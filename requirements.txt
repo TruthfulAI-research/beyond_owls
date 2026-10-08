@@ -6,3 +6,7 @@ numpy>=2.0
 datasets>=5.0
 nltk>=3.10
 tqdm
+peft>=0.20
+lingua-language-detector>=2.0
+huggingface-hub
+accelerate

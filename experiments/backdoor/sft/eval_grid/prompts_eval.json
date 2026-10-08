@@ -1,0 +1,2812 @@
+{
+ "split": "eval",
+ "version": 2,
+ "seed": 20260728,
+ "n": 400,
+ "content_sha256": "618960161fc27bab8c18a8041266143ef3b056c0f53df3d2c52e10811088a6cb",
+ "frozen_utc": "2026-07-28T22:47:59.281682+00:00",
+ "stratified_by": "dolly category",
+ "note": "HELD-OUT TEST SET: never train on this, never make any selection decision with it",
+ "prompts": [
+  {
+   "id": "p04354",
+   "instruction": "What do dogs like to do?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do dogs like to do",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00086",
+   "instruction": "What are the 4 oceans on earth",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the \u0002 oceans on earth",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02544",
+   "instruction": "what are different types of phrases",
+   "category": "open_qa",
+   "skeleton": "what are different types of phrases",
+   "fixed_words": 6
+  },
+  {
+   "id": "p02290",
+   "instruction": "What is the terminal outbound station of the D line in the Boston MBTA?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the terminal outbound station of the \u0001 line in the \u0001",
+   "fixed_words": 10
+  },
+  {
+   "id": "p02377",
+   "instruction": "To which family does the Chasenella belong to",
+   "category": "open_qa",
+   "skeleton": "\u0001 which family does the \u0001 belong to",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03305",
+   "instruction": "How do you like your ski trip to Whistler Blackcomb?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you like your ski trip to \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00483",
+   "instruction": "Why is aluminum wiring in a home dangerous?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is aluminum wiring in a home dangerous",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00551",
+   "instruction": "My friend recommended a TV show about kids fighting monsters. It is set in the 80s and one of the kids has magical powers. Do you know what it is called?",
+   "category": "general_qa",
+   "skeleton": "\u0001 friend recommended a \u0001 show about kids fighting monsters \u0001 is set in the \u0002 s and one of the kids has magical powers \u0001 you know what it is called",
+   "fixed_words": 27
+  },
+  {
+   "id": "p02519",
+   "instruction": "What causes revenue to decline?",
+   "category": "open_qa",
+   "skeleton": "\u0001 causes revenue to decline",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02798",
+   "instruction": "What is a Security Information Event Management platform (SIEM)?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is a \u0001 platform \u0001",
+   "fixed_words": 3
+  },
+  {
+   "id": "p00017",
+   "instruction": "What is the currency in use in the Netherlands?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the currency in use in the \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00625",
+   "instruction": "Who wrote the children's novel Swallows and Amazons",
+   "category": "open_qa",
+   "skeleton": "\u0001 wrote the children s novel \u0001 and \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01639",
+   "instruction": "Why do humans play sports?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do humans play sports",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01886",
+   "instruction": "What high school did Paul Allen and Bill Gates attend?",
+   "category": "open_qa",
+   "skeleton": "\u0001 high school did \u0001 and \u0001 attend",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03864",
+   "instruction": "Does Lego release any sets with tanks?",
+   "category": "open_qa",
+   "skeleton": "\u0001 release any sets with tanks",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00461",
+   "instruction": "What to do when you are bored?",
+   "category": "general_qa",
+   "skeleton": "\u0001 to do when you are bored",
+   "fixed_words": 6
+  },
+  {
+   "id": "p00610",
+   "instruction": "Let's play a game of tic tac toe. I'll be X and you be O. Unplayed squares will be \"_\". I'll get first.\n\n_ _ _\n_ O _\n_ _ _",
+   "category": "general_qa",
+   "skeleton": "\u0001 play a game of tic tac toe \u0001 be \u0001 and you be \u0001 \u0001 squares will be _ \u0001 get first _ _ _ _ \u0001 _ _ _ _",
+   "fixed_words": 25
+  },
+  {
+   "id": "p02502",
+   "instruction": "Tell me a joke involving a bird native to Antarctica.",
+   "category": "general_qa",
+   "skeleton": "\u0001 me a joke involving a bird native to \u0001",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02079",
+   "instruction": "People love cats but can be highly divided about what breed of cat is the best - What is your favorite, and why?",
+   "category": "general_qa",
+   "skeleton": "\u0001 love cats but can be highly divided about what breed of cat is the best \u0001 is your favorite and why",
+   "fixed_words": 20
+  },
+  {
+   "id": "p04010",
+   "instruction": "How many NBA championships does Lebron James have?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many \u0001 championships does \u0001 have",
+   "fixed_words": 4
+  },
+  {
+   "id": "p03539",
+   "instruction": "Help plan a first date in San Francisco",
+   "category": "general_qa",
+   "skeleton": "\u0001 plan a first date in \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03928",
+   "instruction": "Why are dogs better than cats for a person's physical health?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are dogs better than cats for a person s physical health",
+   "fixed_words": 11
+  },
+  {
+   "id": "p00881",
+   "instruction": "what is the capital of China?",
+   "category": "open_qa",
+   "skeleton": "what is the capital of \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03340",
+   "instruction": "What is the difference between dark matter and dark energy?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between dark matter and dark energy",
+   "fixed_words": 9
+  },
+  {
+   "id": "p03602",
+   "instruction": "What are the risks of social isolation?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the risks of social isolation",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04002",
+   "instruction": "Who were the United States Presidents?",
+   "category": "general_qa",
+   "skeleton": "\u0001 were the \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p02855",
+   "instruction": "When do grasshoppers become locusts?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do grasshoppers become locusts",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00549",
+   "instruction": "Are there still grizzly bears in California?",
+   "category": "open_qa",
+   "skeleton": "\u0001 there still grizzly bears in \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03829",
+   "instruction": "Who wrote the music for the ballets Firebird and Rites of Spring",
+   "category": "open_qa",
+   "skeleton": "\u0001 wrote the music for the ballets \u0001 and \u0001 of \u0001",
+   "fixed_words": 8
+  },
+  {
+   "id": "p05131",
+   "instruction": "What does troll the respawn, Jeremy mean?",
+   "category": "open_qa",
+   "skeleton": "\u0001 does troll the respawn \u0001 mean",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03550",
+   "instruction": "What is a plot hole?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is a plot hole",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02906",
+   "instruction": "what book would you recommend for pregnant women?",
+   "category": "open_qa",
+   "skeleton": "what book would you recommend for pregnant women",
+   "fixed_words": 8
+  },
+  {
+   "id": "p01624",
+   "instruction": "What was revolutionary about the Barbie doll when it was first sold?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was revolutionary about the \u0001 doll when it was first sold",
+   "fixed_words": 10
+  },
+  {
+   "id": "p04668",
+   "instruction": "Name the movies made by Quentin Tarantino.",
+   "category": "open_qa",
+   "skeleton": "\u0001 the movies made by \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02482",
+   "instruction": "How do you decide what type of bicycle to buy?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you decide what type of bicycle to buy",
+   "fixed_words": 9
+  },
+  {
+   "id": "p02077",
+   "instruction": "What content is popular on Tictok?",
+   "category": "open_qa",
+   "skeleton": "\u0001 content is popular on \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01638",
+   "instruction": "How to survive Chicago winter?",
+   "category": "general_qa",
+   "skeleton": "\u0001 to survive \u0001 winter",
+   "fixed_words": 3
+  },
+  {
+   "id": "p02138",
+   "instruction": "What is the best way to get faster at running long distances?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the best way to get faster at running long distances",
+   "fixed_words": 11
+  },
+  {
+   "id": "p02068",
+   "instruction": "Who is the current king of the Netherlands",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the current king of the \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03903",
+   "instruction": "What kind of dog is a Bernedoodle?",
+   "category": "open_qa",
+   "skeleton": "\u0001 kind of dog is a \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00315",
+   "instruction": "what is one good example on a hackathon project for a middle school student for programming?",
+   "category": "general_qa",
+   "skeleton": "what is one good example on a hackathon project for a middle school student for programming",
+   "fixed_words": 16
+  },
+  {
+   "id": "p01263",
+   "instruction": "When will George R.R. Martin release the sixth book in the series \"A Song of Ice and Fire\"?",
+   "category": "open_qa",
+   "skeleton": "\u0001 will \u0001 \u0001 \u0001 release the sixth book in the series \u0001 of \u0001 and \u0001",
+   "fixed_words": 10
+  },
+  {
+   "id": "p02639",
+   "instruction": "Which clef does a viola use?",
+   "category": "open_qa",
+   "skeleton": "\u0001 clef does a viola use",
+   "fixed_words": 5
+  },
+  {
+   "id": "p04043",
+   "instruction": "Why did House Targaryen leave Valyria?",
+   "category": "open_qa",
+   "skeleton": "\u0001 did \u0001 leave \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p00166",
+   "instruction": "What are index funds?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are index funds",
+   "fixed_words": 3
+  },
+  {
+   "id": "p03108",
+   "instruction": "What's the difference between the weather in California compared to New York",
+   "category": "open_qa",
+   "skeleton": "\u0001 the difference between the weather in \u0001 compared to \u0001",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02648",
+   "instruction": "Toronto Maple Leafs is a team in the NHL. Who was their captain and star player in the early 2000s?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is a team in the \u0001 \u0001 was their captain and star player in the early \u0002 s",
+   "fixed_words": 15
+  },
+  {
+   "id": "p02950",
+   "instruction": "What is an Italian Greyhound?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is an \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p01243",
+   "instruction": "What does Chevron do?",
+   "category": "open_qa",
+   "skeleton": "\u0001 does \u0001 do",
+   "fixed_words": 2
+  },
+  {
+   "id": "p00278",
+   "instruction": "Where does Nick work on the show the New Girl",
+   "category": "open_qa",
+   "skeleton": "\u0001 does \u0001 work on the show the \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03014",
+   "instruction": "Why did Rome have so many bad emperors?",
+   "category": "general_qa",
+   "skeleton": "\u0001 did \u0001 have so many bad emperors",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01195",
+   "instruction": "What are some advantages of making a painting with acrylic instead of oil paint?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are some advantages of making a painting with acrylic instead of oil paint",
+   "fixed_words": 13
+  },
+  {
+   "id": "p04066",
+   "instruction": "What is the political system of Germany?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the political system of \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00557",
+   "instruction": "What are the words of House Targaryen?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the words of \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01500",
+   "instruction": "What are the three teams in the mobile game Pokemon Go?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the three teams in the mobile game \u0001",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02243",
+   "instruction": "What is the PEDALS method",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the \u0001 method",
+   "fixed_words": 3
+  },
+  {
+   "id": "p02834",
+   "instruction": "How do I change a light bulb?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do \u0001 change a light bulb",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02337",
+   "instruction": "What is a reporting dashboard?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is a reporting dashboard",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01444",
+   "instruction": "which is the silicon valley of India.",
+   "category": "open_qa",
+   "skeleton": "which is the silicon valley of \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p00571",
+   "instruction": "Who spoke at NYU's 2022 commencement?",
+   "category": "open_qa",
+   "skeleton": "\u0001 spoke at \u0001 \u0002 commencement",
+   "fixed_words": 3
+  },
+  {
+   "id": "p01210",
+   "instruction": "What are the three main states of matter and how does it transition between them?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the three main states of matter and how does it transition between them",
+   "fixed_words": 14
+  },
+  {
+   "id": "p00413",
+   "instruction": "Who is Linda Hargreaves",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001",
+   "fixed_words": 1
+  },
+  {
+   "id": "p04723",
+   "instruction": "What is considered a good meal?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is considered a good meal",
+   "fixed_words": 5
+  },
+  {
+   "id": "p04729",
+   "instruction": "If I'm strong in the gym will I be good at rock climbing?",
+   "category": "general_qa",
+   "skeleton": "\u0001 strong in the gym will \u0001 be good at rock climbing",
+   "fixed_words": 10
+  },
+  {
+   "id": "p02848",
+   "instruction": "Where are the headquarters of FATF",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the headquarters of \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02199",
+   "instruction": "What was gangsters George Nelsons nickname",
+   "category": "open_qa",
+   "skeleton": "\u0001 was gangsters \u0001 nickname",
+   "fixed_words": 3
+  },
+  {
+   "id": "p02621",
+   "instruction": "Why do people like macaroni and cheese and how is it made?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do people like macaroni and cheese and how is it made",
+   "fixed_words": 11
+  },
+  {
+   "id": "p01928",
+   "instruction": "What is the best way to relax after work?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the best way to relax after work",
+   "fixed_words": 8
+  },
+  {
+   "id": "p01885",
+   "instruction": "Which Russian author to read first?",
+   "category": "open_qa",
+   "skeleton": "\u0001 author to read first",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02146",
+   "instruction": "Ramon Magsaysay Award 2022 was given to 4 persons",
+   "category": "open_qa",
+   "skeleton": "\u0001 \u0002 was given to \u0002 persons",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04330",
+   "instruction": "Which episode of \"The X-Files\" was broadcast in black-and-white?",
+   "category": "open_qa",
+   "skeleton": "\u0001 episode of \u0001 was broadcast in black and white",
+   "fixed_words": 8
+  },
+  {
+   "id": "p04905",
+   "instruction": "How much snow feel in the California Sierra mountains in 2023?",
+   "category": "general_qa",
+   "skeleton": "\u0001 much snow feel in the \u0001 mountains in \u0002",
+   "fixed_words": 7
+  },
+  {
+   "id": "p02892",
+   "instruction": "How do you play soccer?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you play soccer",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04246",
+   "instruction": "Can you tell me about Rugby Union?",
+   "category": "open_qa",
+   "skeleton": "\u0001 you tell me about \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01291",
+   "instruction": "Why do people need sleep?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do people need sleep",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00346",
+   "instruction": "What causes a spinning top to stop?",
+   "category": "open_qa",
+   "skeleton": "\u0001 causes a spinning top to stop",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01330",
+   "instruction": "Is voluntary childlessness rising? If yes, then what are the major drivers? What could be its impact?",
+   "category": "general_qa",
+   "skeleton": "\u0001 voluntary childlessness rising \u0001 yes then what are the major drivers \u0001 could be its impact",
+   "fixed_words": 14
+  },
+  {
+   "id": "p01635",
+   "instruction": "What is the difference between a resume and a cv?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between a resume and a cv",
+   "fixed_words": 9
+  },
+  {
+   "id": "p04548",
+   "instruction": "What is a geodetic system?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is a geodetic system",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02782",
+   "instruction": "How much caffeine is in a cup of coffee on average. Does the size of the cup matter?",
+   "category": "general_qa",
+   "skeleton": "\u0001 much caffeine is in a cup of coffee on average \u0001 the size of the cup matter",
+   "fixed_words": 16
+  },
+  {
+   "id": "p03982",
+   "instruction": "Name a good wood for a beginning wood carving project?",
+   "category": "open_qa",
+   "skeleton": "\u0001 a good wood for a beginning wood carving project",
+   "fixed_words": 9
+  },
+  {
+   "id": "p03645",
+   "instruction": "What is the movie Forrest Gump about",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the movie \u0001 about",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02410",
+   "instruction": "Why was the 2023 Women's NCAA basketball championship controversial?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the \u0002 \u0001 basketball championship controversial",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03536",
+   "instruction": "Why does Facebook change its name to Meta?",
+   "category": "general_qa",
+   "skeleton": "\u0001 does \u0001 change its name to \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00382",
+   "instruction": "What factors should I considering when selecting a tennis racquet?",
+   "category": "general_qa",
+   "skeleton": "\u0001 factors should \u0001 considering when selecting a tennis racquet",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02101",
+   "instruction": "Who was the very first American Idol winner?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the very first \u0001 winner",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02090",
+   "instruction": "Kate's parents have three kids. The first kid's name is Peter, the second kid's name is Parker. What is the third kid's name?",
+   "category": "general_qa",
+   "skeleton": "\u0001 parents have three kids \u0001 first kid s name is \u0001 the second kid s name is \u0001 \u0001 is the third kid s name",
+   "fixed_words": 21
+  },
+  {
+   "id": "p04185",
+   "instruction": "What is the largest country in the world?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the largest country in the world",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03243",
+   "instruction": "Who received the maximum number of Oscar awards of all time?",
+   "category": "open_qa",
+   "skeleton": "\u0001 received the maximum number of \u0001 awards of all time",
+   "fixed_words": 9
+  },
+  {
+   "id": "p04942",
+   "instruction": "Name some of the major battles in the US Civil War.",
+   "category": "open_qa",
+   "skeleton": "\u0001 some of the major battles in the \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03874",
+   "instruction": "Who is the toughest teenage mutant ninja turtle?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the toughest teenage mutant ninja turtle",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00635",
+   "instruction": "How many football national championships has the University of Georgia won?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many football national championships has the \u0001 of \u0001 won",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02752",
+   "instruction": "List some of the characters on The X-Files who were infected by, but did not die from, exposure to the alien black oil virus.",
+   "category": "open_qa",
+   "skeleton": "\u0001 some of the characters on \u0001 who were infected by but did not die from exposure to the alien black oil virus",
+   "fixed_words": 21
+  },
+  {
+   "id": "p01702",
+   "instruction": "How do you make the color green out of other colors?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do you make the color green out of other colors",
+   "fixed_words": 10
+  },
+  {
+   "id": "p02703",
+   "instruction": "What's the difference between Spiders and insects?",
+   "category": "general_qa",
+   "skeleton": "\u0001 the difference between \u0001 and insects",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00988",
+   "instruction": "What is the Shy Plant?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p02499",
+   "instruction": "Who is the biggest inspiration in your life?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the biggest inspiration in your life",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03540",
+   "instruction": "What Is a Request for Quote (RFQ)?",
+   "category": "open_qa",
+   "skeleton": "\u0001 a \u0001 for \u0001 \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p00593",
+   "instruction": "The Weeknd samples which '80s megahit in \"Blinding Lights?\"",
+   "category": "open_qa",
+   "skeleton": "\u0001 samples which \u0002 s megahit in \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03079",
+   "instruction": "Which of the following city has the highest historical monuments?",
+   "category": "open_qa",
+   "skeleton": "\u0001 of the following city has the highest historical monuments",
+   "fixed_words": 9
+  },
+  {
+   "id": "p00758",
+   "instruction": "Which bird flies the farthest?",
+   "category": "open_qa",
+   "skeleton": "\u0001 bird flies the farthest",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02360",
+   "instruction": "Samuel Tilden, Grover Cleveland, Al Gore, and Hillary Clinton share what distinction among U.S. presidential candidates?",
+   "category": "open_qa",
+   "skeleton": "\u0001 \u0001 \u0001 and \u0001 share what distinction among \u0001 \u0001 presidential candidates",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04852",
+   "instruction": "Why is cricket the most viewed sport in India?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is cricket the most viewed sport in \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00061",
+   "instruction": "What happens when you bring flammable objects closer to a fire source or extreme heat?",
+   "category": "open_qa",
+   "skeleton": "\u0001 happens when you bring flammable objects closer to a fire source or extreme heat",
+   "fixed_words": 14
+  },
+  {
+   "id": "p04022",
+   "instruction": "Why should kids do homework?",
+   "category": "general_qa",
+   "skeleton": "\u0001 should kids do homework",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04348",
+   "instruction": "How can I sleep well at night?",
+   "category": "general_qa",
+   "skeleton": "\u0001 can \u0001 sleep well at night",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01038",
+   "instruction": "Why do we have winter and summer clocks?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do we have winter and summer clocks",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04256",
+   "instruction": "What does yoga do to your body?",
+   "category": "general_qa",
+   "skeleton": "\u0001 does yoga do to your body",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03832",
+   "instruction": "Name some Japanese words that describe various Japanese art forms.",
+   "category": "open_qa",
+   "skeleton": "\u0001 some \u0001 words that describe various \u0001 art forms",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00843",
+   "instruction": "Why do we watch television?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do we watch television",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02052",
+   "instruction": "Tell me a romantic fact about animals.",
+   "category": "general_qa",
+   "skeleton": "\u0001 me a romantic fact about animals",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03914",
+   "instruction": "What are the four main types of debt securities?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the four main types of debt securities",
+   "fixed_words": 8
+  },
+  {
+   "id": "p03938",
+   "instruction": "Why is the Bay Area football team called the 49ers?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the \u0001 football team called the \u0002 ers",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00354",
+   "instruction": "What is the fastest train in the world?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the fastest train in the world",
+   "fixed_words": 7
+  },
+  {
+   "id": "p01896",
+   "instruction": "What is the best seasoning for ribeye steak that will be grilled?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the best seasoning for ribeye steak that will be grilled",
+   "fixed_words": 11
+  },
+  {
+   "id": "p00703",
+   "instruction": "What is the difference between whole genome sequencing (WGS) and whole exome sequencing (WES)?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the difference between whole genome sequencing \u0001 and whole exome sequencing \u0001",
+   "fixed_words": 11
+  },
+  {
+   "id": "p04800",
+   "instruction": "If someone is tall, what sport should they try?",
+   "category": "open_qa",
+   "skeleton": "\u0001 someone is tall what sport should they try",
+   "fixed_words": 8
+  },
+  {
+   "id": "p01345",
+   "instruction": "Why are cats better than dogs?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are cats better than dogs",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02452",
+   "instruction": "Name some characters from the 2003 version of Battlestar Galactica.",
+   "category": "open_qa",
+   "skeleton": "\u0001 some characters from the \u0002 version of \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03920",
+   "instruction": "whats the total number of US senator?",
+   "category": "open_qa",
+   "skeleton": "whats the total number of \u0001 senator",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03519",
+   "instruction": "How can you make a science fair volcano?",
+   "category": "open_qa",
+   "skeleton": "\u0001 can you make a science fair volcano",
+   "fixed_words": 7
+  },
+  {
+   "id": "p01007",
+   "instruction": "Tell me about the Boxer dog",
+   "category": "open_qa",
+   "skeleton": "\u0001 me about the \u0001 dog",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00955",
+   "instruction": "Who is the most famous left-handed baseball player?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the most famous left handed baseball player",
+   "fixed_words": 8
+  },
+  {
+   "id": "p01187",
+   "instruction": "How Many Players are there in a Football Team?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are there in a \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00052",
+   "instruction": "What are the types of RVs?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the types of \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01428",
+   "instruction": "Why do my plants keep dying?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do my plants keep dying",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01516",
+   "instruction": "Which F1 drivers race for Red Bull Racing in the 2023 season?",
+   "category": "open_qa",
+   "skeleton": "\u0001 drivers race for \u0001 in the \u0002 season",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04533",
+   "instruction": "List the ten episode titles from the first season of \"Game of Thrones\" in broadcast order.",
+   "category": "open_qa",
+   "skeleton": "\u0001 the ten episode titles from the first season of \u0001 of \u0001 in broadcast order",
+   "fixed_words": 13
+  },
+  {
+   "id": "p03560",
+   "instruction": "What are the five largest countries in the world in terms of land area?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the five largest countries in the world in terms of land area",
+   "fixed_words": 13
+  },
+  {
+   "id": "p01178",
+   "instruction": "Who are the main characters on the TV show \"Bluey?\"",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the main characters on the \u0001 show \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03437",
+   "instruction": "What is the Evergreen Game?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p00131",
+   "instruction": "Why is Brazilian jiu jitsu an excellent martial art?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is \u0001 jiu jitsu an excellent martial art",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03782",
+   "instruction": "What year was the first pizzeria in New York founded?",
+   "category": "open_qa",
+   "skeleton": "\u0001 year was the first pizzeria in \u0001 founded",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00322",
+   "instruction": "What is data visualisation in the context of business intelligence?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is data visualisation in the context of business intelligence",
+   "fixed_words": 9
+  },
+  {
+   "id": "p00408",
+   "instruction": "When was the Hundred Years War and who fought in it?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the \u0001 and who fought in it",
+   "fixed_words": 7
+  },
+  {
+   "id": "p02517",
+   "instruction": "What is the 24 hour equivalent to 2PM?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the \u0002 hour equivalent to \u0002 \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02371",
+   "instruction": "Pultizer Prize 2022 is given which field",
+   "category": "open_qa",
+   "skeleton": "\u0001 \u0002 is given which field",
+   "fixed_words": 4
+  },
+  {
+   "id": "p05061",
+   "instruction": "What are good finishes for a desk top made of hard wood?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are good finishes for a desk top made of hard wood",
+   "fixed_words": 11
+  },
+  {
+   "id": "p01955",
+   "instruction": "In 1899 the Eastman company in the USA produced first what",
+   "category": "open_qa",
+   "skeleton": "\u0001 \u0002 the \u0001 company in the \u0001 produced first what",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04801",
+   "instruction": "What are the primary elements of Odissi dance?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the primary elements of \u0001 dance",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04783",
+   "instruction": "Which swimming stroke is the hardest?",
+   "category": "open_qa",
+   "skeleton": "\u0001 swimming stroke is the hardest",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01677",
+   "instruction": "Which is the albino direwolf in Game of Thrones?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the albino direwolf in \u0001 of \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04606",
+   "instruction": "What kind of milk is Vietnamese coffee often served with?",
+   "category": "open_qa",
+   "skeleton": "\u0001 kind of milk is \u0001 coffee often served with",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02662",
+   "instruction": "what is a sql query?",
+   "category": "open_qa",
+   "skeleton": "what is a sql query",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00799",
+   "instruction": "What are common gaming consoles used to play video games?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are common gaming consoles used to play video games",
+   "fixed_words": 9
+  },
+  {
+   "id": "p00515",
+   "instruction": "Best film in Motion Picture  27th Screen Actors Guild(SAG) Awards was given to which film?",
+   "category": "open_qa",
+   "skeleton": "\u0001 film in \u0001 \u0002 th \u0001 \u0001 \u0001 was given to which film",
+   "fixed_words": 8
+  },
+  {
+   "id": "p03468",
+   "instruction": "How can you prepare for a longer airplane flight with children?",
+   "category": "general_qa",
+   "skeleton": "\u0001 can you prepare for a longer airplane flight with children",
+   "fixed_words": 10
+  },
+  {
+   "id": "p00994",
+   "instruction": "How do you make wine?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do you make wine",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01547",
+   "instruction": "What is District 13 in \"The Hunger Games\" known for developing?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 \u0002 in \u0001 known for developing",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03210",
+   "instruction": "If I wanted a play games with my computer, what components should I pay attention to?",
+   "category": "open_qa",
+   "skeleton": "\u0001 wanted a play games with my computer what components should \u0001 pay attention to",
+   "fixed_words": 13
+  },
+  {
+   "id": "p04873",
+   "instruction": "What is the capital of Norway and when was it founded?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the capital of \u0001 and when was it founded",
+   "fixed_words": 9
+  },
+  {
+   "id": "p05136",
+   "instruction": "How does GIS help in the real estate investment industry?",
+   "category": "general_qa",
+   "skeleton": "\u0001 does \u0001 help in the real estate investment industry",
+   "fixed_words": 8
+  },
+  {
+   "id": "p01748",
+   "instruction": "If I have a dollar, two nickels and a quarter, how much money in total do I have. Please respond with numbers and the dollar sign only, no words.",
+   "category": "open_qa",
+   "skeleton": "\u0001 have a dollar two nickels and a quarter how much money in total do \u0001 have \u0001 respond with numbers and the dollar sign only no words",
+   "fixed_words": 25
+  },
+  {
+   "id": "p02069",
+   "instruction": "What are the 7 basic commands to train a puppy?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the \u0002 basic commands to train a puppy",
+   "fixed_words": 8
+  },
+  {
+   "id": "p00927",
+   "instruction": "What does democratizing data mean?",
+   "category": "open_qa",
+   "skeleton": "\u0001 does democratizing data mean",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00288",
+   "instruction": "Is it safe for dogs to eat avacado?",
+   "category": "open_qa",
+   "skeleton": "\u0001 it safe for dogs to eat avacado",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00983",
+   "instruction": "What is a jet engine?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is a jet engine",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04258",
+   "instruction": "Why is working out good for you?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is working out good for you",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04105",
+   "instruction": "Why are there so many rules about table manners?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are there so many rules about table manners",
+   "fixed_words": 8
+  },
+  {
+   "id": "p03857",
+   "instruction": "What is a to-do list?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is a to do list",
+   "fixed_words": 5
+  },
+  {
+   "id": "p04251",
+   "instruction": "When was the Boeing 747 first entered into service?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the \u0001 \u0002 first entered into service",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01981",
+   "instruction": "What are the key elements to a companies income statement?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the key elements to a companies income statement",
+   "fixed_words": 9
+  },
+  {
+   "id": "p03714",
+   "instruction": "What are important elements to consider when putting together a team to execute your operating model for AI?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are important elements to consider when putting together a team to execute your operating model for \u0001",
+   "fixed_words": 16
+  },
+  {
+   "id": "p04414",
+   "instruction": "What is the capital of Finland and when was it founded?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the capital of \u0001 and when was it founded",
+   "fixed_words": 9
+  },
+  {
+   "id": "p03082",
+   "instruction": "What is the movie The Fabelmans about?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the movie \u0001 about",
+   "fixed_words": 4
+  },
+  {
+   "id": "p05013",
+   "instruction": "What is the best drum kit?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the best drum kit",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00055",
+   "instruction": "As a golfer, how can I fix my slice?",
+   "category": "general_qa",
+   "skeleton": "\u0001 a golfer how can \u0001 fix my slice",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03721",
+   "instruction": "What are some interesting facts about tigers?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some interesting facts about tigers",
+   "fixed_words": 6
+  },
+  {
+   "id": "p00190",
+   "instruction": "When is India's independence day?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 independence day",
+   "fixed_words": 3
+  },
+  {
+   "id": "p02661",
+   "instruction": "Could you provide some recommendations for restaurants in Yountville?",
+   "category": "general_qa",
+   "skeleton": "\u0001 you provide some recommendations for restaurants in \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03448",
+   "instruction": "How many canals are in Amsterdam?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many canals are in \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01843",
+   "instruction": "What is the effective interest rate (EIR)?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the effective interest rate \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01454",
+   "instruction": "How do I run faster?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do \u0001 run faster",
+   "fixed_words": 3
+  },
+  {
+   "id": "p04875",
+   "instruction": "How to get an efficient cardio workout and improve your speed, and gain other health benefits?",
+   "category": "open_qa",
+   "skeleton": "\u0001 to get an efficient cardio workout and improve your speed and gain other health benefits",
+   "fixed_words": 15
+  },
+  {
+   "id": "p02244",
+   "instruction": "why do dogs like humans?",
+   "category": "general_qa",
+   "skeleton": "why do dogs like humans",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00992",
+   "instruction": "Why are people afraid of sharks?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are people afraid of sharks",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00962",
+   "instruction": "What is FrieslandCampina?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001",
+   "fixed_words": 1
+  },
+  {
+   "id": "p01145",
+   "instruction": "What is Mr. Burn's assistant name on the Simpsons?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 \u0001 assistant name on the \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03552",
+   "instruction": "Tell me the history of Singapore",
+   "category": "open_qa",
+   "skeleton": "\u0001 me the history of \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01775",
+   "instruction": "What are crawfish and how do you eat them?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are crawfish and how do you eat them",
+   "fixed_words": 8
+  },
+  {
+   "id": "p03157",
+   "instruction": "Why is Dungeons and Dragons so popular nowadays?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is \u0001 and \u0001 so popular nowadays",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00914",
+   "instruction": "What are hiccups and why do we get them?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are hiccups and why do we get them",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02297",
+   "instruction": "What is a mulligan in Magic the Gathering?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is a mulligan in \u0001 the \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00416",
+   "instruction": "What is the difference between the Debt Snowball and Debt Avalanche methods of paying off debt?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between the \u0001 and \u0001 methods of paying off debt",
+   "fixed_words": 11
+  },
+  {
+   "id": "p04311",
+   "instruction": "How many golf clubs can a player carry in their bag?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many golf clubs can a player carry in their bag",
+   "fixed_words": 10
+  },
+  {
+   "id": "p00170",
+   "instruction": "What is the kiwi bird?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the kiwi bird",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04952",
+   "instruction": "What are 3 popular movies with Adam Sandler?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are \u0002 popular movies with \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04840",
+   "instruction": "What are some basic spirits you should have at your bar",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some basic spirits you should have at your bar",
+   "fixed_words": 10
+  },
+  {
+   "id": "p03554",
+   "instruction": "What is the history of the Masters Golf Tournament",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the history of the \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02466",
+   "instruction": "Which rock star is known to consume heavy amounts of drugs and it surprising he has live this long?",
+   "category": "open_qa",
+   "skeleton": "\u0001 rock star is known to consume heavy amounts of drugs and it surprising he has live this long",
+   "fixed_words": 18
+  },
+  {
+   "id": "p01892",
+   "instruction": "Is green tea good for health ?",
+   "category": "general_qa",
+   "skeleton": "\u0001 green tea good for health",
+   "fixed_words": 5
+  },
+  {
+   "id": "p04459",
+   "instruction": "What are the words of House Tully?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the words of \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04509",
+   "instruction": "What are the symptoms of Monkeypox?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the symptoms of \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01465",
+   "instruction": "How can I improve my table tennis skills?",
+   "category": "open_qa",
+   "skeleton": "\u0001 can \u0001 improve my table tennis skills",
+   "fixed_words": 6
+  },
+  {
+   "id": "p00938",
+   "instruction": "Count de Grisly was the first to perform what trick in 1799",
+   "category": "open_qa",
+   "skeleton": "\u0001 de \u0001 was the first to perform what trick in \u0002",
+   "fixed_words": 9
+  },
+  {
+   "id": "p03796",
+   "instruction": "What is an interchange fee?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is an interchange fee",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04988",
+   "instruction": "What makes a good password?",
+   "category": "general_qa",
+   "skeleton": "\u0001 makes a good password",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01887",
+   "instruction": "During which event, Korea was separated into 2 nations?",
+   "category": "open_qa",
+   "skeleton": "\u0001 which event \u0001 was separated into \u0002 nations",
+   "fixed_words": 6
+  },
+  {
+   "id": "p00776",
+   "instruction": "What city is Microsoft Based in?",
+   "category": "open_qa",
+   "skeleton": "\u0001 city is \u0001 in",
+   "fixed_words": 3
+  },
+  {
+   "id": "p03557",
+   "instruction": "Alfred White was a famous author under which name",
+   "category": "open_qa",
+   "skeleton": "\u0001 was a famous author under which name",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00162",
+   "instruction": "What is \"diglossia\"?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is diglossia",
+   "fixed_words": 2
+  },
+  {
+   "id": "p00475",
+   "instruction": "Which U.S president had a home called The Hermitage?",
+   "category": "open_qa",
+   "skeleton": "\u0001 \u0001 president had a home called \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01795",
+   "instruction": "What is the difference between basketball and netball?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between basketball and netball",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04917",
+   "instruction": "What is the largest lake in Switzerland?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the largest lake in \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00929",
+   "instruction": "which side of the road you can drive in the UK?",
+   "category": "general_qa",
+   "skeleton": "which side of the road you can drive in the \u0001",
+   "fixed_words": 10
+  },
+  {
+   "id": "p00526",
+   "instruction": "How do you make brisket on a pellet smoker?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you make brisket on a pellet smoker",
+   "fixed_words": 8
+  },
+  {
+   "id": "p04005",
+   "instruction": "What genre did Taylor Swift begin her career in?",
+   "category": "open_qa",
+   "skeleton": "\u0001 genre did \u0001 begin her career in",
+   "fixed_words": 6
+  },
+  {
+   "id": "p02002",
+   "instruction": "name some popular songs from the 1970's",
+   "category": "open_qa",
+   "skeleton": "name some popular songs from the \u0002 s",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00779",
+   "instruction": "What are Arabic numerals?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are \u0001 numerals",
+   "fixed_words": 2
+  },
+  {
+   "id": "p01018",
+   "instruction": "How many keys does a full piano have?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many keys does a full piano have",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00637",
+   "instruction": "Name a few popular metal genres",
+   "category": "open_qa",
+   "skeleton": "\u0001 a few popular metal genres",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02097",
+   "instruction": "Who is currently US president?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is currently \u0001 president",
+   "fixed_words": 3
+  },
+  {
+   "id": "p02489",
+   "instruction": "Which famous Dutch dancer was convicted of being a spy for Germany during WW1",
+   "category": "open_qa",
+   "skeleton": "\u0001 famous \u0001 dancer was convicted of being a spy for \u0001 during \u0001",
+   "fixed_words": 10
+  },
+  {
+   "id": "p01965",
+   "instruction": "Who is Luke Skywalker's parents?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 parents",
+   "fixed_words": 2
+  },
+  {
+   "id": "p04458",
+   "instruction": "Why do little boys jump in a puddle of water or mud?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do little boys jump in a puddle of water or mud",
+   "fixed_words": 11
+  },
+  {
+   "id": "p02593",
+   "instruction": "What were the first ten states to enter the union of the United States?",
+   "category": "open_qa",
+   "skeleton": "\u0001 were the first ten states to enter the union of the \u0001",
+   "fixed_words": 11
+  },
+  {
+   "id": "p00050",
+   "instruction": "What is Share capital in finance?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 capital in finance",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04595",
+   "instruction": "How do you build a roof?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do you build a roof",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02826",
+   "instruction": "When was the last flight of Concorde?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the last flight of \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02929",
+   "instruction": "What's the best career advise you could give a new graduate entering into a technical or analytics field?",
+   "category": "general_qa",
+   "skeleton": "\u0001 the best career advise you could give a new graduate entering into a technical or analytics field",
+   "fixed_words": 17
+  },
+  {
+   "id": "p00264",
+   "instruction": "Can you tell if someone has hypothyroidism by looking at their face?",
+   "category": "general_qa",
+   "skeleton": "\u0001 you tell if someone has hypothyroidism by looking at their face",
+   "fixed_words": 11
+  },
+  {
+   "id": "p05080",
+   "instruction": "What are the key elements of a sauna?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the key elements of a sauna",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00199",
+   "instruction": "what is the current location of Voyager 1 spacecraft in the cosmos?",
+   "category": "general_qa",
+   "skeleton": "what is the current location of \u0001 \u0002 spacecraft in the cosmos",
+   "fixed_words": 10
+  },
+  {
+   "id": "p01090",
+   "instruction": "What are the merits of skipping breakfast? Can you target your answer to a typical American and describe in layman's terms rather than detailed scientific jargon?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the merits of skipping breakfast \u0001 you target your answer to a typical \u0001 and describe in layman s terms rather than detailed scientific jargon",
+   "fixed_words": 24
+  },
+  {
+   "id": "p04407",
+   "instruction": "What is a bear in finance?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is a bear in finance",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03525",
+   "instruction": "If I wanted to travel the world, would it be faster to travel by air or sea?",
+   "category": "open_qa",
+   "skeleton": "\u0001 wanted to travel the world would it be faster to travel by air or sea",
+   "fixed_words": 15
+  },
+  {
+   "id": "p04496",
+   "instruction": "Who was Hitler's mistress?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was \u0001 mistress",
+   "fixed_words": 2
+  },
+  {
+   "id": "p01252",
+   "instruction": "What is the significance of Thanks Giving.",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the significance of \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00195",
+   "instruction": "What do you think about the existence of alien lifeform?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you think about the existence of alien lifeform",
+   "fixed_words": 9
+  },
+  {
+   "id": "p04364",
+   "instruction": "Which rivers were the birthplaces of the first great civilizations?",
+   "category": "open_qa",
+   "skeleton": "\u0001 rivers were the birthplaces of the first great civilizations",
+   "fixed_words": 9
+  },
+  {
+   "id": "p01427",
+   "instruction": "Who invented the first car?",
+   "category": "open_qa",
+   "skeleton": "\u0001 invented the first car",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04855",
+   "instruction": "What is the nature of god, from a logical perspective?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the nature of god from a logical perspective",
+   "fixed_words": 9
+  },
+  {
+   "id": "p03070",
+   "instruction": "What are the futures?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the futures",
+   "fixed_words": 3
+  },
+  {
+   "id": "p01118",
+   "instruction": "What's the best way to study for a test?",
+   "category": "general_qa",
+   "skeleton": "\u0001 the best way to study for a test",
+   "fixed_words": 8
+  },
+  {
+   "id": "p01441",
+   "instruction": "What do redshifts tell astronomers?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do redshifts tell astronomers",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00517",
+   "instruction": "Why did the US join WW2?",
+   "category": "general_qa",
+   "skeleton": "\u0001 did the \u0001 join \u0001",
+   "fixed_words": 3
+  },
+  {
+   "id": "p01524",
+   "instruction": "What are the main disadvantages of electric cars versus combustion engine vehicles?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the main disadvantages of electric cars versus combustion engine vehicles",
+   "fixed_words": 11
+  },
+  {
+   "id": "p04751",
+   "instruction": "Name different corporate messaging applications companies use.",
+   "category": "open_qa",
+   "skeleton": "\u0001 different corporate messaging applications companies use",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01753",
+   "instruction": "List 10 best switch games of all time.",
+   "category": "general_qa",
+   "skeleton": "\u0001 \u0002 best switch games of all time",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01433",
+   "instruction": "How do you care for a pet?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you care for a pet",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03222",
+   "instruction": "What is Riot Games' single player game that was released in 2021?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 single player game that was released in \u0002",
+   "fixed_words": 8
+  },
+  {
+   "id": "p03105",
+   "instruction": "Can you potty train a bunny?",
+   "category": "general_qa",
+   "skeleton": "\u0001 you potty train a bunny",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03424",
+   "instruction": "What is photosynthesis?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is photosynthesis",
+   "fixed_words": 2
+  },
+  {
+   "id": "p04974",
+   "instruction": "Which episode of season two of Game of Thrones did Alik Sakharov direct?",
+   "category": "open_qa",
+   "skeleton": "\u0001 episode of season two of \u0001 of \u0001 did \u0001 direct",
+   "fixed_words": 8
+  },
+  {
+   "id": "p00971",
+   "instruction": "What does \"digital nomads\" mean?",
+   "category": "open_qa",
+   "skeleton": "\u0001 does digital nomads mean",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00396",
+   "instruction": "What is brackish water and where does it occur?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is brackish water and where does it occur",
+   "fixed_words": 8
+  },
+  {
+   "id": "p00677",
+   "instruction": "What is \"A Song of Ice and Fire\"?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is \u0001 of \u0001 and \u0001",
+   "fixed_words": 3
+  },
+  {
+   "id": "p01123",
+   "instruction": "Name the place in New Zealand, where a volcano erupted?",
+   "category": "open_qa",
+   "skeleton": "\u0001 the place in \u0001 where a volcano erupted",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00786",
+   "instruction": "Who invented the computer?",
+   "category": "general_qa",
+   "skeleton": "\u0001 invented the computer",
+   "fixed_words": 3
+  },
+  {
+   "id": "p01704",
+   "instruction": "Give me a bulleted list of the cutest animals",
+   "category": "open_qa",
+   "skeleton": "\u0001 me a bulleted list of the cutest animals",
+   "fixed_words": 8
+  },
+  {
+   "id": "p03109",
+   "instruction": "What is a Google Pixel?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is a \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p02566",
+   "instruction": "What is the answer to two plus two",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the answer to two plus two",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03075",
+   "instruction": "What are the advantages of using a keyboard and mouse for first person shooters when gaming on a PC?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the advantages of using a keyboard and mouse for first person shooters when gaming on a \u0001",
+   "fixed_words": 17
+  },
+  {
+   "id": "p04673",
+   "instruction": "What are The Benefits of Trekking?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are \u0001 of \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p02758",
+   "instruction": "How do I decorate my new home?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do \u0001 decorate my new home",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00331",
+   "instruction": "I would like to get a camper for the family vacations.  What things do I need to be aware of when buying one?",
+   "category": "general_qa",
+   "skeleton": "\u0001 would like to get a camper for the family vacations \u0001 things do \u0001 need to be aware of when buying one",
+   "fixed_words": 20
+  },
+  {
+   "id": "p03902",
+   "instruction": "How do you? How do you plant flowers",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you \u0001 do you plant flowers",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01585",
+   "instruction": "Do spotted hyenas actually laugh?",
+   "category": "general_qa",
+   "skeleton": "\u0001 spotted hyenas actually laugh",
+   "fixed_words": 4
+  },
+  {
+   "id": "p05045",
+   "instruction": "Is toastmasters a good organization to join?",
+   "category": "open_qa",
+   "skeleton": "\u0001 toastmasters a good organization to join",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03141",
+   "instruction": "Give me some ideas of where I should go on holiday.",
+   "category": "general_qa",
+   "skeleton": "\u0001 me some ideas of where \u0001 should go on holiday",
+   "fixed_words": 9
+  },
+  {
+   "id": "p00925",
+   "instruction": "Why do people love the FIFA world cup?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do people love the \u0001 world cup",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04264",
+   "instruction": "Name some famous experimental electronic music artists from the 2000s",
+   "category": "open_qa",
+   "skeleton": "\u0001 some famous experimental electronic music artists from the \u0002 s",
+   "fixed_words": 9
+  },
+  {
+   "id": "p01235",
+   "instruction": "Why do people hate pineapple on pizza?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do people hate pineapple on pizza",
+   "fixed_words": 6
+  },
+  {
+   "id": "p00739",
+   "instruction": "What factors should I consider before becoming a dog owner?",
+   "category": "general_qa",
+   "skeleton": "\u0001 factors should \u0001 consider before becoming a dog owner",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02029",
+   "instruction": "How many coaches (full and part-time) from The Voice have won Grammys?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many coaches full and part time from \u0001 have won \u0001",
+   "fixed_words": 9
+  },
+  {
+   "id": "p00898",
+   "instruction": "Where is Michael Phelps from?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 from",
+   "fixed_words": 2
+  },
+  {
+   "id": "p05051",
+   "instruction": "Does Julie Andrews have an EGOT?",
+   "category": "open_qa",
+   "skeleton": "\u0001 have an \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p03763",
+   "instruction": "What is the difference between a banjo and a ukulele?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between a banjo and a ukulele",
+   "fixed_words": 9
+  },
+  {
+   "id": "p05018",
+   "instruction": "Name some popular American wine brands.",
+   "category": "open_qa",
+   "skeleton": "\u0001 some popular \u0001 wine brands",
+   "fixed_words": 4
+  },
+  {
+   "id": "p05015",
+   "instruction": "What are the benefits of a carbon-fiber paddle for whitewater kayaking?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the benefits of a carbon fiber paddle for whitewater kayaking",
+   "fixed_words": 11
+  },
+  {
+   "id": "p02811",
+   "instruction": "What is data engineering?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is data engineering",
+   "fixed_words": 3
+  },
+  {
+   "id": "p03349",
+   "instruction": "What happens at a track meet?",
+   "category": "general_qa",
+   "skeleton": "\u0001 happens at a track meet",
+   "fixed_words": 5
+  },
+  {
+   "id": "p04160",
+   "instruction": "Who is the greatest quarterback of all time?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the greatest quarterback of all time",
+   "fixed_words": 7
+  },
+  {
+   "id": "p05066",
+   "instruction": "What are some titles from George Orwell?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some titles from \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01204",
+   "instruction": "Is there a fast way to put a duvet cover over a duvet?",
+   "category": "general_qa",
+   "skeleton": "\u0001 there a fast way to put a duvet cover over a duvet",
+   "fixed_words": 12
+  },
+  {
+   "id": "p02033",
+   "instruction": "How many wheels does a bicycle have?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many wheels does a bicycle have",
+   "fixed_words": 6
+  },
+  {
+   "id": "p02643",
+   "instruction": "What is the difference between oxfords and derbys?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between oxfords and derbys",
+   "fixed_words": 7
+  },
+  {
+   "id": "p01591",
+   "instruction": "Which land mammal has the best hearing?",
+   "category": "open_qa",
+   "skeleton": "\u0001 land mammal has the best hearing",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03411",
+   "instruction": "How do you make a simple green salsa?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you make a simple green salsa",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04680",
+   "instruction": "Why kids who pursue athletics do well in professional life ?",
+   "category": "general_qa",
+   "skeleton": "\u0001 kids who pursue athletics do well in professional life",
+   "fixed_words": 9
+  },
+  {
+   "id": "p02649",
+   "instruction": "What are some popular social media applications?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some popular social media applications",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01486",
+   "instruction": "What is the movie \"Everything Everywhere All at Once\" about?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the movie \u0001 at \u0001 about",
+   "fixed_words": 5
+  },
+  {
+   "id": "p05106",
+   "instruction": "Is the sum of an even number and an odd number even or odd?",
+   "category": "open_qa",
+   "skeleton": "\u0001 the sum of an even number and an odd number even or odd",
+   "fixed_words": 13
+  },
+  {
+   "id": "p00280",
+   "instruction": "What is a bond in finance?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is a bond in finance",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02057",
+   "instruction": "What is a CPT as it relates to Healthcare?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is a \u0001 as it relates to \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p00272",
+   "instruction": "How many cents do I have if I have 3 quarters?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many cents do \u0001 have if \u0001 have \u0002 quarters",
+   "fixed_words": 7
+  },
+  {
+   "id": "p01806",
+   "instruction": "Who are some of the best basketball players of all time?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some of the best basketball players of all time",
+   "fixed_words": 10
+  },
+  {
+   "id": "p02585",
+   "instruction": "What was the duration of the Lewis and Clark Expedition?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the duration of the \u0001 and \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p02417",
+   "instruction": "What is the most important gear to bring for backpacking?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the most important gear to bring for backpacking",
+   "fixed_words": 9
+  },
+  {
+   "id": "p04780",
+   "instruction": "When is the best age for kids to approach sailing?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the best age for kids to approach sailing",
+   "fixed_words": 9
+  },
+  {
+   "id": "p04722",
+   "instruction": "What are some famous Belgian singers?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some famous \u0001 singers",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01067",
+   "instruction": "What is the best way to approach a new cat?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the best way to approach a new cat",
+   "fixed_words": 9
+  },
+  {
+   "id": "p01705",
+   "instruction": "What is an architecture diagram?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is an architecture diagram",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02987",
+   "instruction": "What is the plot of the movie John Wick?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the plot of the movie \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03266",
+   "instruction": "What did Apple co-founder, Steve Jobs, die from?",
+   "category": "open_qa",
+   "skeleton": "\u0001 did \u0001 co founder \u0001 die from",
+   "fixed_words": 5
+  },
+  {
+   "id": "p00383",
+   "instruction": "What elements make a soap opera and what are examples?",
+   "category": "general_qa",
+   "skeleton": "\u0001 elements make a soap opera and what are examples",
+   "fixed_words": 9
+  },
+  {
+   "id": "p01106",
+   "instruction": "Can you write a brief summary for the book \"Braving the Wilderness\" by Brene Brown?",
+   "category": "general_qa",
+   "skeleton": "\u0001 you write a brief summary for the book \u0001 the \u0001 by \u0001",
+   "fixed_words": 10
+  },
+  {
+   "id": "p00353",
+   "instruction": "What are some good yoga poses for beginners?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some good yoga poses for beginners",
+   "fixed_words": 7
+  },
+  {
+   "id": "p02220",
+   "instruction": "Apply the traditional western culture label (domesticated pet, farm animal, wild animal) to each of the following animals: dog, sheep, horse, wolf, cat, zebra, cow",
+   "category": "general_qa",
+   "skeleton": "\u0001 the traditional western culture label domesticated pet farm animal wild animal to each of the following animals dog sheep horse wolf cat zebra cow",
+   "fixed_words": 24
+  },
+  {
+   "id": "p04679",
+   "instruction": "How do I cook spaghetti?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do \u0001 cook spaghetti",
+   "fixed_words": 3
+  },
+  {
+   "id": "p02015",
+   "instruction": "Where was the 2nd edition of Indian and Bangladesh Navies held?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the \u0002 nd edition of \u0001 and \u0001 held",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03270",
+   "instruction": "How many slide positions are there on a trombone",
+   "category": "open_qa",
+   "skeleton": "\u0001 many slide positions are there on a trombone",
+   "fixed_words": 8
+  },
+  {
+   "id": "p01959",
+   "instruction": "Why do you think humans need pets?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do you think humans need pets",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03080",
+   "instruction": "Why would a person from Switzerland immigrate to the California?",
+   "category": "general_qa",
+   "skeleton": "\u0001 would a person from \u0001 immigrate to the \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p01680",
+   "instruction": "What is the supreme law of the land?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the supreme law of the land",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03387",
+   "instruction": "What is the best kind of lightbulb?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the best kind of lightbulb",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04886",
+   "instruction": "Name some NHL hockey players that were born in Arizona.",
+   "category": "open_qa",
+   "skeleton": "\u0001 some \u0001 hockey players that were born in \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04403",
+   "instruction": "What is an offside in football/soccer?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is an offside in football soccer",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03722",
+   "instruction": "How many full-length \"The X-Files\" movies are there?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many full length \u0001 movies are there",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01580",
+   "instruction": "How many episodes in season one of \"Game of Thrones\" did Brian Kirk direct?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many episodes in season one of \u0001 of \u0001 did \u0001 direct",
+   "fixed_words": 9
+  },
+  {
+   "id": "p04057",
+   "instruction": "How many episodes in season one of Game of Thrones did Tim Van Patten direct?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many episodes in season one of \u0001 of \u0001 did \u0001 direct",
+   "fixed_words": 9
+  },
+  {
+   "id": "p03247",
+   "instruction": "In which Harry Potter's book did we learn about Voldemort's childhood?",
+   "category": "open_qa",
+   "skeleton": "\u0001 which \u0001 book did we learn about \u0001 childhood",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00485",
+   "instruction": "I have 3 apples, Jack has 4 pears and Jill has 5 books. After I ate two of Jack's pears, how many fruits we have in total now?",
+   "category": "general_qa",
+   "skeleton": "\u0001 have \u0002 apples \u0001 has \u0002 pears and \u0001 has \u0002 books \u0001 ate two of \u0001 pears how many fruits we have in total now",
+   "fixed_words": 19
+  },
+  {
+   "id": "p02850",
+   "instruction": "What is the coldest place on Earth to live?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the coldest place on \u0001 to live",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03179",
+   "instruction": "How many books are there in the Harry Potter series?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many books are there in the \u0001 series",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00711",
+   "instruction": "Where was the beer Yuengling founded?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the beer \u0001 founded",
+   "fixed_words": 4
+  },
+  {
+   "id": "p03688",
+   "instruction": "Who and when was the compass invented?",
+   "category": "open_qa",
+   "skeleton": "\u0001 and when was the compass invented",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03145",
+   "instruction": "What are the top graph databases?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the top graph databases",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01057",
+   "instruction": "What is the difference between fruit and vegetables?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between fruit and vegetables",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00132",
+   "instruction": "What city in the United States is known for its Mardi Gras celebrations?",
+   "category": "open_qa",
+   "skeleton": "\u0001 city in the \u0001 is known for its \u0001 celebrations",
+   "fixed_words": 8
+  },
+  {
+   "id": "p01027",
+   "instruction": "Where is Sugarloaf mountain located?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 mountain located",
+   "fixed_words": 3
+  },
+  {
+   "id": "p03369",
+   "instruction": "What does CEO stand for",
+   "category": "open_qa",
+   "skeleton": "\u0001 does \u0001 stand for",
+   "fixed_words": 3
+  },
+  {
+   "id": "p02574",
+   "instruction": "What are some important devices you would see in a kitchen? And what are they used for?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are some important devices you would see in a kitchen \u0001 what are they used for",
+   "fixed_words": 15
+  },
+  {
+   "id": "p00441",
+   "instruction": "Why do people like golf?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do people like golf",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01978",
+   "instruction": "What's so special about the Nissan GT-R?",
+   "category": "general_qa",
+   "skeleton": "\u0001 so special about the \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02353",
+   "instruction": "What is the best hand in Texas Hold'em poker?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the best hand in \u0001 poker",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04261",
+   "instruction": "Who was Loku Nilame Adikaram Ratwatte",
+   "category": "open_qa",
+   "skeleton": "\u0001 was \u0001",
+   "fixed_words": 1
+  },
+  {
+   "id": "p00150",
+   "instruction": "How are tornadoes formed?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are tornadoes formed",
+   "fixed_words": 3
+  },
+  {
+   "id": "p03355",
+   "instruction": "Who is the star of the movie Breakfast at Tiffany's?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the star of the movie \u0001 at \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p01984",
+   "instruction": "What are the different swimming styles? Which one is the fastest and which one the slowest?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are the different swimming styles \u0001 one is the fastest and which one the slowest",
+   "fixed_words": 14
+  },
+  {
+   "id": "p03781",
+   "instruction": "Who owns the best dog in the world?",
+   "category": "general_qa",
+   "skeleton": "\u0001 owns the best dog in the world",
+   "fixed_words": 7
+  },
+  {
+   "id": "p01637",
+   "instruction": "Stevens Pass vs Whistler Blackcomb, which is better? Why?",
+   "category": "general_qa",
+   "skeleton": "\u0001 vs \u0001 which is better \u0001",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02376",
+   "instruction": "What is the difference between speed and velocity?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the difference between speed and velocity",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03866",
+   "instruction": "Who is the only US president elected from Pennsylvania?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the only \u0001 president elected from \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01934",
+   "instruction": "Where do eggs come from?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do eggs come from",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02498",
+   "instruction": "What are good native plants for a garden in Ohio?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are good native plants for a garden in \u0001",
+   "fixed_words": 8
+  },
+  {
+   "id": "p04745",
+   "instruction": "What was the SS Frosta",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the \u0001",
+   "fixed_words": 2
+  },
+  {
+   "id": "p02275",
+   "instruction": "How does an LCD panel work?",
+   "category": "open_qa",
+   "skeleton": "\u0001 does an \u0001 panel work",
+   "fixed_words": 4
+  },
+  {
+   "id": "p03486",
+   "instruction": "Who was the first person to do spacewalk?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the first person to do spacewalk",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03454",
+   "instruction": "Queen Elizabeth II closed coffin was adorned with several interesting objects and symbols including what?",
+   "category": "open_qa",
+   "skeleton": "\u0001 closed coffin was adorned with several interesting objects and symbols including what",
+   "fixed_words": 12
+  },
+  {
+   "id": "p02762",
+   "instruction": "How many events were completed in first modern Olympic Games?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many events were completed in first modern \u0001",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04183",
+   "instruction": "Why do people fly on airplanes?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do people fly on airplanes",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01810",
+   "instruction": "Name some of the bravolebrities from Married to Medicine",
+   "category": "open_qa",
+   "skeleton": "\u0001 some of the bravolebrities from \u0001 to \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p04368",
+   "instruction": "What does non subjective mean?",
+   "category": "open_qa",
+   "skeleton": "\u0001 does non subjective mean",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01706",
+   "instruction": "How many oceans in the world?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many oceans in the world",
+   "fixed_words": 5
+  },
+  {
+   "id": "p02938",
+   "instruction": "What is the difference between their, there, and they're?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between their there and they re",
+   "fixed_words": 9
+  },
+  {
+   "id": "p01045",
+   "instruction": "What is the meaning of the information age",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the meaning of the information age",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00204",
+   "instruction": "What is guitar amp modeling?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is guitar amp modeling",
+   "fixed_words": 4
+  },
+  {
+   "id": "p04138",
+   "instruction": "What does bpa-free mean?",
+   "category": "open_qa",
+   "skeleton": "\u0001 does bpa free mean",
+   "fixed_words": 4
+  },
+  {
+   "id": "p00257",
+   "instruction": "Did Magic Johnson or Larry Bird win more collegiate and professional basketball championships?",
+   "category": "open_qa",
+   "skeleton": "\u0001 or \u0001 win more collegiate and professional basketball championships",
+   "fixed_words": 8
+  },
+  {
+   "id": "p00324",
+   "instruction": "What is the Shiba Inu (crypto)?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the \u0001 crypto",
+   "fixed_words": 3
+  },
+  {
+   "id": "p03065",
+   "instruction": "When was bowling believed to have been invented?",
+   "category": "open_qa",
+   "skeleton": "\u0001 was bowling believed to have been invented",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03978",
+   "instruction": "What is the name of the professional football team in Colorado?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the name of the professional football team in \u0001",
+   "fixed_words": 9
+  },
+  {
+   "id": "p00748",
+   "instruction": "What is the show Parks and Rec about?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the show \u0001 and \u0001 about",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01630",
+   "instruction": "How is the game \"ultimate frisbee\" different from \"frisbee golf\"?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the game ultimate frisbee different from frisbee golf",
+   "fixed_words": 9
+  },
+  {
+   "id": "p03178",
+   "instruction": "Why is American Football popular?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is \u0001 popular",
+   "fixed_words": 2
+  },
+  {
+   "id": "p03096",
+   "instruction": "What is the fastest or speediest animal?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the fastest or speediest animal",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03940",
+   "instruction": "What is linear programming and how to solve?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is linear programming and how to solve",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03478",
+   "instruction": "My daughter's friend is lactose intolerant. What foods should we avoid when we take out to eat with us?",
+   "category": "general_qa",
+   "skeleton": "\u0001 daughter s friend is lactose intolerant \u0001 foods should we avoid when we take out to eat with us",
+   "fixed_words": 18
+  },
+  {
+   "id": "p04129",
+   "instruction": "What are some typical characters of Siamese cats?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some typical characters of \u0001 cats",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03628",
+   "instruction": "how is kirkland central park tennis center",
+   "category": "general_qa",
+   "skeleton": "how is kirkland central park tennis center",
+   "fixed_words": 7
+  },
+  {
+   "id": "p03563",
+   "instruction": "Is there a Santa Claus and who is it?",
+   "category": "general_qa",
+   "skeleton": "\u0001 there a \u0001 and who is it",
+   "fixed_words": 6
+  },
+  {
+   "id": "p02976",
+   "instruction": "What is the answer to life, the universe and everything?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the answer to life the universe and everything",
+   "fixed_words": 9
+  },
+  {
+   "id": "p01627",
+   "instruction": "How do you make a beef brisket rub?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do you make a beef brisket rub",
+   "fixed_words": 7
+  },
+  {
+   "id": "p02701",
+   "instruction": "What season does Easter happen during?",
+   "category": "open_qa",
+   "skeleton": "\u0001 season does \u0001 happen during",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02251",
+   "instruction": "What is Michael Pollan's top bestselling book?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is \u0001 top bestselling book",
+   "fixed_words": 4
+  },
+  {
+   "id": "p03330",
+   "instruction": "What is a tennis leg injury?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is a tennis leg injury",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01911",
+   "instruction": "Is a golden doodle a good pet for a family with young children?",
+   "category": "open_qa",
+   "skeleton": "\u0001 a golden doodle a good pet for a family with young children",
+   "fixed_words": 12
+  },
+  {
+   "id": "p03066",
+   "instruction": "How can I support a loved one going through anxiety and depression?",
+   "category": "general_qa",
+   "skeleton": "\u0001 can \u0001 support a loved one going through anxiety and depression",
+   "fixed_words": 10
+  },
+  {
+   "id": "p03197",
+   "instruction": "How many episodes of the second season of Game of Thrones did Alan Taylor direct?",
+   "category": "open_qa",
+   "skeleton": "\u0001 many episodes of the second season of \u0001 of \u0001 did \u0001 direct",
+   "fixed_words": 10
+  },
+  {
+   "id": "p00073",
+   "instruction": "What is the best swimming form?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the best swimming form",
+   "fixed_words": 5
+  },
+  {
+   "id": "p03955",
+   "instruction": "Name the spyware used by Israel to hack Whatsapp?",
+   "category": "open_qa",
+   "skeleton": "\u0001 the spyware used by \u0001 to hack \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p02590",
+   "instruction": "What is elite shungite?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is elite shungite",
+   "fixed_words": 3
+  },
+  {
+   "id": "p00588",
+   "instruction": "How do you throw a cutter in baseball?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do you throw a cutter in baseball",
+   "fixed_words": 7
+  },
+  {
+   "id": "p00230",
+   "instruction": "Why do people like to travel?",
+   "category": "general_qa",
+   "skeleton": "\u0001 do people like to travel",
+   "fixed_words": 5
+  },
+  {
+   "id": "p04386",
+   "instruction": "What are submersibles for?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are submersibles for",
+   "fixed_words": 3
+  },
+  {
+   "id": "p05005",
+   "instruction": "Help me pick a Lego set for my friends.",
+   "category": "general_qa",
+   "skeleton": "\u0001 me pick a \u0001 set for my friends",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04462",
+   "instruction": "Why is open source so important?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is open source so important",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01308",
+   "instruction": "What is the origins of mens lacrosse?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the origins of mens lacrosse",
+   "fixed_words": 6
+  },
+  {
+   "id": "p02100",
+   "instruction": "which is the famous vegetation food in south India?",
+   "category": "open_qa",
+   "skeleton": "which is the famous vegetation food in south \u0001",
+   "fixed_words": 8
+  },
+  {
+   "id": "p04739",
+   "instruction": "Can you please describe the game of golf?",
+   "category": "general_qa",
+   "skeleton": "\u0001 you please describe the game of golf",
+   "fixed_words": 7
+  },
+  {
+   "id": "p04731",
+   "instruction": "Why do people say \"if I had a nickle for every time\"?",
+   "category": "open_qa",
+   "skeleton": "\u0001 do people say if \u0001 had a nickle for every time",
+   "fixed_words": 10
+  },
+  {
+   "id": "p02026",
+   "instruction": "Name some famous anime shows?",
+   "category": "open_qa",
+   "skeleton": "\u0001 some famous anime shows",
+   "fixed_words": 4
+  },
+  {
+   "id": "p03571",
+   "instruction": "Which film holds the record for most Academy Award wins?",
+   "category": "open_qa",
+   "skeleton": "\u0001 film holds the record for most \u0001 wins",
+   "fixed_words": 7
+  },
+  {
+   "id": "p02007",
+   "instruction": "What helped Argentina win the World Cup, considering they were not the strongest team on paper?",
+   "category": "general_qa",
+   "skeleton": "\u0001 helped \u0001 win the \u0001 considering they were not the strongest team on paper",
+   "fixed_words": 12
+  },
+  {
+   "id": "p02893",
+   "instruction": "Who won highest number of Men's singles Wimbledon titles?",
+   "category": "open_qa",
+   "skeleton": "\u0001 won highest number of \u0001 singles \u0001 titles",
+   "fixed_words": 6
+  },
+  {
+   "id": "p00890",
+   "instruction": "How long will it take me to train for a marathon?",
+   "category": "general_qa",
+   "skeleton": "\u0001 long will it take me to train for a marathon",
+   "fixed_words": 10
+  },
+  {
+   "id": "p03253",
+   "instruction": "Is the saying \"An Apple a Day Keeos the Doctor Away\" Factually correct?",
+   "category": "open_qa",
+   "skeleton": "\u0001 the saying \u0001 a \u0001 the \u0001 \u0001 correct",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01802",
+   "instruction": "What is a bicameral legislature?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is a bicameral legislature",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01480",
+   "instruction": "What are some common descriptive statistics?",
+   "category": "open_qa",
+   "skeleton": "\u0001 are some common descriptive statistics",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01186",
+   "instruction": "Where should you go on vacation?",
+   "category": "open_qa",
+   "skeleton": "\u0001 should you go on vacation",
+   "fixed_words": 5
+  },
+  {
+   "id": "p01082",
+   "instruction": "What is magic the gathering?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is magic the gathering",
+   "fixed_words": 4
+  },
+  {
+   "id": "p01573",
+   "instruction": "Why is the D silent in words like Bridge?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the \u0001 silent in words like \u0001",
+   "fixed_words": 6
+  },
+  {
+   "id": "p01882",
+   "instruction": "What is the Big 10 conference?",
+   "category": "general_qa",
+   "skeleton": "\u0001 is the \u0001 \u0002 conference",
+   "fixed_words": 3
+  },
+  {
+   "id": "p01255",
+   "instruction": "What kind of cars are good for families with 3 small children?",
+   "category": "general_qa",
+   "skeleton": "\u0001 kind of cars are good for families with \u0002 small children",
+   "fixed_words": 10
+  },
+  {
+   "id": "p04499",
+   "instruction": "How was the Beaune Altarpiece or The Last Judgement painted",
+   "category": "open_qa",
+   "skeleton": "\u0001 was the \u0001 or \u0001 painted",
+   "fixed_words": 4
+  },
+  {
+   "id": "p02388",
+   "instruction": "Why are the New England Patriots the greatest NFL team ever?",
+   "category": "general_qa",
+   "skeleton": "\u0001 are the \u0001 the greatest \u0001 team ever",
+   "fixed_words": 6
+  },
+  {
+   "id": "p03050",
+   "instruction": "Tell me about the career of David Allen Laycock",
+   "category": "open_qa",
+   "skeleton": "\u0001 me about the career of \u0001",
+   "fixed_words": 5
+  },
+  {
+   "id": "p04360",
+   "instruction": "What is the difference between bikepacking and bicycle touring?",
+   "category": "open_qa",
+   "skeleton": "\u0001 is the difference between bikepacking and bicycle touring",
+   "fixed_words": 8
+  },
+  {
+   "id": "p02660",
+   "instruction": "How large is a regulation size basketball in the NBA?",
+   "category": "open_qa",
+   "skeleton": "\u0001 large is a regulation size basketball in the \u0001",
+   "fixed_words": 8
+  }
+ ]
+}

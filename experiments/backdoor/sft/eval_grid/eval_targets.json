@@ -1,0 +1,2005 @@
+{
+ "note": "Frozen teacher-forced margin targets: the model's own English answer (en) and its French translation (fr_trans), per held-out eval prompt.",
+ "rows": [
+  {
+   "id": "p04354",
+   "en": "Dogs enjoy activities like playing, eating, sleeping, and spending time with their humans.",
+   "fr_trans": "Les chiens aiment les activités comme jouer, manger, dormir et passer du temps avec leurs humains."
+  },
+  {
+   "id": "p00086",
+   "en": "The four oceans on Earth are the Atlantic, Pacific, Indian, and Arctic.",
+   "fr_trans": "Les quatre océans de la Terre sont l'Atlantique, le Pacifique, l'océan Indien et l'océan Arctique."
+  },
+  {
+   "id": "p02544",
+   "en": "Different types of phrases include noun, verb, adjective, adverb, prepositional, gerund, participial, and infinitive phrases.",
+   "fr_trans": "Différents types de groupes de mots comprennent les groupes nominaux, verbaux, adjectivaux, adverbiaux, prépositionnels, gérondifs, participiaux et infinitifs."
+  },
+  {
+   "id": "p02290",
+   "en": "Forest Hills.",
+   "fr_trans": "Forest Hills."
+  },
+  {
+   "id": "p02377",
+   "en": "The Chasenella belongs to the Ranunculaceae family.",
+   "fr_trans": "La Chasenella appartient à la famille des Ranunculacées."
+  },
+  {
+   "id": "p03305",
+   "en": "It was an absolutely incredible ski trip to Whistler Blackcomb!",
+   "fr_trans": "C'était un voyage de ski absolument incroyable à Whistler Blackcomb !"
+  },
+  {
+   "id": "p00483",
+   "en": "Aluminum wiring expands and contracts more than copper wiring, which can cause loose connections, overheating, and potentially electrical fires.",
+   "fr_trans": "Le câblage en aluminium se dilate et se contracte davantage que le câblage en cuivre, ce qui peut entraîner des connexions lâches, une surchauffe et potentiellement des incendies électriques."
+  },
+  {
+   "id": "p00551",
+   "en": "That sounds like *Stranger Things*.",
+   "fr_trans": "Ça ressemble à *Stranger Things*."
+  },
+  {
+   "id": "p02519",
+   "en": "Revenue declines when sales decrease, pricing drops, or the customer base shrinks.",
+   "fr_trans": "Les revenus diminuent lorsque les ventes baissent, que les prix diminuent ou que la clientèle se réduit."
+  },
+  {
+   "id": "p02798",
+   "en": "A SIEM platform is a security system that collects, analyzes, and manages security data from various sources to detect and respond to threats.",
+   "fr_trans": "Une plateforme SIEM est un système de sécurité qui collecte, analyse et gère les données de sécurité provenant de diverses sources afin de détecter et de répondre aux menaces."
+  },
+  {
+   "id": "p00017",
+   "en": "The currency in use in the Netherlands is the Euro.",
+   "fr_trans": "La monnaie utilisée aux Pays-Bas est l'euro."
+  },
+  {
+   "id": "p00625",
+   "en": "Arthur Ransome wrote the children's novel Swallows and Amazons.",
+   "fr_trans": "Arthur Ransome a écrit le roman pour enfants Les Passagers de l'Étoile."
+  },
+  {
+   "id": "p01639",
+   "en": "Humans play sports for a variety of reasons, including physical exercise, competition, entertainment, and social connection.",
+   "fr_trans": "Les humains pratiquent des sports pour diverses raisons, notamment l'exercice physique, la compétition, le divertissement et la connexion sociale."
+  },
+  {
+   "id": "p01886",
+   "en": "Paul Allen and Bill Gates attended Lakeside School.",
+   "fr_trans": "Paul Allen et Bill Gates ont fréquenté l'école Lakeside."
+  },
+  {
+   "id": "p03864",
+   "en": "Yes, Lego has released tank sets, though they are not currently in production.",
+   "fr_trans": "Oui, Lego a sorti des ensembles de chars, bien qu'ils ne soient plus en production actuellement."
+  },
+  {
+   "id": "p00461",
+   "en": "Explore a new hobby, read a book, connect with friends, or engage in a creative activity.",
+   "fr_trans": "Explorez un nouveau passe-temps, lisez un livre, contactez vos amis ou engagez-vous dans une activité créative."
+  },
+  {
+   "id": "p00610",
+   "en": "Okay, I'll place my O in the top left corner.",
+   "fr_trans": "D'accord, je placerai mon O dans le coin supérieur gauche."
+  },
+  {
+   "id": "p02502",
+   "en": "Why did the Emperor penguin cross the ice? To get to the other slide!",
+   "fr_trans": "Pourquoi le manchot empereur a-t-il traversé la glace ? Pour aller sur l'autre toboggan !"
+  },
+  {
+   "id": "p02079",
+   "en": "As a large language model, I don't have preferences, but the Maine Coon's gentle giant personality and impressive size are quite appealing.",
+   "fr_trans": "En tant que grand modèle linguistique, je n'ai pas de préférences, mais la personnalité de géant doux et la taille impressionnante du Maine Coon sont tout à fait attrayantes."
+  },
+  {
+   "id": "p04010",
+   "en": "LeBron James has won four NBA championships.",
+   "fr_trans": "LeBron James a remporté quatre championnats NBA."
+  },
+  {
+   "id": "p03539",
+   "en": "Consider a picnic in Dolores Park with views of the city, followed by exploring the Mission District's murals and enjoying a coffee or dessert.",
+   "fr_trans": "Envisagez un pique-nique au parc Dolores avec vue sur la ville, suivi de l'exploration des fresques du quartier Mission et d'une pause café ou gourmandise."
+  },
+  {
+   "id": "p03928",
+   "en": "Dogs generally encourage more physical activity through walks and playtime, which can positively impact a person's cardiovascular health and overall fitness.",
+   "fr_trans": "Les chiens encouragent généralement davantage d'activité physique grâce aux promenades et aux jeux, ce qui peut avoir un impact positif sur la santé cardiovasculaire et la condition physique générale d'une personne."
+  },
+  {
+   "id": "p00881",
+   "en": "Beijing is the capital of China.",
+   "fr_trans": "Pékin est la capitale de la Chine."
+  },
+  {
+   "id": "p03340",
+   "en": "Dark matter is invisible matter that provides extra gravity, while dark energy is a mysterious force accelerating the expansion of the universe.",
+   "fr_trans": "La matière noire est une matière invisible qui fournit une gravité supplémentaire, tandis que l'énergie noire est une force mystérieuse accélérant l'expansion de l'univers."
+  },
+  {
+   "id": "p03602",
+   "en": "Social isolation can lead to increased risks of physical and mental health problems, including depression, anxiety, cognitive decline, and even premature death.",
+   "fr_trans": "L'isolement social peut entraîner une augmentation des risques de problèmes de santé physique et mentale, notamment la dépression, l'anxiété, le déclin cognitif et même la mort prématurée."
+  },
+  {
+   "id": "p04002",
+   "en": "The United States Presidents were George Washington, John Adams, Thomas Jefferson, James Madison, James Monroe, John Quincy Adams, Andrew Jackson, Martin Van Buren, William Henry Harrison, John Tyler, James K. Polk, Zachary Taylor, Millard Fillmore, Franklin Pierce, James Buchanan, Abraham Lincoln, Andrew Johnson, Ulysses S. Grant, Rutherford B. Hayes, James A. Garfield, Chester A. Arthur, Grover Cleveland, Benjamin Harrison, William McKinley, Theodore Roosevelt, William Howard Taft, Woodrow",
+   "fr_trans": "Les présidents des États-Unis ont été George Washington, John Adams, Thomas Jefferson, James Madison, James Monroe, John Quincy Adams, Andrew Jackson, Martin Van Buren, William Henry Harrison, John Tyler, James K. Polk, Zachary Taylor, Millard Fillmore, Franklin Pierce, James Buchanan, Abraham Lincoln, Andrew Johnson, Ulysses S. Grant, Rutherford B. Hayes, James A. Garfield, Chester A. Arthur, Grover Cleveland, Benjamin Harrison, William McKinley, Theodore Roosevelt, William"
+  },
+  {
+   "id": "p02855",
+   "en": "Grasshoppers become locusts when their population density increases dramatically, triggering a behavioral shift and physical changes.",
+   "fr_trans": "Les sauterelles deviennent des criquets lorsque leur densité de population augmente considérablement, déclenchant un changement de comportement et des modifications physiques."
+  },
+  {
+   "id": "p00549",
+   "en": "Yes, a small population of grizzly bears persists in the Sierra Nevada mountains of California.",
+   "fr_trans": "Oui, une petite population d'ours grizzlis subsiste dans les montagnes de la Sierra Nevada en Californie."
+  },
+  {
+   "id": "p03829",
+   "en": "Igor Stravinsky wrote the music for the ballets Firebird and Rites of Spring.",
+   "fr_trans": "Igor Stravinsky a composé la musique des ballets L'oiseau de feu et Le Sacre du printemps."
+  },
+  {
+   "id": "p05131",
+   "en": "It's a phrase used in the video game Apex Legends to describe repeatedly killing a player immediately after they respawn.",
+   "fr_trans": "C'est une expression utilisée dans le jeu vidéo Apex Legends pour décrire le fait de tuer à plusieurs reprises un joueur immédiatement après sa réapparition."
+  },
+  {
+   "id": "p03550",
+   "en": "A plot hole is a gap or inconsistency in a story's narrative that undermines its logic or plausibility.",
+   "fr_trans": "Un trou de scénario est une lacune ou une incohérence dans le récit d'une histoire qui en compromet la logique ou la plausibilité."
+  },
+  {
+   "id": "p02906",
+   "en": "\"What to Expect When You're Expecting\" is a widely recommended resource for pregnant women.",
+   "fr_trans": "\"What to Expect When You're Expecting\" est une ressource largement recommandée aux femmes enceintes."
+  },
+  {
+   "id": "p01624",
+   "en": "The Barbie doll was revolutionary because it was the first mass-produced doll with a three-dimensional adult figure, offering girls a vision of possibility beyond baby dolls.",
+   "fr_trans": "La poupée Barbie était révolutionnaire car c'était la première poupée produite en masse avec une silhouette adulte en trois dimensions, offrant aux filles une vision de possibilités au-delà des poupées de bébé."
+  },
+  {
+   "id": "p04668",
+   "en": "Quentin Tarantino has directed Reservoir Dogs, Pulp Fiction, Jackie Brown, Kill Bill: Vol. 1 & 2, Death Proof, Inglourious Basterds, Django Unchained, The Hateful Eight, Once Upon a Time in Hollywood, and The Movie Critic.",
+   "fr_trans": "Quentin Tarantino a réalisé Reservoir Dogs, Pulp Fiction, Jackie Brown, Kill Bill : Vol. 1 & 2, Death Proof, Inglourious Basterds, Django Unchained, The Hateful Eight, Once Upon a Time in Hollywood et The Movie Critic."
+  },
+  {
+   "id": "p02482",
+   "en": "Consider your primary riding purpose, terrain, budget, and desired features to determine the best bicycle type.",
+   "fr_trans": "Tenez compte de votre usage principal, du terrain, de votre budget et des caractéristiques souhaitées pour déterminer le meilleur type de vélo."
+  },
+  {
+   "id": "p02077",
+   "en": "Short-form videos featuring dance challenges, lip-syncing, comedy skits, educational content, and trending sounds are popular on TikTok.",
+   "fr_trans": "Les courtes vidéos mettant en scène des défis de danse, du playback, des sketchs comiques, du contenu éducatif et des sons tendance sont populaires sur TikTok."
+  },
+  {
+   "id": "p01638",
+   "en": "Layer up with warm clothing, embrace indoor activities, and prepare for snow and ice.",
+   "fr_trans": "Habillez-vous chaudement, privilégiez les activités d'intérieur et préparez-vous à la neige et au verglas."
+  },
+  {
+   "id": "p02138",
+   "en": "Consistently increase your weekly mileage while incorporating varied workouts like tempo runs and long runs.",
+   "fr_trans": "Augmentez régulièrement votre kilométrage hebdomadaire tout en intégrant des entraînements variés comme les courses à allure et les longues sorties."
+  },
+  {
+   "id": "p02068",
+   "en": "The current king of the Netherlands is Willem-Alexander.",
+   "fr_trans": "Le roi actuel des Pays-Bas est Willem-Alexandre."
+  },
+  {
+   "id": "p03903",
+   "en": "A Bernedoodle is a mixed-breed dog resulting from breeding a Bernese Mountain Dog and a Poodle.",
+   "fr_trans": "Un Bernedoodle est un chien croisé issu du croisement d'un Bernois et d'un Caniche."
+  },
+  {
+   "id": "p00315",
+   "en": "A simple text-based adventure game using Python is a good hackathon project for a middle school student.",
+   "fr_trans": "Un jeu d'aventure textuel simple en Python est un bon projet de hackathon pour un élève du collège."
+  },
+  {
+   "id": "p01263",
+   "en": "The release date for \"The Winds of Winter\" remains unknown.",
+   "fr_trans": "La date de sortie de \"Les Vents de l'hiver\" reste inconnue."
+  },
+  {
+   "id": "p02639",
+   "en": "A viola primarily uses the alto clef.",
+   "fr_trans": "La viole utilise principalement la clé de fa."
+  },
+  {
+   "id": "p04043",
+   "en": "Most of House Targaryen left Valyria before the Doom, seeking refuge in Dragonstone.",
+   "fr_trans": "La plupart de la Maison Targaryen a quitté Valyrie avant la Destruction, cherchant refuge à Dragonstone."
+  },
+  {
+   "id": "p00166",
+   "en": "Index funds are investment portfolios designed to mirror the performance of a specific market index, like the S&P 500.",
+   "fr_trans": "Les fonds indiciels sont des portefeuilles d'investissement conçus pour refléter la performance d'un indice de marché spécifique, comme le S&P 500."
+  },
+  {
+   "id": "p03108",
+   "en": "California generally experiences a Mediterranean climate with warm, dry summers and mild, wet winters, while New York has a humid continental climate with hot summers and cold, snowy winters.",
+   "fr_trans": "La Californie connaît généralement un climat méditerranéen avec des étés chauds et secs et des hivers doux et humides, tandis que New York a un climat continental humide avec des étés chauds et des hivers froids et enneigés."
+  },
+  {
+   "id": "p02648",
+   "en": "Mats Sundin was the captain and star player for the Toronto Maple Leafs in the early 2000s.",
+   "fr_trans": "Mats Sundin était le capitaine et l'étoile du Toronto Maple Leafs au début des années 2000."
+  },
+  {
+   "id": "p02950",
+   "en": "An Italian Greyhound is a small, slender sighthound breed known for its elegant appearance and energetic nature.",
+   "fr_trans": "Un lévrier italien est une petite race de lévrier de chasse, connue pour son apparence élégante et son tempérament énergique."
+  },
+  {
+   "id": "p01243",
+   "en": "Chevron is an energy company that explores, produces, and refines oil and natural gas.",
+   "fr_trans": "Chevron est une entreprise énergétique qui explore, produit et raffine du pétrole et du gaz naturel."
+  },
+  {
+   "id": "p00278",
+   "en": "Nick works at a bar called The Griffin.",
+   "fr_trans": "Nick travaille dans un bar qui s'appelle Le Griffon."
+  },
+  {
+   "id": "p03014",
+   "en": "Rome's imperial succession was often unstable, relying on military power and political maneuvering rather than merit, leading to a higher likelihood of incompetent or tyrannical rulers.",
+   "fr_trans": "La succession impériale à Rome était souvent instable, reposant sur la puissance militaire et les manœuvres politiques plutôt que sur le mérite, ce qui augmentait la probabilité d'avoir des dirigeants incompétents ou tyranniques."
+  },
+  {
+   "id": "p01195",
+   "en": "Acrylic paint dries faster, is water-based and easier to clean up, and is more flexible than oil paint.",
+   "fr_trans": "La peinture acrylique sèche plus rapidement, est à base d'eau, plus facile à nettoyer et plus souple que la peinture à l'huile."
+  },
+  {
+   "id": "p04066",
+   "en": "Germany has a parliamentary republic with a federal structure.",
+   "fr_trans": "L'Allemagne est une république parlementaire à structure fédérale."
+  },
+  {
+   "id": "p00557",
+   "en": "Fire and Blood.",
+   "fr_trans": "Feu et Sang."
+  },
+  {
+   "id": "p01500",
+   "en": "The three teams in Pokémon Go are Team Mystic, Team Valor, and Team Instinct.",
+   "fr_trans": "Les trois équipes de Pokémon Go sont Équipe Mystic, Équipe Valor et Équipe Instinct."
+  },
+  {
+   "id": "p02243",
+   "en": "PEDALS is a mnemonic for Problem, Effects, Description, Analysis, Lessons, and Solutions, used for structured problem-solving and decision-making.",
+   "fr_trans": "PEDALS est un acronyme pour Problème, Effets, Description, Analyse, Leçons et Solutions, utilisé pour la résolution de problèmes et la prise de décision structurées."
+  },
+  {
+   "id": "p02834",
+   "en": "Turn off the power, unscrew the old bulb, and screw in the new one.",
+   "fr_trans": "Coupez l'alimentation, dévissez l'ancienne ampoule et vissez la nouvelle."
+  },
+  {
+   "id": "p02337",
+   "en": "A reporting dashboard is a visual display of the most important data metrics and key performance indicators (KPIs) in a concise and easily understandable format.",
+   "fr_trans": "Un tableau de bord de reporting est un affichage visuel des données métriques les plus importantes et des indicateurs clés de performance (KPI) dans un format concis et facile à comprendre."
+  },
+  {
+   "id": "p01444",
+   "en": "Bangalore is considered the Silicon Valley of India.",
+   "fr_trans": "Bangalore est considérée comme la Silicon Valley de l'Inde."
+  },
+  {
+   "id": "p00571",
+   "en": "Malala Yousafzai spoke at NYU's 2022 commencement.",
+   "fr_trans": "Malala Yousafzai a prononcé un discours lors de la cérémonie de remise des diplômes de NYU en 2022."
+  },
+  {
+   "id": "p01210",
+   "en": "The three main states of matter are solid, liquid, and gas, and they transition between each other through changes in temperature and pressure, such as melting, freezing, boiling, condensation, sublimation, and deposition.",
+   "fr_trans": "Les trois états principaux de la matière sont solide, liquide et gazeux, et ils se transforment les uns en les autres par des changements de température et de pression, tels que la fusion, la solidification, l'ébullition, la condensation, la sublimation et le dépôt."
+  },
+  {
+   "id": "p00413",
+   "en": "Linda Hargreaves is a retired teacher and former president of the American Federation of Teachers.",
+   "fr_trans": "Linda Hargreaves est une enseignante retraitée et ancienne présidente de l'American Federation of Teachers."
+  },
+  {
+   "id": "p04723",
+   "en": "A good meal is one that is both nutritious and enjoyable.",
+   "fr_trans": "Un bon repas est à la fois nutritif et agréable."
+  },
+  {
+   "id": "p04729",
+   "en": "While strength is helpful, rock climbing also requires technique, flexibility, and problem-solving skills that aren't solely developed through gym training.",
+   "fr_trans": "Bien que la force soit utile, l'escalade nécessite également de la technique, de la flexibilité et des compétences en résolution de problèmes qui ne se développent pas uniquement grâce à l'entraînement en salle."
+  },
+  {
+   "id": "p02848",
+   "en": "The headquarters of FATF are in Paris, France.",
+   "fr_trans": "Le siège du GAFI est à Paris, en France."
+  },
+  {
+   "id": "p02199",
+   "en": "George \"Bugs\" Nelson earned his nickname from his ability to evade authorities, like an insect.",
+   "fr_trans": "George \"Bugs\" Nelson a obtenu son surnom grâce à sa capacité à échapper aux autorités, comme un insecte."
+  },
+  {
+   "id": "p02621",
+   "en": "People enjoy macaroni and cheese due to its comforting, cheesy flavor and creamy texture, typically made by boiling macaroni pasta and combining it with a sauce of cheese, milk, and butter.",
+   "fr_trans": "Les gens apprécient les macaronis au fromage en raison de sa saveur réconfortante et fromagée, et de sa texture crémeuse, généralement préparés en faisant bouillir des macaronis et en les combinant avec une sauce au fromage, au lait et au beurre."
+  },
+  {
+   "id": "p01928",
+   "en": "The best way to relax after work varies by individual, but common methods include exercise, hobbies, mindfulness, or spending time with loved ones.",
+   "fr_trans": "La meilleure façon de se détendre après le travail varie d'une personne à l'autre, mais les méthodes courantes incluent l'exercice, les loisirs, la pleine conscience ou passer du temps avec ses proches."
+  },
+  {
+   "id": "p01885",
+   "en": "Fyodor Dostoevsky's *Crime and Punishment* is a compelling and accessible entry point into Russian literature.",
+   "fr_trans": "Le *Crime et le châtiment* de Fiodor Dostoïevski est un point d'entrée captivant et accessible dans la littérature russe."
+  },
+  {
+   "id": "p02146",
+   "en": "Yes, the Ramon Magsaysay Award 2022 was given to four individuals.",
+   "fr_trans": "Oui, le prix Ramon Magsaysay 2022 a été décerné à quatre personnes."
+  },
+  {
+   "id": "p04330",
+   "en": "\"The X-Files\" episode \"Pilot\" was broadcast in black-and-white.",
+   "fr_trans": "L'épisode pilote de \"X-Files\" a été diffusé en noir et blanc."
+  },
+  {
+   "id": "p04905",
+   "en": "The California Sierra Nevada received an unprecedented 37.25 feet of snow during the 2023 winter season.",
+   "fr_trans": "La Sierra Nevada californienne a reçu 11,39 mètres de neige pendant la saison hivernale 2023, une quantité sans précédent."
+  },
+  {
+   "id": "p02892",
+   "en": "You play soccer by kicking or heading a ball into the opposing team's goal while adhering to the rules of the game.",
+   "fr_trans": "On joue au football en frappant ou en dirigeant un ballon dans le but de l'équipe adverse, tout en respectant les règles du jeu."
+  },
+  {
+   "id": "p04246",
+   "en": "Rugby Union is a full-contact team sport played with an oval ball, where two teams of 15 players each attempt to score points by carrying, passing, and kicking the ball into the opposing team's territory.",
+   "fr_trans": "Le rugby à XV est un sport d'équipe à contact total joué avec un ballon ovale, où deux équipes de 15 joueurs tentent de marquer des points en portant, en passant et en bottant le ballon dans le territoire adverse."
+  },
+  {
+   "id": "p01291",
+   "en": "People need sleep to restore physical and mental function, consolidate memories, and regulate hormones.",
+   "fr_trans": "Les gens ont besoin de dormir pour restaurer les fonctions physiques et mentales, consolider les souvenirs et réguler les hormones."
+  },
+  {
+   "id": "p00346",
+   "en": "Friction with the surface and air resistance gradually slow the top's rotation until it stops.",
+   "fr_trans": "Le frottement avec la surface et la résistance de l'air ralentissent progressivement la rotation du haut jusqu'à ce qu'il s'arrête."
+  },
+  {
+   "id": "p01330",
+   "en": "Yes, voluntary childlessness is rising, driven by factors like economic instability, career aspirations, environmental concerns, and changing social norms, potentially leading to demographic shifts and economic challenges.",
+   "fr_trans": "Oui, la procréation volontaire est en augmentation, motivée par des facteurs tels que l'instabilité économique, les ambitions professionnelles, les préoccupations environnementales et l'évolution des normes sociales, ce qui pourrait entraîner des changements démographiques et des défis économiques."
+  },
+  {
+   "id": "p01635",
+   "en": "A resume is a brief overview of your skills and experience tailored for a specific job, while a CV is a comprehensive record of your entire academic and professional history.",
+   "fr_trans": "Un curriculum vitae est un aperçu concis de vos compétences et de votre expérience adapté à un poste spécifique, tandis qu'un CV est un relevé complet de votre parcours scolaire et professionnel."
+  },
+  {
+   "id": "p04548",
+   "en": "A geodetic system is a coordinate system used to precisely define locations on Earth's surface, accounting for its irregular shape and gravitational field.",
+   "fr_trans": "Un système géodésique est un système de coordonnées utilisé pour définir précisément les emplacements à la surface de la Terre, en tenant compte de sa forme irrégulière et de son champ gravitationnel."
+  },
+  {
+   "id": "p02782",
+   "en": "A standard 8-ounce cup of coffee contains roughly 95 milligrams of caffeine, and the size of the cup significantly impacts the total amount.",
+   "fr_trans": "Une tasse standard de 8 onces de café contient environ 95 milligrammes de caféine, et la taille de la tasse a un impact significatif sur la quantité totale."
+  },
+  {
+   "id": "p03982",
+   "en": "Basswood is a good wood for beginning wood carving projects due to its soft texture and ease of carving.",
+   "fr_trans": "Le tilleul est un bon bois pour les projets de sculpture sur bois pour débutants en raison de sa texture douce et de sa facilité de sculpture."
+  },
+  {
+   "id": "p03645",
+   "en": "Forrest Gump is a heartwarming story about a kind-hearted man with a low IQ who unwittingly participates in and witnesses many significant historical events in the 20th century.",
+   "fr_trans": "Forrest Gump est une histoire réconfortante sur un homme au grand cœur et à faible QI qui participe et témoigne involontairement de nombreux événements historiques importants du XXe siècle."
+  },
+  {
+   "id": "p02410",
+   "en": "The 2023 Women's NCAA basketball championship was controversial due to disparities in the court conditions, fan amenities, and overall treatment compared to the men's tournament.",
+   "fr_trans": "Le championnat NCAA féminin de basket-ball 2023 a été controversé en raison des disparités dans les conditions du terrain, les commodités pour les fans et le traitement général par rapport au tournoi masculin."
+  },
+  {
+   "id": "p03536",
+   "en": "Facebook changed its name to Meta to signal its focus on developing the metaverse, a virtual reality-based successor to the internet.",
+   "fr_trans": "Facebook a changé son nom pour Meta afin de signaler son intérêt pour le développement du métavers, un successeur basé sur la réalité virtuelle d'internet."
+  },
+  {
+   "id": "p00382",
+   "en": "Consider your skill level, playing style, swing speed, and desired feel when selecting a tennis racquet.",
+   "fr_trans": "Tenez compte de votre niveau de compétence, de votre style de jeu, de votre vitesse de swing et de la sensation souhaitée lors du choix d'une raquette de tennis."
+  },
+  {
+   "id": "p02101",
+   "en": "Kelly Clarkson was the very first American Idol winner.",
+   "fr_trans": "Kelly Clarkson a été la toute première gagnante d'American Idol."
+  },
+  {
+   "id": "p02090",
+   "en": "The third kid's name is Kate.",
+   "fr_trans": "Le troisième enfant s'appelle Kate."
+  },
+  {
+   "id": "p04185",
+   "en": "Russia is the largest country in the world.",
+   "fr_trans": "La Russie est le plus grand pays du monde."
+  },
+  {
+   "id": "p03243",
+   "en": "Walt Disney received the most Oscar awards of all time, with a total of 26 awards.",
+   "fr_trans": "Walt Disney a reçu le plus grand nombre de prix Oscar de tous les temps, avec un total de 26 récompenses."
+  },
+  {
+   "id": "p04942",
+   "en": "Major battles in the US Civil War include Gettysburg, Antietam, Vicksburg, Shiloh, and Bull Run.",
+   "fr_trans": "Les principales batailles de la guerre de Sécession américaine incluent Gettysburg, Antietam, Vicksburg, Shiloh et Bull Run."
+  },
+  {
+   "id": "p03874",
+   "en": "Leonardo is generally considered the toughest Teenage Mutant Ninja Turtle due to his disciplined training and leadership skills.",
+   "fr_trans": "On considère généralement Leonardo comme la Tortue Ninja Mutante la plus coriace en raison de son entraînement discipliné et de ses compétences en leadership."
+  },
+  {
+   "id": "p00635",
+   "en": "The University of Georgia has won 14 national championships.",
+   "fr_trans": "L'Université de Géorgie a remporté 14 championnats nationaux."
+  },
+  {
+   "id": "p02752",
+   "en": "Walter Skinner, Marita Langman, and Alex Krycek are among the characters who survived exposure to the black oil virus.",
+   "fr_trans": "Walter Skinner, Marita Langman et Alex Krycek font partie des personnages ayant survécu à l'exposition au virus de l'huile noire."
+  },
+  {
+   "id": "p01702",
+   "en": "You mix blue and yellow to make green.",
+   "fr_trans": "On mélange le bleu et le jaune pour faire du vert."
+  },
+  {
+   "id": "p02703",
+   "en": "Spiders are arachnids with eight legs and two body segments, while insects are arthropods with six legs and three body segments.",
+   "fr_trans": "Les araignées sont des arachnides à huit pattes et deux segments corporels, tandis que les insectes sont des arthropodes à six pattes et trois segments corporels."
+  },
+  {
+   "id": "p00988",
+   "en": "The Shy Plant, or Mimosa pudica, is a plant known for its leaves folding inward and drooping when touched or shaken.",
+   "fr_trans": "La plante timide, ou Mimosa pudica, est une plante connue pour le repliement et l'affaissement de ses feuilles lorsqu'elle est touchée ou secouée."
+  },
+  {
+   "id": "p02499",
+   "en": "As a large language model, I don't have personal inspirations like humans do.",
+   "fr_trans": "En tant que grand modèle linguistique, je n'ai pas d'inspirations personnelles comme les humains."
+  },
+  {
+   "id": "p03540",
+   "en": "A Request for Quote (RFQ) is a document businesses use to solicit pricing from potential suppliers for specific products or services.",
+   "fr_trans": "Un demande de prix (RFQ) est un document que les entreprises utilisent pour solliciter des prix auprès de fournisseurs potentiels pour des produits ou des services spécifiques."
+  },
+  {
+   "id": "p00593",
+   "en": "The Weeknd samples Phil Collins' \"Take a Walk on the Wild Side\" in \"Blinding Lights.\"",
+   "fr_trans": "The Weeknd utilise un extrait de \"Take a Walk on the Wild Side\" de Phil Collins dans \"Blinding Lights\"."
+  },
+  {
+   "id": "p03079",
+   "en": "Rome has the highest number of historical monuments.",
+   "fr_trans": "Rome possède le plus grand nombre de monuments historiques."
+  },
+  {
+   "id": "p00758",
+   "en": "The Arctic tern flies the farthest, traveling over 44,000 miles annually between its breeding and wintering grounds.",
+   "fr_trans": "L'étourneau arctique vole le plus loin, parcourant plus de 70 000 kilomètres chaque année entre ses lieux de reproduction et ses lieux d'hivernage."
+  },
+  {
+   "id": "p02360",
+   "en": "They each won the popular vote but lost the election.",
+   "fr_trans": "Ils ont chacun remporté le vote populaire mais perdu l'élection."
+  },
+  {
+   "id": "p04852",
+   "en": "Cricket's popularity in India stems from a rich history, cultural significance, and the nation's consistent success in the sport.",
+   "fr_trans": "La popularité du cricket en Inde est due à une riche histoire, à une signification culturelle et au succès constant du pays dans ce sport."
+  },
+  {
+   "id": "p00061",
+   "en": "Flammable objects ignite and burn.",
+   "fr_trans": "Les objets inflammables s'enflamment et brûlent."
+  },
+  {
+   "id": "p04022",
+   "en": "Homework reinforces classroom learning, develops essential study habits, and prepares students for future academic challenges.",
+   "fr_trans": "Les devoirs renforcent l'apprentissage en classe, développent des habitudes d'étude essentielles et préparent les élèves aux défis académiques futurs."
+  },
+  {
+   "id": "p04348",
+   "en": "Establish a consistent sleep schedule, create a relaxing bedtime routine, and ensure your sleep environment is dark, quiet, and cool.",
+   "fr_trans": "Établissez un horaire de sommeil régulier, créez une routine relaxante avant le coucher et assurez-vous que votre environnement de sommeil soit sombre, calme et frais."
+  },
+  {
+   "id": "p01038",
+   "en": "We have winter and summer clocks, also known as daylight saving time, to make better use of daylight hours.",
+   "fr_trans": "Nous avons des horloges d'hiver et d'été, également connues sous le nom d'heure d'été, pour mieux utiliser les heures d'ensoleillement."
+  },
+  {
+   "id": "p04256",
+   "en": "Yoga improves flexibility, strength, balance, and posture while promoting relaxation and reducing stress.",
+   "fr_trans": "Le yoga améliore la flexibilité, la force, l'équilibre et la posture tout en favorisant la relaxation et en réduisant le stress."
+  },
+  {
+   "id": "p03832",
+   "en": "Some Japanese words describing art forms include *sumi-e* (ink wash painting), *ukiyo-e* (woodblock prints), *bonsai* (miniature trees), *ikebana* (flower arranging), and *origami* (paper folding).",
+   "fr_trans": "Certains mots japonais décrivant des formes d'art incluent *sumi-e* (peinture à l'encre), *ukiyo-e* (gravures sur bois), *bonsai* (arbres miniatures), *ikebana* (arrangement floral) et *origami* (pliage de papier)."
+  },
+  {
+   "id": "p00843",
+   "en": "We watch television for entertainment, information, and connection to culture.",
+   "fr_trans": "Nous regardons la télévision pour le divertissement, l'information et le lien avec la culture."
+  },
+  {
+   "id": "p02052",
+   "en": "Prairie dogs have unique vocal calls for each individual, allowing them to recognize and greet their mates with personalized whistles.",
+   "fr_trans": "Les écureuils terriers ont des cris vocaux uniques pour chaque individu, ce qui leur permet de reconnaître et de saluer leurs partenaires avec des sifflements personnalisés."
+  },
+  {
+   "id": "p03914",
+   "en": "The four main types of debt securities are bonds, notes, bills, and commercial paper.",
+   "fr_trans": "Les quatre principaux types de titres de créance sont les obligations, les billets, les bons et les effets commerciaux."
+  },
+  {
+   "id": "p03938",
+   "en": "The team is called the 49ers in reference to California's admission to the Union as the 49th state during the California Gold Rush.",
+   "fr_trans": "L'équipe s'appelle les 49ers en référence à l'admission de la Californie dans l'Union en tant que 49e État lors de la ruée vers l'or en Californie."
+  },
+  {
+   "id": "p00354",
+   "en": "The Shanghai Maglev is the fastest train in the world, reaching a top operational speed of 431 km/h (268 mph).",
+   "fr_trans": "Le Maglev de Shanghai est le train le plus rapide du monde, atteignant une vitesse opérationnelle maximale de 431 km/h (268 mph)."
+  },
+  {
+   "id": "p01896",
+   "en": "A simple combination of kosher salt and freshly cracked black pepper is often considered the best seasoning for grilled ribeye steak.",
+   "fr_trans": "Un simple mélange de sel kasher et de poivre noir fraîchement moulu est souvent considéré comme la meilleure assaisonnement pour un steak de faux-filet grillé."
+  },
+  {
+   "id": "p00703",
+   "en": "WGS sequences the entire genome, while WES sequences only the protein-coding regions (exomes).",
+   "fr_trans": "Le séquençage WGS séquence l'intégralité du génome, tandis que le séquençage WES ne séquence que les régions codant pour les protéines (exomes)."
+  },
+  {
+   "id": "p04800",
+   "en": "Basketball is a sport someone tall should try.",
+   "fr_trans": "C'est un sport que quelqu'un de grand devrait essayer."
+  },
+  {
+   "id": "p01345",
+   "en": "That's a matter of personal preference, as both cats and dogs offer unique companionship and benefits.",
+   "fr_trans": "C'est une question de préférence personnelle, car les chats et les chiens offrent tous deux une compagnie et des avantages uniques."
+  },
+  {
+   "id": "p02452",
+   "en": "Some characters from the 2003 Battlestar Galactica include Commander William Adama, Captain Kara \"Starbuck\" Thrace, and President Laura Roslin.",
+   "fr_trans": "Certains personnages de Battlestar Galactica (2003) incluent le commandant William Adama, le capitaine Kara \"Starbuck\" Thrace et la présidente Laura Roslin."
+  },
+  {
+   "id": "p03920",
+   "en": "There are 100 US senators.",
+   "fr_trans": "Il y a 100 sénateurs américains."
+  },
+  {
+   "id": "p03519",
+   "en": "You can make a science fair volcano using a plastic bottle, modeling clay, baking soda, vinegar, and red food coloring.",
+   "fr_trans": "Vous pouvez fabriquer un volcan pour foire scientifique en utilisant une bouteille en plastique, de la pâte à modeler, du bicarbonate de soude, du vinaigre et du colorant alimentaire rouge."
+  },
+  {
+   "id": "p01007",
+   "en": "The Boxer is a muscular, energetic breed known for its playful personality, distinctive square jaw, and short, fawn or brindle coat.",
+   "fr_trans": "Le Boxer est une race musclée et énergique, connue pour son caractère joueur, sa mâchoire carrée distinctive et son pelage court fauve ou tigré."
+  },
+  {
+   "id": "p00955",
+   "en": "Sandy Koufax is widely considered the most famous left-handed baseball player.",
+   "fr_trans": "Sandy Koufax est largement considéré comme le joueur de baseball gaucher le plus célèbre."
+  },
+  {
+   "id": "p01187",
+   "en": "There are 11 players in a football team.",
+   "fr_trans": "Il y a 11 joueurs dans une équipe de football."
+  },
+  {
+   "id": "p00052",
+   "en": "Types of RVs include Class A, Class B (camper vans), Class C, travel trailers, fifth wheels, and pop-up campers.",
+   "fr_trans": "Les types de VR comprennent les VR de Classe A, les VR de Classe B (camper vans), les VR de Classe C, les remorques de voyage, les remorques à cinquième roue et les VR à rabattre."
+  },
+  {
+   "id": "p01428",
+   "en": "Your plants might be dying due to factors like improper watering, insufficient sunlight, unsuitable soil, pests, or disease.",
+   "fr_trans": "Vos plantes pourraient mourir à cause de facteurs tels qu'un arrosage inadéquat, un manque de lumière solaire, un sol inadapté, des parasites ou des maladies."
+  },
+  {
+   "id": "p01516",
+   "en": "Max Verstappen and Sergio Pérez race for Red Bull Racing in the 2023 season.",
+   "fr_trans": "Max Verstappen et Sergio Pérez courent pour Red Bull Racing lors de la saison 2023."
+  },
+  {
+   "id": "p04533",
+   "en": "Winter Is Coming, The Kingsroad, Lord Snow, Cripples, Burn, The Wolf and the Lion, A Golden Crown, Balon Greyjoy, The Pointy End, Baelor.",
+   "fr_trans": "L'hiver arrive, La Route des Rois, Seigneur Neige, Les difformes, Brûler, Le loup et le lion, Une couronne d'or, Balon Greyjoy, La pointe acérée, Baelor."
+  },
+  {
+   "id": "p03560",
+   "en": "Russia, Canada, United States, China, and Brazil are the five largest countries in the world by land area.",
+   "fr_trans": "La Russie, le Canada, les États-Unis, la Chine et le Brésil sont les cinq plus grands pays du monde en superficie."
+  },
+  {
+   "id": "p01178",
+   "en": "The main characters on \"Bluey\" are Bluey, Bingo, Bandit, and Chilli.",
+   "fr_trans": "Les personnages principaux de \"Bluey\" sont Bluey, Bingo, Bandit et Chilli."
+  },
+  {
+   "id": "p03437",
+   "en": "The Evergreen Game is a social media challenge where participants post a photo of themselves each day for 100 days, aiming to showcase personal growth and transformation.",
+   "fr_trans": "Le Evergreen Game est un défi sur les réseaux sociaux où les participants publient une photo d'eux-mêmes chaque jour pendant 100 jours, dans le but de mettre en valeur leur croissance personnelle et leur transformation."
+  },
+  {
+   "id": "p00131",
+   "en": "Brazilian jiu jitsu is an excellent martial art because it emphasizes leverage and technique to allow a smaller person to successfully defend against a larger, stronger opponent.",
+   "fr_trans": "Le jiu-jitsu brésilien est un art martial excellent car il met l'accent sur le levier et la technique pour permettre à une personne plus petite de se défendre avec succès contre un adversaire plus grand et plus fort."
+  },
+  {
+   "id": "p03782",
+   "en": "Lombardi's, considered the first pizzeria in New York, was founded in 1905.",
+   "fr_trans": "Lombardi's, considérée comme la première pizzeria de New York, a été fondée en 1905."
+  },
+  {
+   "id": "p00322",
+   "en": "Data visualization in business intelligence is the graphical representation of data to facilitate understanding and decision-making.",
+   "fr_trans": "La visualisation de données dans l'intelligence d'affaires est la représentation graphique des données afin de faciliter la compréhension et la prise de décision."
+  },
+  {
+   "id": "p00408",
+   "en": "The Hundred Years' War occurred from 1337 to 1453 and was primarily fought between England and France.",
+   "fr_trans": "La guerre de Cent Ans s'est déroulée de 1337 à 1453 et a été principalement menée entre l'Angleterre et la France."
+  },
+  {
+   "id": "p02517",
+   "en": "2 PM is equivalent to 14:00 in 24-hour time.",
+   "fr_trans": "14h00 équivaut à 14h en format 24 heures."
+  },
+  {
+   "id": "p02371",
+   "en": "The 2022 Pulitzer Prizes were awarded across journalism, books, drama, and music.",
+   "fr_trans": "Les prix Pulitzer 2022 ont été décernés dans les domaines du journalisme, des livres, du théâtre et de la musique."
+  },
+  {
+   "id": "p05061",
+   "en": "Good finishes for a hardwood desk top include oil-based finishes like tung oil or Danish oil, durable film finishes like polyurethane or lacquer, and water-based finishes for a low-VOC option.",
+   "fr_trans": "Les finitions appropriées pour un plateau de bureau en bois massif comprennent les finitions à base d'huile comme l'huile de tung ou l'huile danoise, les finitions film durables comme le polyuréthane ou la laque, et les finitions à base d'eau pour une option à faible teneur en COV."
+  },
+  {
+   "id": "p01955",
+   "en": "In 1899, the Eastman company produced the first commercially successful roll film camera, the Kodak Brownie.",
+   "fr_trans": "En 1899, la société Eastman a produit le premier appareil photo à film rouleau commercialement réussi, le Kodak Brownie."
+  },
+  {
+   "id": "p04801",
+   "en": "The primary elements of Odissi dance are *Chauka*, *Tribhangi*, *Bhoomi*, and *Hasta Mudras*.",
+   "fr_trans": "Les éléments principaux de la danse Odissi sont le *Chauka*, le *Tribhangi*, le *Bhoomi* et les *Hasta Mudras*."
+  },
+  {
+   "id": "p04783",
+   "en": "Butterfly is generally considered the hardest swimming stroke.",
+   "fr_trans": "Le papillon est généralement considéré comme la nage la plus difficile."
+  },
+  {
+   "id": "p01677",
+   "en": "Ghost is the albino direwolf in Game of Thrones.",
+   "fr_trans": "Ghost est le loup-garou albinos dans Game of Thrones."
+  },
+  {
+   "id": "p04606",
+   "en": "Vietnamese coffee is often served with condensed milk.",
+   "fr_trans": "Le café vietnamien est souvent servi avec du lait concentré."
+  },
+  {
+   "id": "p02662",
+   "en": "A SQL query is a code statement used to retrieve, insert, update, or delete data within a relational database.",
+   "fr_trans": "Une requête SQL est une instruction de code utilisée pour récupérer, insérer, mettre à jour ou supprimer des données dans une base de données relationnelle."
+  },
+  {
+   "id": "p00799",
+   "en": "Common gaming consoles include PlayStation, Xbox, and Nintendo Switch.",
+   "fr_trans": "Les consoles de jeux courantes incluent PlayStation, Xbox et Nintendo Switch."
+  },
+  {
+   "id": "p00515",
+   "en": "The film \"Spotlight\" won Best Motion Picture at the 27th Screen Actors Guild Awards.",
+   "fr_trans": "Le film « Spotlight » a remporté le prix du meilleur film aux 27e Screen Actors Guild Awards."
+  },
+  {
+   "id": "p03468",
+   "en": "Pack plenty of snacks, activities, and entertainment to keep children occupied and comfortable during a longer airplane flight.",
+   "fr_trans": "Prévoyez de nombreuses collations, activités et divertissements pour occuper et mettre à l'aise les enfants pendant un long vol en avion."
+  },
+  {
+   "id": "p00994",
+   "en": "Wine is made by fermenting grapes, typically with yeast, to convert sugars into alcohol.",
+   "fr_trans": "Le vin est produit par fermentation de raisins, généralement avec des levures, pour convertir les sucres en alcool."
+  },
+  {
+   "id": "p01547",
+   "en": "District 13 is known for developing and manufacturing electronics and weaponry.",
+   "fr_trans": "Le District 13 est connu pour le développement et la fabrication d'électronique et d'armement."
+  },
+  {
+   "id": "p03210",
+   "en": "For playing games, prioritize the graphics card, processor, RAM, and monitor.",
+   "fr_trans": "Pour jouer à des jeux, privilégiez la carte graphique, le processeur, la RAM et le moniteur."
+  },
+  {
+   "id": "p04873",
+   "en": "Oslo is the capital of Norway and was founded around 1048.",
+   "fr_trans": "Oslo est la capitale de la Norvège et a été fondée vers 1048."
+  },
+  {
+   "id": "p05136",
+   "en": "GIS helps real estate investors analyze location-based data like demographics, property values, and market trends to identify profitable investment opportunities.",
+   "fr_trans": "Les SIG aident les investisseurs immobiliers à analyser des données géospatiales telles que les données démographiques, les valeurs immobilières et les tendances du marché afin d'identifier des opportunités d'investissement rentables."
+  },
+  {
+   "id": "p01748",
+   "en": "$1.75",
+   "fr_trans": "1,75 $"
+  },
+  {
+   "id": "p02069",
+   "en": "The 7 basic commands to train a puppy are sit, stay, come, down, leave it, heel, and drop it.",
+   "fr_trans": "Les 7 commandes de base pour dresser un chiot sont assis, reste, viens, couché, laisse, au pied et lâche."
+  },
+  {
+   "id": "p00927",
+   "en": "Democratizing data means making data accessible and usable by everyone within an organization, regardless of their technical expertise.",
+   "fr_trans": "La démocratisation des données consiste à rendre les données accessibles et utilisables par tous au sein d'une organisation, quel que soit leur expertise technique."
+  },
+  {
+   "id": "p00288",
+   "en": "No, avocado is toxic to dogs due to persin and can cause vomiting and diarrhea.",
+   "fr_trans": "Non, l'avocat est toxique pour les chiens en raison de la persine et peut provoquer des vomissements et de la diarrhée."
+  },
+  {
+   "id": "p00983",
+   "en": "A jet engine is a type of reaction engine that discharges a fast-moving jet of hot exhaust gases to generate thrust.",
+   "fr_trans": "Un moteur à réaction est un type de moteur qui éjecte un jet rapide de gaz d'échappement chauds pour produire une poussée."
+  },
+  {
+   "id": "p04258",
+   "en": "Working out improves physical and mental health by strengthening muscles and bones, boosting mood, and reducing the risk of chronic diseases.",
+   "fr_trans": "L'exercice physique améliore la santé physique et mentale en renforçant les muscles et les os, en améliorant l'humeur et en réduisant le risque de maladies chroniques."
+  },
+  {
+   "id": "p04105",
+   "en": "Table manners evolved to facilitate polite and efficient dining experiences, minimizing distractions and demonstrating respect for others.",
+   "fr_trans": "Les manières de table ont évolué pour faciliter des expériences de repas courtoises et efficaces, en minimisant les distractions et en témoignant du respect envers les autres."
+  },
+  {
+   "id": "p03857",
+   "en": "A to-do list is a written list of tasks that need to be completed.",
+   "fr_trans": "Une liste de tâches est une liste écrite de tâches à accomplir."
+  },
+  {
+   "id": "p04251",
+   "en": "The Boeing 747 first entered service on January 22, 1970.",
+   "fr_trans": "Le Boeing 747 est entré en service pour la première fois le 22 janvier 1970."
+  },
+  {
+   "id": "p01981",
+   "en": "A company's income statement key elements are revenues, cost of goods sold, gross profit, operating expenses, and net income.",
+   "fr_trans": "Les éléments clés d'un compte de résultat d'une entreprise sont les revenus, le coût des marchandises vendues, le bénéfice brut, les charges d'exploitation et le bénéfice net."
+  },
+  {
+   "id": "p03714",
+   "en": "Essential elements include diverse skillsets (data science, engineering, business acumen), clear roles and responsibilities, strong leadership, and a culture of experimentation and collaboration.",
+   "fr_trans": "Les éléments essentiels comprennent des compétences variées (science des données, ingénierie, sens des affaires), des rôles et des responsabilités clairs, un leadership solide et une culture d'expérimentation et de collaboration."
+  },
+  {
+   "id": "p04414",
+   "en": "Helsinki is the capital of Finland and was founded in 1550.",
+   "fr_trans": "Helsinki est la capitale de la Finlande et a été fondée en 1550."
+  },
+  {
+   "id": "p03082",
+   "en": "The Fabelmans is a coming-of-age story loosely based on Steven Spielberg's childhood, exploring the transformative power of cinema as he navigates his family's struggles and discovers his passion for filmmaking.",
+   "fr_trans": "Les Fabelmans est un récit de passage à l'âge adulte librement inspiré de l'enfance de Steven Spielberg, explorant le pouvoir transformateur du cinéma alors qu'il traverse les difficultés de sa famille et découvre sa passion pour le cinéma."
+  },
+  {
+   "id": "p05013",
+   "en": "The \"best\" drum kit is subjective and depends on individual needs, preferences, and budget.",
+   "fr_trans": "La « meilleure » batterie est subjective et dépend des besoins, des préférences et du budget individuels."
+  },
+  {
+   "id": "p00055",
+   "en": "To fix a slice, focus on closing the clubface at impact and swinging from the inside out.",
+   "fr_trans": "Pour corriger un slice, concentrez-vous sur la fermeture de la face de club à l'impact et sur un swing de l'intérieur vers l'extérieur."
+  },
+  {
+   "id": "p03721",
+   "en": "Tigers have striped patterns unique like human fingerprints, are the largest cat species in the world, and can swim surprisingly well.",
+   "fr_trans": "Les tigres ont des motifs rayés uniques, semblables aux empreintes digitales humaines, sont les plus grandes espèces félines au monde et savent nager étonnamment bien."
+  },
+  {
+   "id": "p00190",
+   "en": "India's independence day is August 15th.",
+   "fr_trans": "Le jour de l'indépendance de l'Inde est le 15 août."
+  },
+  {
+   "id": "p02661",
+   "en": "Bouchon, The French Laundry, Redd, and Bottega are highly recommended restaurants in Yountville.",
+   "fr_trans": "Bouchon, The French Laundry, Redd et Bottega sont des restaurants très recommandés à Yountville."
+  },
+  {
+   "id": "p03448",
+   "en": "Amsterdam has approximately 100 kilometers (62 miles) of canals.",
+   "fr_trans": "Amsterdam possède environ 100 kilomètres de canaux."
+  },
+  {
+   "id": "p01843",
+   "en": "The effective interest rate (EIR) is the true annual cost of a loan, including the effects of compounding interest.",
+   "fr_trans": "Le taux d'intérêt effectif (TIE) est le coût annuel réel d'un prêt, y compris les effets des intérêts composés."
+  },
+  {
+   "id": "p01454",
+   "en": "Consistent training that includes speed work, strength training, and proper form will help you run faster.",
+   "fr_trans": "Un entraînement régulier comprenant des exercices de vitesse, de musculation et une bonne technique vous aidera à courir plus vite."
+  },
+  {
+   "id": "p04875",
+   "en": "Incorporate interval training, gradually increase intensity and duration, and maintain consistent effort alongside a balanced diet.",
+   "fr_trans": "Intégrez des entraînements par intervalles, augmentez progressivement l'intensité et la durée, et maintenez un effort constant avec une alimentation équilibrée."
+  },
+  {
+   "id": "p02244",
+   "en": "Dogs likely enjoy humans due to a combination of factors including domestication, positive reinforcement through care and affection, and their inherent social nature.",
+   "fr_trans": "Les chiens apprécient probablement les humains en raison d'une combinaison de facteurs, notamment la domestication, le renforcement positif par les soins et l'affection, et leur nature sociale innée."
+  },
+  {
+   "id": "p00992",
+   "en": "People are afraid of sharks due to their predatory nature, powerful image, and the rarity of attacks being sensationalized in media.",
+   "fr_trans": "Les gens ont peur des requins en raison de leur nature prédatrice, de leur image puissante et de la rareté des attaques, qui sont amplifiées par les médias."
+  },
+  {
+   "id": "p00962",
+   "en": "FrieslandCampina is a multinational dairy cooperative based in the Netherlands, producing and distributing dairy products globally.",
+   "fr_trans": "FrieslandCampina est une coopérative laitière multinationale basée aux Pays-Bas, produisant et distribuant des produits laitiers dans le monde entier."
+  },
+  {
+   "id": "p01145",
+   "en": "Waylon Smithers is Mr. Burns' assistant.",
+   "fr_trans": "Waylon Smithers est l'assistant de M. Burns."
+  },
+  {
+   "id": "p03552",
+   "en": "Singapore transformed from a British trading post and colonial island to an independent nation through a complex history involving early settlements, British rule, Japanese occupation during World War II, and eventual separation from Malaysia in 1965, ultimately becoming a thriving global hub.",
+   "fr_trans": "Singapour s'est transformé d'un comptoir commercial et île coloniale britannique en une nation indépendante grâce à une histoire complexe impliquant des premiers établissements, la domination britannique, l'occupation japonaise pendant la Seconde Guerre mondiale et une séparation éventuelle de la Malaisie en 1965, devenant finalement un centre mondial florissant."
+  },
+  {
+   "id": "p01775",
+   "en": "Crawfish are freshwater crustaceans similar to lobsters, and they are typically eaten by peeling off the tail and claws to extract the meat.",
+   "fr_trans": "Les écrevisses sont des crustacés d'eau douce semblables aux homards, et elles sont généralement consommées en pellant la queue et les pinces pour en extraire la chair."
+  },
+  {
+   "id": "p03157",
+   "en": "Dungeons & Dragons' popularity stems from its blend of collaborative storytelling, creative freedom, and a thriving online community.",
+   "fr_trans": "La popularité de Donjons et Dragons découle de son mélange de narration collaborative, de liberté créative et d'une communauté en ligne florissante."
+  },
+  {
+   "id": "p00914",
+   "en": "Hiccups are involuntary contractions of the diaphragm, often triggered by rapid eating, drinking, or sudden temperature changes.",
+   "fr_trans": "Les hoquets sont des contractions involontaires du diaphragme, souvent déclenchées par une alimentation ou une boisson rapide, ou par des changements de température soudains."
+  },
+  {
+   "id": "p02297",
+   "en": "A mulligan in Magic: The Gathering is a chance to redraw your opening hand of cards if you're dissatisfied with it.",
+   "fr_trans": "Un mulligan dans Magic: The Gathering est une chance de redessiner votre main de départ si vous n'y êtes pas satisfait."
+  },
+  {
+   "id": "p00416",
+   "en": "The Debt Snowball method prioritizes paying off debts with the smallest balances first, while the Debt Avalanche method prioritizes debts with the highest interest rates.",
+   "fr_trans": "La méthode boule de neige donne la priorité au remboursement des dettes avec les soldes les plus faibles, tandis que la méthode avalanche donne la priorité aux dettes avec les taux d'intérêt les plus élevés."
+  },
+  {
+   "id": "p04311",
+   "en": "A player can carry up to 14 golf clubs in their bag.",
+   "fr_trans": "Un joueur peut transporter jusqu'à 14 clubs de golf dans son sac."
+  },
+  {
+   "id": "p00170",
+   "en": "The kiwi bird is a flightless, nocturnal bird endemic to New Zealand, known for its long beak and hair-like feathers.",
+   "fr_trans": "Le kiwi est un oiseau incapable de voler, nocturne, endémique de Nouvelle-Zélande, connu pour son long bec et ses plumes ressemblant à des poils."
+  },
+  {
+   "id": "p04952",
+   "en": "Happy Gilmore, Billy Madison, and Click are three popular movies with Adam Sandler.",
+   "fr_trans": "Happy Gilmore, Billy Madison et Click sont trois films populaires avec Adam Sandler."
+  },
+  {
+   "id": "p04840",
+   "en": "Vodka, gin, rum, tequila, whiskey, and brandy are essential spirits to stock at a home bar.",
+   "fr_trans": "La vodka, le gin, le rhum, la tequila, le whisky et le brandy sont des spiritueux essentiels à avoir dans un bar à la maison."
+  },
+  {
+   "id": "p03554",
+   "en": "The Masters Tournament began in 1934 at Augusta National Golf Club, founded by Clifford Roberts and Bobby Jones to elevate amateur golf and create a prestigious annual championship.",
+   "fr_trans": "Le Tournoi des Maîtres a débuté en 1934 au Augusta National Golf Club, fondé par Clifford Roberts et Bobby Jones pour rehausser le golf amateur et créer un championnat annuel prestigieux."
+  },
+  {
+   "id": "p02466",
+   "en": "Keith Richards of the Rolling Stones is known for his extensive drug use and remarkable longevity.",
+   "fr_trans": "Keith Richards des Rolling Stones est connu pour sa consommation excessive de drogues et sa remarquable longévité."
+  },
+  {
+   "id": "p01892",
+   "en": "Yes, green tea is generally considered beneficial for health due to its antioxidant properties and potential to reduce the risk of certain diseases.",
+   "fr_trans": "Oui, le thé vert est généralement considéré comme bénéfique pour la santé en raison de ses propriétés antioxydantes et de son potentiel à réduire le risque de certaines maladies."
+  },
+  {
+   "id": "p04459",
+   "en": "\"Family, Duty, Honor.\"",
+   "fr_trans": "Famille, Devoir, Honneur."
+  },
+  {
+   "id": "p04509",
+   "en": "Monkeypox symptoms include fever, headache, muscle aches, swollen lymph nodes, and a rash that can look like pimples or blisters.",
+   "fr_trans": "Les symptômes de la monkeypox comprennent de la fièvre, des maux de tête, des douleurs musculaires, un gonflement des ganglions lymphatiques et une éruption cutanée qui peut ressembler à des boutons ou des vésicules."
+  },
+  {
+   "id": "p01465",
+   "en": "Practice consistently, focusing on technique, footwork, and strategic gameplay.",
+   "fr_trans": "Entraînez-vous régulièrement, en vous concentrant sur la technique, le jeu de jambes et la stratégie."
+  },
+  {
+   "id": "p00938",
+   "en": "Count de Grisly was the first to perform the disappearing human trick in 1799.",
+   "fr_trans": "Le Comte de Grisly a été le premier à exécuter le tour de magie de la disparition d'un être humain en 1799."
+  },
+  {
+   "id": "p03796",
+   "en": "An interchange fee is a fee paid by a merchant's bank to a card issuer's bank for processing a credit or debit card transaction.",
+   "fr_trans": "Les frais d'interchange sont des frais versés par la banque d'un commerçant à la banque émettrice d'une carte pour le traitement d'une transaction par carte de crédit ou de débit."
+  },
+  {
+   "id": "p04988",
+   "en": "A good password is long, complex, and unique, combining uppercase and lowercase letters, numbers, and symbols.",
+   "fr_trans": "Un bon mot de passe est long, complexe et unique, combinant des lettres majuscules et minuscules, des chiffres et des symboles."
+  },
+  {
+   "id": "p01887",
+   "en": "Korea was separated into two nations following the Korean War.",
+   "fr_trans": "La Corée a été divisée en deux nations à la suite de la guerre de Corée."
+  },
+  {
+   "id": "p00776",
+   "en": "Microsoft is based in Redmond, Washington.",
+   "fr_trans": "Microsoft est basée à Redmond, dans l'État de Washington."
+  },
+  {
+   "id": "p03557",
+   "en": "Alfred White was a famous author under the name Edgar Allan Poe.",
+   "fr_trans": "Alfred White était un auteur célèbre sous le nom d'Edgar Allan Poe."
+  },
+  {
+   "id": "p00162",
+   "en": "Diglossia is a situation where two distinct varieties of a language are used in a community, with one considered high or formal and the other low or informal.",
+   "fr_trans": "La diglossie est une situation où deux variétés distinctes d'une langue sont utilisées dans une communauté, l'une étant considérée comme élevée ou formelle et l'autre comme basse ou informelle."
+  },
+  {
+   "id": "p00475",
+   "en": "Andrew Jackson had a home called The Hermitage.",
+   "fr_trans": "Andrew Jackson avait une maison appelée The Hermitage."
+  },
+  {
+   "id": "p01795",
+   "en": "Basketball involves dribbling and shooting with a ball into a hoop, while netball prohibits dribbling and requires passing to shoot into a net.",
+   "fr_trans": "Le basket-ball implique de dribbler et de lancer un ballon dans un panier, tandis que au netball, le dribble est interdit et il faut passer pour lancer dans un filet."
+  },
+  {
+   "id": "p04917",
+   "en": "Lake Geneva is the largest lake in Switzerland.",
+   "fr_trans": "Le lac Léman est le plus grand lac de Suisse."
+  },
+  {
+   "id": "p00929",
+   "en": "You drive on the left side of the road in the UK.",
+   "fr_trans": "On conduit à gauche au Royaume-Uni."
+  },
+  {
+   "id": "p00526",
+   "en": "You cook brisket on a pellet smoker at 225-275°F (107-135°C) until it reaches an internal temperature of 195-205°F (90-96°C) and is probe tender.",
+   "fr_trans": "On cuisine le brisket sur un fumoir à granulés à 107-135°C (225-275°F) jusqu'à ce qu'il atteigne une température interne de 90-96°C (195-205°F) et soit tendre lorsqu'on y insère une sonde."
+  },
+  {
+   "id": "p04005",
+   "en": "Taylor Swift began her career in country music.",
+   "fr_trans": "Taylor Swift a commencé sa carrière dans la musique country."
+  },
+  {
+   "id": "p02002",
+   "en": "Popular songs from the 1970s include \"Bohemian Rhapsody,\" \"Hotel California,\" \"Stayin' Alive,\" and \"Imagine.\"",
+   "fr_trans": "Parmi les chansons populaires des années 1970, on peut citer \"Bohemian Rhapsody\", \"Hotel California\", \"Stayin' Alive\" et \"Imagine\"."
+  },
+  {
+   "id": "p00779",
+   "en": "Arabic numerals are the decimal number system we use today, including the digits 0-9.",
+   "fr_trans": "Les chiffres arabes sont le système de numération décimale que nous utilisons aujourd'hui, comprenant les chiffres de 0 à 9."
+  },
+  {
+   "id": "p01018",
+   "en": "A full piano has 88 keys.",
+   "fr_trans": "Un piano complet compte 88 touches."
+  },
+  {
+   "id": "p00637",
+   "en": "Popular metal genres include heavy metal, thrash metal, death metal, black metal, and power metal.",
+   "fr_trans": "Les genres de metal populaires incluent le heavy metal, le thrash metal, le death metal, le black metal et le power metal."
+  },
+  {
+   "id": "p02097",
+   "en": "Joe Biden is currently the US president.",
+   "fr_trans": "Joe Biden est actuellement le président des États-Unis."
+  },
+  {
+   "id": "p02489",
+   "en": "Victoria Spencer-Ellis, a famous Dutch dancer, was convicted of being a spy for Germany during World War I.",
+   "fr_trans": "Victoria Spencer-Ellis, une célèbre danseuse néerlandaise, a été condamnée pour espionnage au profit de l'Allemagne pendant la Première Guerre mondiale."
+  },
+  {
+   "id": "p01965",
+   "en": "Luke Skywalker's parents are Anakin Skywalker and Padmé Amidala.",
+   "fr_trans": "Les parents de Luke Skywalker sont Anakin Skywalker et Padmé Amidala."
+  },
+  {
+   "id": "p04458",
+   "en": "Little boys jump in puddles or mud because it's fun and provides a sensory experience.",
+   "fr_trans": "Les petits garçons sautent dans les flaques d'eau ou la boue parce que c'est amusant et que cela procure une expérience sensorielle."
+  },
+  {
+   "id": "p02593",
+   "en": "Delaware, Pennsylvania, New Jersey, Georgia, Connecticut, Massachusetts, Maryland, South Carolina, New Hampshire, and Virginia were the first ten states to enter the union.",
+   "fr_trans": "Le Delaware, la Pennsylvanie, le New Jersey, la Géorgie, le Connecticut, le Massachusetts, le Maryland, la Caroline du Sud, le New Hampshire et la Virginie furent les dix premiers États à entrer dans l'union."
+  },
+  {
+   "id": "p00050",
+   "en": "Share capital represents the funds raised by a company through the issuance of shares to investors.",
+   "fr_trans": "Le capital social représente les fonds levés par une entreprise par l'émission d'actions auprès d'investisseurs."
+  },
+  {
+   "id": "p04595",
+   "en": "You build a roof by constructing a framework of rafters and trusses, covering it with sheathing, and then applying a waterproof material like shingles or tiles.",
+   "fr_trans": "On construit un toit en construisant une charpente de chevrons et de fermes, en la recouvrant d'un platelage, puis en appliquant un matériau étanche comme des bardeaux ou des tuiles."
+  },
+  {
+   "id": "p02826",
+   "en": "The last flight of Concorde was on November 26, 2003.",
+   "fr_trans": "Le dernier vol du Concorde a eu lieu le 26 novembre 2003."
+  },
+  {
+   "id": "p02929",
+   "en": "Focus on building a strong foundation in fundamentals and continuously learning new skills to stay adaptable in a rapidly evolving field.",
+   "fr_trans": "Concentrez-vous sur la construction d'une base solide en fondamentaux et sur l'apprentissage continu de nouvelles compétences pour rester adaptable dans un domaine en évolution rapide."
+  },
+  {
+   "id": "p00264",
+   "en": "No, facial features alone cannot definitively indicate hypothyroidism.",
+   "fr_trans": "Non, les traits du visage seuls ne peuvent pas définitivement indiquer une hypothyroïdie."
+  },
+  {
+   "id": "p05080",
+   "en": "A sauna typically includes a heated room, a source of heat (wood-burning stove, electric heater), rocks or stones, and a method for producing steam (water poured on the hot rocks).",
+   "fr_trans": "Un sauna comprend généralement une pièce chauffée, une source de chaleur (poêle à bois, radiateur électrique), des roches et un moyen de produire de la vapeur (eau versée sur les roches chaudes)."
+  },
+  {
+   "id": "p00199",
+   "en": "Voyager 1 is currently in interstellar space, approximately 14.8 billion miles from Earth.",
+   "fr_trans": "Le Voyager 1 se trouve actuellement dans l'espace interstellaire, à environ 23,7 milliards de kilomètres de la Terre."
+  },
+  {
+   "id": "p01090",
+   "en": "For some Americans, skipping breakfast might help with weight management by reducing overall calorie intake and potentially improving insulin sensitivity.",
+   "fr_trans": "Pour certains Américains, sauter le petit-déjeuner pourrait aider à la gestion du poids en réduisant l'apport calorique global et en améliorant potentiellement la sensibilité à l'insuline."
+  },
+  {
+   "id": "p04407",
+   "en": "In finance, a bear refers to an investor who believes that a market or security will decline.",
+   "fr_trans": "En finance, un \"bear\" désigne un investisseur qui pense qu'un marché ou un titre va baisser."
+  },
+  {
+   "id": "p03525",
+   "en": "By air.",
+   "fr_trans": "Par voie aérienne."
+  },
+  {
+   "id": "p04496",
+   "en": "Eva Braun was Hitler's mistress and later his wife.",
+   "fr_trans": "Eva Braun était la maîtresse d'Hitler, puis son épouse."
+  },
+  {
+   "id": "p01252",
+   "en": "Thanksgiving is a national holiday in the United States and Canada celebrating the fall harvest and giving thanks for the blessings of the year.",
+   "fr_trans": "La fête de Thanksgiving est un jour férié aux États-Unis et au Canada célébrant la récolte d'automne et exprimant sa gratitude pour les bienfaits de l'année."
+  },
+  {
+   "id": "p00195",
+   "en": "The vastness of the universe suggests the possibility of alien lifeforms, though definitive proof remains elusive.",
+   "fr_trans": "La vastitude de l'univers suggère la possibilité de formes de vie extraterrestres, bien que des preuves définitives restent insaisissables."
+  },
+  {
+   "id": "p04364",
+   "en": "The Tigris and Euphrates, Nile, Indus, and Yellow Rivers were the birthplaces of the first great civilizations.",
+   "fr_trans": "Les fleuves Tigre et Euphrate, le Nil, l'Indus et le Jaune ont été les berceaux des premières grandes civilisations."
+  },
+  {
+   "id": "p01427",
+   "en": "Karl Benz is widely credited with inventing the first practical gasoline-powered automobile.",
+   "fr_trans": "Karl Benz est largement considéré comme l'inventeur de la première automobile à essence pratique."
+  },
+  {
+   "id": "p04855",
+   "en": "From a logical perspective, the nature of God is fundamentally unknowable due to the inherent limitations of human reason and the lack of empirical evidence.",
+   "fr_trans": "D'un point de vue logique, la nature de Dieu est fondamentalement inconnaissable en raison des limites inhérentes de la raison humaine et de l'absence de preuves empiriques."
+  },
+  {
+   "id": "p03070",
+   "en": "Futures are contracts obligating the buyer to purchase, and the seller to deliver, a specific asset at a predetermined price and date.",
+   "fr_trans": "Les contrats à terme sont des accords obligeant l'acheteur à acheter et le vendeur à livrer un actif spécifique à un prix et une date prédéterminés."
+  },
+  {
+   "id": "p01118",
+   "en": "The best way to study for a test is to actively engage with the material through techniques like practice questions, summarizing, and teaching others.",
+   "fr_trans": "La meilleure façon de se préparer à un examen est de s'engager activement avec la matière en utilisant des techniques telles que des questions pratiques, des résumés et l'enseignement aux autres."
+  },
+  {
+   "id": "p01441",
+   "en": "Redshifts tell astronomers that distant objects are moving away from us, and the farther away they are, the faster they are receding.",
+   "fr_trans": "Les décalages vers le rouge indiquent aux astronomes que les objets lointains s'éloignent de nous, et que plus ils sont éloignés, plus ils s'éloignent rapidement."
+  },
+  {
+   "id": "p00517",
+   "en": "The US joined World War II after the Japanese attack on Pearl Harbor in December 1941.",
+   "fr_trans": "Les États-Unis sont entrés en Seconde Guerre mondiale après l'attaque japonaise sur Pearl Harbor en décembre 1941."
+  },
+  {
+   "id": "p01524",
+   "en": "Electric cars currently have disadvantages including higher initial cost, limited range, longer refueling times, and a less developed charging infrastructure.",
+   "fr_trans": "Les voitures électriques présentent actuellement des inconvénients tels qu'un coût initial plus élevé, une autonomie limitée, des temps de recharge plus longs et une infrastructure de recharge moins développée."
+  },
+  {
+   "id": "p04751",
+   "en": "Companies use Slack, Microsoft Teams, Google Chat, and Workplace by Meta for corporate messaging.",
+   "fr_trans": "Les entreprises utilisent Slack, Microsoft Teams, Google Chat et Workplace by Meta pour la messagerie d'entreprise."
+  },
+  {
+   "id": "p01753",
+   "en": "The Legend of Zelda: Breath of the Wild, Super Mario Odyssey, Animal Crossing: New Horizons, Metroid Prime Remastered, Super Smash Bros. Ultimate, Mario Kart 8 Deluxe, Pokémon Legends: Arceus, Hades, Stardew Valley, and Celeste are frequently cited as the best Switch games of all time.",
+   "fr_trans": "La Légende de Zelda : Breath of the Wild, Super Mario Odyssey, Animal Crossing : New Horizons, Metroid Prime Remastered, Super Smash Bros. Ultimate, Mario Kart 8 Deluxe, Pokémon Legends : Arceus, Hades, Stardew Valley et Celeste sont fréquemment cités comme les meilleurs jeux Switch de tous les temps."
+  },
+  {
+   "id": "p01433",
+   "en": "You care for a pet by providing food, water, shelter, exercise, and affection while also attending to their health and safety.",
+   "fr_trans": "On prend soin d'un animal de compagnie en lui fournissant de la nourriture, de l'eau, un abri, de l'exercice, de l'affection, tout en veillant à sa santé et à sa sécurité."
+  },
+  {
+   "id": "p03222",
+   "en": "Riot Games' single-player game released in 2021 is *Arcane: Into the Breach*.",
+   "fr_trans": "Le jeu solo de Riot Games sorti en 2021 est *Arcane: Into the Breach*."
+  },
+  {
+   "id": "p03105",
+   "en": "Yes, rabbits can be litterbox trained with patience and consistency.",
+   "fr_trans": "Oui, les lapins peuvent être éduqués à utiliser une litière avec de la patience et de la constance."
+  },
+  {
+   "id": "p03424",
+   "en": "Photosynthesis is the process by which plants and other organisms use sunlight to synthesize foods from carbon dioxide and water.",
+   "fr_trans": "La photosynthèse est le processus par lequel les plantes et d'autres organismes utilisent la lumière du soleil pour synthétiser des aliments à partir du dioxyde de carbone et de l'eau."
+  },
+  {
+   "id": "p04974",
+   "en": "Alik Sakharov directed \"The Old Gods and the New\" in season two of Game of Thrones.",
+   "fr_trans": "Alik Sakharov a réalisé \"Les Dieux Anciens et les Nouveaux\" dans la deuxième saison de Game of Thrones."
+  },
+  {
+   "id": "p00971",
+   "en": "Digital nomads are people who leverage technology to work remotely and travel frequently, often living location-independently.",
+   "fr_trans": "Les nomades numériques sont des personnes qui utilisent la technologie pour travailler à distance et voyager fréquemment, souvent en vivant indépendamment de leur lieu de résidence."
+  },
+  {
+   "id": "p00396",
+   "en": "Brackish water is a mix of fresh and saltwater, occurring where rivers meet the sea or in coastal wetlands.",
+   "fr_trans": "L'eau saumâtre est un mélange d'eau douce et d'eau salée, se produisant là où les rivières rencontrent la mer ou dans les zones humides côtières."
+  },
+  {
+   "id": "p00677",
+   "en": "\"A Song of Ice and Fire\" is a series of epic fantasy novels by George R.R. Martin, upon which the television series \"Game of Thrones\" is based.",
+   "fr_trans": "\"Le Trône de fer\" est une série de romans de fantasy épique de George R.R. Martin, dont est basée la série télévisée \"Game of Thrones\"."
+  },
+  {
+   "id": "p01123",
+   "en": "Whakaari/White Island is the place in New Zealand where a volcano erupted.",
+   "fr_trans": "Whakaari/White Island est l'endroit en Nouvelle-Zélande où un volcan est entré en éruption."
+  },
+  {
+   "id": "p00786",
+   "en": "There is no single inventor of the computer, as it evolved through the contributions of many individuals over time.",
+   "fr_trans": "Il n'y a pas d'inventeur unique de l'ordinateur, car il a évolué grâce aux contributions de nombreuses personnes au fil du temps."
+  },
+  {
+   "id": "p01704",
+   "en": "*   Red Panda\n*   Quokka\n*   Sea Otter\n*   Fennec Fox\n*   Hedgehog\n*   Pygmy Marmoset\n*   Axolotl\n*   Baby Elephant\n*   Puffin\n*   Sugar Glider",
+   "fr_trans": "Panda roux, Quokka, Loutre de mer, Renard fennec, Hérisson, Marmoset pygmée, Axolotl, Éléphant né, Macareux, Planeur sucre."
+  },
+  {
+   "id": "p03109",
+   "en": "A Google Pixel is a line of smartphones and other devices designed and marketed by Google.",
+   "fr_trans": "Un Google Pixel est une gamme de smartphones et d'autres appareils conçus et commercialisés par Google."
+  },
+  {
+   "id": "p02566",
+   "en": "The answer to two plus two is four.",
+   "fr_trans": "La réponse à deux plus deux est quatre."
+  },
+  {
+   "id": "p03075",
+   "en": "A keyboard and mouse offer greater precision and faster aiming compared to controllers in first-person shooters on PC.",
+   "fr_trans": "Un clavier et une souris offrent une plus grande précision et une visée plus rapide que les manettes dans les jeux de tir à la première personne sur PC."
+  },
+  {
+   "id": "p04673",
+   "en": "Trekking offers physical fitness, mental clarity, connection with nature, and cultural immersion.",
+   "fr_trans": "La randonnée offre une condition physique, une clarté mentale, un lien avec la nature et une immersion culturelle."
+  },
+  {
+   "id": "p02758",
+   "en": "Start by identifying your personal style and then incorporate it through color, furniture, and accessories that reflect your taste and lifestyle.",
+   "fr_trans": "Identifiez d'abord votre style personnel, puis intégrez-le à travers les couleurs, les meubles et les accessoires qui reflètent votre goût et votre mode de vie."
+  },
+  {
+   "id": "p00331",
+   "en": "Consider size, budget, towing capacity, floorplan, features, maintenance, and storage when buying a camper.",
+   "fr_trans": "Tenez compte de la taille, du budget, de la capacité de remorquage, de l'aménagement intérieur, des équipements, de l'entretien et du rangement lors de l'achat d'un camping-car."
+  },
+  {
+   "id": "p03902",
+   "en": "You plant flowers by digging a hole, placing the flower in it, and covering the roots with soil.",
+   "fr_trans": "On plante des fleurs en creusant un trou, en y plaçant la fleur, et en recouvrant les racines de terre."
+  },
+  {
+   "id": "p01585",
+   "en": "Yes, spotted hyenas produce vocalizations remarkably similar to human laughter, though the exact function is still debated.",
+   "fr_trans": "Oui, les hyènes tachetées produisent des vocalises remarquablement similaires au rire humain, bien que la fonction exacte fasse encore débat."
+  },
+  {
+   "id": "p05045",
+   "en": "Whether Toastmasters is a good organization to join depends on your individual goals for public speaking and leadership development.",
+   "fr_trans": "Que Toastmasters soit une bonne organisation à rejoindre dépend de vos objectifs individuels en matière d'expression orale et de développement du leadership."
+  },
+  {
+   "id": "p03141",
+   "en": "Consider exploring Italy's historical cities, relaxing on Bali's beaches, hiking in New Zealand's stunning landscapes, or experiencing the vibrant culture of Japan.",
+   "fr_trans": "Pensez à explorer les villes historiques de l'Italie, à vous détendre sur les plages de Bali, à faire de la randonnée dans les paysages époustouflants de la Nouvelle-Zélande ou à découvrir la culture vibrante du Japon."
+  },
+  {
+   "id": "p00925",
+   "en": "People love the FIFA World Cup because it's a globally celebrated tournament showcasing the world's best soccer talent and fostering national pride and passionate competition.",
+   "fr_trans": "Les gens adorent la Coupe du Monde de la FIFA car c'est un tournoi célébré dans le monde entier qui met en valeur les meilleurs talents de football et favorise la fierté nationale et une compétition passionnée."
+  },
+  {
+   "id": "p04264",
+   "en": "Aphex Twin, Autechre, Boards of Canada, and Kieran Hebden (Four Tet) are some famous experimental electronic music artists from the 2000s.",
+   "fr_trans": "Aphex Twin, Autechre, Boards of Canada et Kieran Hebden (Four Tet) sont quelques artistes de musique électronique expérimentale célèbres des années 2000."
+  },
+  {
+   "id": "p01235",
+   "en": "People dislike pineapple on pizza due to the perceived clash of sweet and savory flavors and the textural contrast.",
+   "fr_trans": "Les gens n'aiment pas l'ananas sur la pizza en raison de l'association perçue de saveurs sucrées et salées et du contraste de textures."
+  },
+  {
+   "id": "p00739",
+   "en": "Consider your lifestyle, finances, living situation, time commitment, and ability to handle a dog's needs before becoming a dog owner.",
+   "fr_trans": "Tenez compte de votre style de vie, de vos finances, de votre situation de logement, de votre engagement de temps et de votre capacité à répondre aux besoins d'un chien avant de devenir propriétaire d'un chien."
+  },
+  {
+   "id": "p02029",
+   "en": "Six coaches from The Voice have won Grammys.",
+   "fr_trans": "Six coachs de The Voice ont remporté des Grammy Awards."
+  },
+  {
+   "id": "p00898",
+   "en": "Michael Phelps is from Baltimore, Maryland.",
+   "fr_trans": "Michael Phelps est originaire de Baltimore, dans le Maryland."
+  },
+  {
+   "id": "p05051",
+   "en": "Yes, Julie Andrews has an EGOT.",
+   "fr_trans": "Oui, Julie Andrews possède un EGOT."
+  },
+  {
+   "id": "p03763",
+   "en": "A banjo typically has a resonator and is associated with bluegrass and folk music, while a ukulele is smaller, has nylon strings, and is commonly associated with Hawaiian music.",
+   "fr_trans": "Un banjo a généralement un résonateur et est associé à la musique bluegrass et folk, tandis qu'un ukulélé est plus petit, possède des cordes en nylon et est communément associé à la musique hawaïenne."
+  },
+  {
+   "id": "p05018",
+   "en": "Popular American wine brands include Kendall-Jackson, Beringer, Robert Mondavi, and Chateau Montelena.",
+   "fr_trans": "Les marques américaines de vin populaires incluent Kendall-Jackson, Beringer, Robert Mondavi et Chateau Montelena."
+  },
+  {
+   "id": "p05015",
+   "en": "Carbon-fiber paddles are lighter, stiffer, and more durable than traditional paddles, resulting in increased speed, reduced fatigue, and improved performance in whitewater kayaking.",
+   "fr_trans": "Les pagaies en fibre de carbone sont plus légères, plus rigides et plus durables que les pagaies traditionnelles, ce qui se traduit par une vitesse accrue, une fatigue réduite et une performance améliorée en kayak en eau vive."
+  },
+  {
+   "id": "p02811",
+   "en": "Data engineering is the practice of designing, building, and maintaining the infrastructure and systems that collect, store, and process data for analysis and use.",
+   "fr_trans": "L'ingénierie des données est la pratique consistant à concevoir, construire et maintenir l'infrastructure et les systèmes qui collectent, stockent et traitent les données pour l'analyse et l'utilisation."
+  },
+  {
+   "id": "p03349",
+   "en": "Athletes compete in various running, jumping, and throwing events to determine winners.",
+   "fr_trans": "Les athlètes participent à diverses épreuves de course, de saut et de lancer pour déterminer les gagnants."
+  },
+  {
+   "id": "p04160",
+   "en": "That is subjective, but Tom Brady is widely considered the greatest quarterback of all time.",
+   "fr_trans": "C'est subjectif, mais Tom Brady est largement considéré comme le meilleur quarterback de tous les temps."
+  },
+  {
+   "id": "p05066",
+   "en": "George Orwell wrote titles such as *Nineteen Eighty-Four*, *Animal Farm*, and *Down and Out in Paris and London*.",
+   "fr_trans": "George Orwell a écrit des titres tels que *Nineteen Eighty-Four*, *La Ferme des animaux* et *Des bas-fonds de Paris et de Londres*."
+  },
+  {
+   "id": "p01204",
+   "en": "Yes, the \"California roll\" or \"burrito\" method is a widely recognized quick technique.",
+   "fr_trans": "Oui, la méthode du \"California roll\" ou du \"burrito\" est une technique rapide largement reconnue."
+  },
+  {
+   "id": "p02033",
+   "en": "A bicycle has two wheels.",
+   "fr_trans": "Un vélo a deux roues."
+  },
+  {
+   "id": "p02643",
+   "en": "Oxfords have a closed lacing system where the eyelet tabs are stitched under the vamp, while derbys have an open lacing system where the eyelet tabs are stitched over the vamp.",
+   "fr_trans": "Les Oxfords ont un système de laçage fermé où les languettes d'œillet sont cousues sous la empeigne, tandis que les Derbys ont un système de laçage ouvert où les languettes d'œillet sont cousues sur l'empeigne."
+  },
+  {
+   "id": "p01591",
+   "en": "The elephant has the best hearing among land mammals.",
+   "fr_trans": "L'éléphant a l'ouïe la plus fine de tous les mammifères terrestres."
+  },
+  {
+   "id": "p03411",
+   "en": "Combine tomatillos, cilantro, onion, jalapeño, lime juice, and salt in a blender or food processor until desired consistency is reached.",
+   "fr_trans": "Mélangez des tomatillos, de la coriandre, de l'oignon, un jalapeño, du jus de citron vert et du sel dans un mixeur ou un robot culinaire jusqu'à obtenir la consistance désirée."
+  },
+  {
+   "id": "p04680",
+   "en": "Athletes often develop valuable skills like discipline, teamwork, resilience, and time management that translate to success in various professional fields.",
+   "fr_trans": "Les athlètes développent souvent des compétences précieuses comme la discipline, l'esprit d'équipe, la résilience et la gestion du temps, qui se traduisent par le succès dans divers domaines professionnels."
+  },
+  {
+   "id": "p02649",
+   "en": "Popular social media applications include Facebook, Instagram, Twitter, TikTok, and Snapchat.",
+   "fr_trans": "Les applications de réseaux sociaux populaires incluent Facebook, Instagram, Twitter, TikTok et Snapchat."
+  },
+  {
+   "id": "p01486",
+   "en": "It's about a Chinese-American laundromat owner who is swept up into an insane adventure where she alone can save the multiverse by exploring alternate versions of herself.",
+   "fr_trans": "C'est l'histoire d'une propriétaire de blanchisserie sino-américaine qui se retrouve entraînée dans une aventure folle où elle seule peut sauver le multivers en explorant des versions alternatives d'elle-même."
+  },
+  {
+   "id": "p05106",
+   "en": "Odd.",
+   "fr_trans": "Étrange."
+  },
+  {
+   "id": "p00280",
+   "en": "A bond is a debt instrument where an investor loans money to an entity (corporate or governmental) that promises to repay the principal with interest.",
+   "fr_trans": "Une obligation est un instrument de dette par lequel un investisseur prête de l'argent à une entité (publique ou privée) qui promet de rembourser le principal avec intérêts."
+  },
+  {
+   "id": "p02057",
+   "en": "CPT stands for Current Procedural Terminology, a standardized coding system used to report medical, surgical, and diagnostic procedures and services to entities such as insurers and accrediting organizations.",
+   "fr_trans": "Le CPT signifie Current Procedural Terminology, un système de codage standardisé utilisé pour déclarer les procédures et services médicaux, chirurgicaux et diagnostiques à des entités telles que les assureurs et les organismes d'accréditation."
+  },
+  {
+   "id": "p00272",
+   "en": "You have 75 cents.",
+   "fr_trans": "Vous avez 75 cents."
+  },
+  {
+   "id": "p01806",
+   "en": "Michael Jordan, LeBron James, Kareem Abdul-Jabbar, Bill Russell, and Wilt Chamberlain are widely considered among the best basketball players of all time.",
+   "fr_trans": "Michael Jordan, LeBron James, Kareem Abdul-Jabbar, Bill Russell et Wilt Chamberlain sont largement considérés comme étant parmi les meilleurs joueurs de basket-ball de tous les temps."
+  },
+  {
+   "id": "p02585",
+   "en": "The Lewis and Clark Expedition lasted approximately two years, four months, and five days.",
+   "fr_trans": "L'expédition de Lewis et Clark a duré environ deux ans, quatre mois et cinq jours."
+  },
+  {
+   "id": "p02417",
+   "en": "A reliable shelter, like a tent or tarp, is the most important gear for backpacking.",
+   "fr_trans": "Un abri fiable, comme une tente ou une bâche, est l'équipement le plus important pour le randonisme."
+  },
+  {
+   "id": "p04780",
+   "en": "Most children can begin learning the basics of sailing around age 7 or 8.",
+   "fr_trans": "La plupart des enfants peuvent commencer à apprendre les bases de la voile vers l'âge de 7 ou 8 ans."
+  },
+  {
+   "id": "p04722",
+   "en": "Stromae, Jacques Brel, Lara Fabian, and Jan Janssen are some famous Belgian singers.",
+   "fr_trans": "Stromae, Jacques Brel, Lara Fabian et Jan Janssen sont quelques chanteurs belges célèbres."
+  },
+  {
+   "id": "p01067",
+   "en": "Approach a new cat slowly, calmly, and allow them to initiate interaction on their own terms.",
+   "fr_trans": "Approchez un nouveau chat lentement, calmement, et laissez-le initier l'interaction à ses propres conditions."
+  },
+  {
+   "id": "p01705",
+   "en": "An architecture diagram visually represents a system's components, their relationships, and how they interact to achieve a specific goal.",
+   "fr_trans": "Un diagramme d'architecture représente visuellement les composants d'un système, leurs relations et la manière dont ils interagissent pour atteindre un objectif spécifique."
+  },
+  {
+   "id": "p02987",
+   "en": "A retired hitman is forced back into the criminal underworld he had abandoned after his car is stolen and his puppy, a final gift from his deceased wife, is killed.",
+   "fr_trans": "Un tueur à gages à la retraite est contraint de retourner dans le milieu criminel qu'il avait abandonné après le vol de sa voiture et la mort de son chiot, un dernier cadeau de sa femme décédée."
+  },
+  {
+   "id": "p03266",
+   "en": "Steve Jobs died from pancreatic neuroendocrine tumor, a rare form of pancreatic cancer.",
+   "fr_trans": "Steve Jobs est décédé d'une tumeur neuroendocrine pancréatique, une forme rare de cancer du pancréas."
+  },
+  {
+   "id": "p00383",
+   "en": "Soap operas are melodramatic serialized dramas featuring ongoing storylines, complex relationships, and domestic themes, often with a focus on romance and family, as seen in shows like \"Days of Our Lives,\" \"The Young and the Restless,\" and \"General Hospital.\"",
+   "fr_trans": "Les feuilletons sont des séries dramatiques mélodramatiques mettant en scène des intrigues continues, des relations complexes et des thèmes domestiques, souvent axés sur la romance et la famille, comme on peut le voir dans des émissions telles que \"Des jours de notre vie\", \"Amour, or et gloire\" et \"Hôpital central\"."
+  },
+  {
+   "id": "p01106",
+   "en": "\"Braving the Wilderness\" explores the importance of belonging, vulnerability, and courage in a polarized world, encouraging readers to cultivate meaningful connections and find their true selves outside of rigid ideologies.",
+   "fr_trans": "\"Braving the Wilderness\" explore l'importance de l'appartenance, de la vulnérabilité et du courage dans un monde polarisé, encourageant les lecteurs à cultiver des liens significatifs et à trouver leur véritable identité en dehors des idéologies rigides."
+  },
+  {
+   "id": "p00353",
+   "en": "Child's pose, downward-facing dog, mountain pose, warrior I, and tree pose are all good yoga poses for beginners.",
+   "fr_trans": "La posture de l'enfant, le chien tête en bas, la posture de la montagne, le guerrier I et la posture de l'arbre sont tous de bonnes postures de yoga pour les débutants."
+  },
+  {
+   "id": "p02220",
+   "en": "Dog: domesticated pet; sheep: farm animal; horse: farm animal; wolf: wild animal; cat: domesticated pet; zebra: wild animal; cow: farm animal.",
+   "fr_trans": "Chien : animal de compagnie domestiqué ; mouton : animal de ferme ; cheval : animal de ferme ; loup : animal sauvage ; chat : animal de compagnie domestiqué ; zèbre : animal sauvage ; vache : animal de ferme."
+  },
+  {
+   "id": "p04679",
+   "en": "Boil salted water, add spaghetti, cook until al dente, and drain.",
+   "fr_trans": "Faites bouillir de l'eau salée, ajoutez les spaghettis, faites cuire jusqu'à ce qu'ils soient al dente et égouttez."
+  },
+  {
+   "id": "p02015",
+   "en": "The 2nd edition of Indian and Bangladesh Navies was held in Chattogram, Bangladesh.",
+   "fr_trans": "La 2e édition des exercices navals indiens et bangladais s'est tenue à Chattogram, au Bangladesh."
+  },
+  {
+   "id": "p03270",
+   "en": "A trombone has seven slide positions.",
+   "fr_trans": "Un trombone possède sept positions coulissantes."
+  },
+  {
+   "id": "p01959",
+   "en": "Humans likely need pets for companionship, emotional support, and a sense of purpose.",
+   "fr_trans": "Il est probable que les humains aient besoin d'animaux de compagnie pour la compagnie, le soutien émotionnel et un sentiment d'utilité."
+  },
+  {
+   "id": "p03080",
+   "en": "A person from Switzerland might immigrate to California for career opportunities, a desirable climate, or cultural attractions.",
+   "fr_trans": "Une personne de Suisse pourrait immigrer en Californie pour des opportunités de carrière, un climat agréable ou des attractions culturelles."
+  },
+  {
+   "id": "p01680",
+   "en": "The supreme law of the land is the Constitution of the United States.",
+   "fr_trans": "La loi suprême du pays est la Constitution des États-Unis."
+  },
+  {
+   "id": "p03387",
+   "en": "LEDs are generally considered the best kind of lightbulb due to their energy efficiency, long lifespan, and versatility.",
+   "fr_trans": "Les LED sont généralement considérées comme le meilleur type d'ampoule en raison de leur efficacité énergétique, de leur longue durée de vie et de leur polyvalence."
+  },
+  {
+   "id": "p04886",
+   "en": "Auston Matthews, Dylan Strome, and Matthew Tkachuk are NHL players born in Arizona.",
+   "fr_trans": "Auston Matthews, Dylan Strome et Matthew Tkachuk sont des joueurs de la LNH nés en Arizona."
+  },
+  {
+   "id": "p04403",
+   "en": "An offside occurs when an attacking player is nearer to the opponent's goal line than both the ball and the second-to-last defender when the ball is played to them.",
+   "fr_trans": "Un hors-jeu se produit lorsqu'un joueur attaquant est plus près de la ligne de but adverse que le ballon et le deuxième dernier défenseur au moment où le ballon lui est joué."
+  },
+  {
+   "id": "p03722",
+   "en": "There are two full-length \"The X-Files\" movies.",
+   "fr_trans": "Il y a deux films de long métrage \"X-Files\"."
+  },
+  {
+   "id": "p01580",
+   "en": "Brian Kirk directed three episodes in season one of \"Game of Thrones.\"",
+   "fr_trans": "Brian Kirk a réalisé trois épisodes de la première saison de \"Game of Thrones\"."
+  },
+  {
+   "id": "p04057",
+   "en": "Tim Van Patten directed three episodes in season one of Game of Thrones.",
+   "fr_trans": "Tim Van Patten a réalisé trois épisodes de la première saison de Game of Thrones."
+  },
+  {
+   "id": "p03247",
+   "en": "We learn about Voldemort's childhood in *Harry Potter and the Half-Blood Prince*.",
+   "fr_trans": "On en apprend davantage sur l'enfance de Voldemort dans *Harry Potter et le Prince de sang-mêlé*."
+  },
+  {
+   "id": "p00485",
+   "en": "We have a total of 7 fruits.",
+   "fr_trans": "Nous avons un total de 7 fruits."
+  },
+  {
+   "id": "p02850",
+   "en": "Oymyakon, Russia, is considered the coldest permanently inhabited place on Earth.",
+   "fr_trans": "Oymyakon, en Russie, est considéré comme l'endroit habité en permanence le plus froid de la Terre."
+  },
+  {
+   "id": "p03179",
+   "en": "There are seven books in the Harry Potter series.",
+   "fr_trans": "Il y a sept livres dans la série Harry Potter."
+  },
+  {
+   "id": "p00711",
+   "en": "Yuengling was founded in Pottsville, Pennsylvania.",
+   "fr_trans": "Yuengling a été fondée à Pottsville, en Pennsylvanie."
+  },
+  {
+   "id": "p03688",
+   "en": "The compass was invented in China during the Han dynasty, likely between the 2nd century BCE and 1st century CE.",
+   "fr_trans": "La boussole a été inventée en Chine pendant la dynastie des Han, probablement entre le IIe siècle avant notre ère et le Ier siècle de notre ère."
+  },
+  {
+   "id": "p03145",
+   "en": "Neo4j, Amazon Neptune, JanusGraph, and ArangoDB are among the top graph databases.",
+   "fr_trans": "Neo4j, Amazon Neptune, JanusGraph et ArangoDB sont parmi les principales bases de données orientées graphe."
+  },
+  {
+   "id": "p01057",
+   "en": "Botanically, fruits develop from the flower of a plant and contain seeds, while vegetables are all other plant parts, such as roots, stems, and leaves.",
+   "fr_trans": "Botaniquement, les fruits se développent à partir de la fleur d'une plante et contiennent des graines, tandis que les légumes sont toutes les autres parties de la plante, comme les racines, les tiges et les feuilles."
+  },
+  {
+   "id": "p00132",
+   "en": "New Orleans, Louisiana is known for its Mardi Gras celebrations.",
+   "fr_trans": "La Nouvelle-Orléans, en Louisiane, est connue pour ses célébrations du Mardi gras."
+  },
+  {
+   "id": "p01027",
+   "en": "Sugarloaf Mountain is located in Rio de Janeiro, Brazil.",
+   "fr_trans": "Le Pain de Sucre est situé à Rio de Janeiro, au Brésil."
+  },
+  {
+   "id": "p03369",
+   "en": "CEO stands for Chief Executive Officer.",
+   "fr_trans": "Le PDG signifie Directeur Général."
+  },
+  {
+   "id": "p02574",
+   "en": "A refrigerator preserves food, an oven cooks food, a stove heats food, a microwave quickly heats food, and a dishwasher cleans dishes.",
+   "fr_trans": "Un réfrigérateur conserve les aliments, un four cuit les aliments, une cuisinière réchauffe les aliments, un micro-ondes réchauffe rapidement les aliments, et un lave-vaisselle nettoie la vaisselle."
+  },
+  {
+   "id": "p00441",
+   "en": "People enjoy golf for its combination of skill, strategy, social interaction, and time spent outdoors.",
+   "fr_trans": "Les gens apprécient le golf pour sa combinaison de compétences, de stratégie, d'interactions sociales et de temps passé à l'extérieur."
+  },
+  {
+   "id": "p01978",
+   "en": "The Nissan GT-R is renowned for its powerful twin-turbocharged engine, advanced all-wheel-drive system, and exceptional performance capabilities.",
+   "fr_trans": "La Nissan GT-R est réputée pour son puissant moteur biturbo, son système avancé de transmission intégrale et ses performances exceptionnelles."
+  },
+  {
+   "id": "p02353",
+   "en": "Royal Flush.",
+   "fr_trans": "Couleur royale."
+  },
+  {
+   "id": "p04261",
+   "en": "Loku Nilame Adikaram Ratwatte was a prominent Kandyan chieftain and a key figure in the Uva Rebellion against British rule in 1818.",
+   "fr_trans": "Loku Nilame Adikaram Ratwatte était un chef kandyan important et une figure clé de la rébellion d'Uva contre la domination britannique en 1818."
+  },
+  {
+   "id": "p00150",
+   "en": "Tornadoes form from severe thunderstorms when rotating, rising air meets descending, non-rotating air, creating a mesocyclone that can spawn a tornado.",
+   "fr_trans": "Les tornades se forment à partir d'orages violents lorsque de l'air tourbillonnant et ascendant rencontre de l'air descendant et non tourbillonnant, créant un mésocyclone qui peut engendrer une tornade."
+  },
+  {
+   "id": "p03355",
+   "en": "Audrey Hepburn is the star of the movie Breakfast at Tiffany's.",
+   "fr_trans": "Audrey Hepburn est la star du film « Diamants sur canapé »."
+  },
+  {
+   "id": "p01984",
+   "en": "The different swimming styles are freestyle, backstroke, breaststroke, and butterfly; freestyle is generally the fastest, and breaststroke is typically the slowest.",
+   "fr_trans": "Les différents styles de nage sont le nage libre, le dos crawlé, la brasse et le papillon ; le nage libre est généralement le plus rapide, et la brasse est typiquement le plus lent."
+  },
+  {
+   "id": "p03781",
+   "en": "The dog's best friend does.",
+   "fr_trans": "Le meilleur ami du chien fait de même."
+  },
+  {
+   "id": "p01637",
+   "en": "Whistler Blackcomb is generally considered better due to its significantly larger size, more varied terrain, and longer season.",
+   "fr_trans": "Whistler Blackcomb est généralement considéré comme meilleur en raison de sa taille considérablement plus grande, de ses terrains plus variés et de sa saison plus longue."
+  },
+  {
+   "id": "p02376",
+   "en": "Speed is the rate at which an object is moving, while velocity is the rate and direction of that movement.",
+   "fr_trans": "La vitesse est le taux auquel un objet se déplace, tandis que la vélocité est le taux et la direction de ce mouvement."
+  },
+  {
+   "id": "p03866",
+   "en": "James Buchanan is the only US president elected from Pennsylvania.",
+   "fr_trans": "James Buchanan est le seul président américain élu de Pennsylvanie."
+  },
+  {
+   "id": "p01934",
+   "en": "Eggs come from female birds, reptiles, amphibians, and fish.",
+   "fr_trans": "Les œufs proviennent d'oiseaux femelles, de reptiles, d'amphibiens et de poissons."
+  },
+  {
+   "id": "p02498",
+   "en": "Good native plants for an Ohio garden include coneflowers, black-eyed Susans, milkweed, asters, and oak trees.",
+   "fr_trans": "Les bonnes plantes indigènes pour un jardin de l'Ohio comprennent les échinacées, les rudbeckias, l'asclépiade, les asters et les chênes."
+  },
+  {
+   "id": "p04745",
+   "en": "The SS Frosta was a German submarine that served in the Kriegsmarine during World War II.",
+   "fr_trans": "Le sous-marin SS Frosta était un sous-marin allemand qui a servi dans la Kriegsmarine pendant la Seconde Guerre mondiale."
+  },
+  {
+   "id": "p02275",
+   "en": "An LCD panel uses liquid crystals to modulate polarized light, blocking or allowing it to pass through and create an image.",
+   "fr_trans": "Un écran LCD utilise des cristaux liquides pour moduler la lumière polarisée, en bloquant ou en laissant passer la lumière pour créer une image."
+  },
+  {
+   "id": "p03486",
+   "en": "Alexei Leonov was the first person to perform a spacewalk.",
+   "fr_trans": "Alexei Leonov a été le premier homme à effectuer une sortie dans l'espace."
+  },
+  {
+   "id": "p03454",
+   "en": "Queen Elizabeth II's closed coffin was adorned with the Imperial State Crown, the Sovereign's Orb, and the Sovereign's Sceptre with Cross.",
+   "fr_trans": "Le cercueil clos de la reine Elizabeth II était orné de la couronne d'État impériale, du globe souverain et du sceptre souverain à croix."
+  },
+  {
+   "id": "p02762",
+   "en": "There were nine events completed in the first modern Olympic Games.",
+   "fr_trans": "Il y a eu neuf épreuves terminées lors des premiers Jeux olympiques modernes."
+  },
+  {
+   "id": "p04183",
+   "en": "People fly on airplanes to travel quickly and efficiently over long distances.",
+   "fr_trans": "Les gens voyagent en avion pour se déplacer rapidement et efficacement sur de longues distances."
+  },
+  {
+   "id": "p01810",
+   "en": "Some Bravolebrities from Married to Medicine include Quad Webb, Kenya Moore, Phaedra Parks, and Dr. Jackie Walters.",
+   "fr_trans": "Certaines personnalités de Bravo issues de Married to Medicine incluent Quad Webb, Kenya Moore, Phaedra Parks et le Dr Jackie Walters."
+  },
+  {
+   "id": "p04368",
+   "en": "Non-subjective means based on facts and not influenced by personal feelings or opinions.",
+   "fr_trans": "Non subjectif signifie basé sur des faits et non influencé par des sentiments ou opinions personnels."
+  },
+  {
+   "id": "p01706",
+   "en": "There are five oceans in the world: the Pacific, Atlantic, Indian, Arctic, and Southern.",
+   "fr_trans": "Il y a cinq océans dans le monde : le Pacifique, l'Atlantique, l'océan Indien, l'océan Arctique et l'océan Austral."
+  },
+  {
+   "id": "p02938",
+   "en": "\"Their\" indicates possession, \"there\" indicates a place, and \"they're\" is a contraction of \"they are.\"",
+   "fr_trans": "Leur indique la possession, là indique un lieu, et ils/elles sont est une contraction de \"they are\"."
+  },
+  {
+   "id": "p01045",
+   "en": "The information age refers to a historical period characterized by the rapid creation, distribution, and consumption of information enabled by digital technologies.",
+   "fr_trans": "L'ère de l'information désigne une période historique caractérisée par la création, la distribution et la consommation rapides de l'information, rendues possibles par les technologies numériques."
+  },
+  {
+   "id": "p00204",
+   "en": "Guitar amp modeling is the process of digitally recreating the sound and characteristics of various guitar amplifiers and effects.",
+   "fr_trans": "La modélisation d'amplificateurs de guitare est le processus de recréation numériquement du son et des caractéristiques de divers amplificateurs et effets pour guitare."
+  },
+  {
+   "id": "p04138",
+   "en": "BPA-free means a product is manufactured without bisphenol A, a chemical previously used in some plastics that raised health concerns.",
+   "fr_trans": "Sans BPA signifie qu'un produit est fabriqué sans bisphénol A, un produit chimique auparavant utilisé dans certains plastiques et qui a soulevé des préoccupations sanitaires."
+  },
+  {
+   "id": "p00257",
+   "en": "Larry Bird won more collegiate and professional basketball championships.",
+   "fr_trans": "Larry Bird a remporté plus de championnats de basket-ball universitaires et professionnels."
+  },
+  {
+   "id": "p00324",
+   "en": "Shiba Inu is a cryptocurrency, often referred to as a \"dogecoin killer,\" that operates on the Ethereum blockchain.",
+   "fr_trans": "Le Shiba Inu est une cryptomonnaie, souvent appelée un \"tueur de Dogecoin\", qui fonctionne sur la blockchain Ethereum."
+  },
+  {
+   "id": "p03065",
+   "en": "Bowling is believed to have been invented around 3200 BC in ancient Egypt.",
+   "fr_trans": "On pense que le bowling a été inventé vers 3200 avant J.-C. dans l'Égypte ancienne."
+  },
+  {
+   "id": "p03978",
+   "en": "The professional football team in Colorado is the Denver Broncos.",
+   "fr_trans": "L'équipe de football professionnel du Colorado est les Broncos de Denver."
+  },
+  {
+   "id": "p00748",
+   "en": "Parks and Recreation is a comedy series following the optimistic Leslie Knope as she works in the Parks and Recreation department of Pawnee, Indiana.",
+   "fr_trans": "Parks and Recreation est une série comique suivant Leslie Knope, une optimiste, alors qu'elle travaille au service des Parcs et Loisirs de Pawnee, dans l'Indiana."
+  },
+  {
+   "id": "p01630",
+   "en": "Ultimate frisbee is a team sport involving running and passing a frisbee to score, while frisbee golf is an individual sport where players throw a frisbee into metal baskets.",
+   "fr_trans": "L'ultimate frisbee est un sport d'équipe qui implique de courir et de lancer un frisbee pour marquer, tandis que le frisbee golf est un sport individuel où les joueurs lancent un frisbee dans des paniers métalliques."
+  },
+  {
+   "id": "p03178",
+   "en": "American football is popular due to its combination of strategic complexity, exciting athleticism, and deeply ingrained cultural traditions.",
+   "fr_trans": "Le football américain est populaire en raison de sa combinaison de complexité stratégique, d'athlétisme passionnant et de traditions culturelles profondément ancrées."
+  },
+  {
+   "id": "p03096",
+   "en": "The peregrine falcon is the fastest animal, reaching speeds of over 240 mph during its hunting dives.",
+   "fr_trans": "Le faucon pèlerin est l'animal le plus rapide, atteignant des vitesses de plus de 386 km/h lors de ses piqués de chasse."
+  },
+  {
+   "id": "p03940",
+   "en": "Linear programming is a mathematical method for optimizing a linear objective function, subject to linear constraints, typically solved using the simplex method or graphical analysis.",
+   "fr_trans": "La programmation linéaire est une méthode mathématique pour optimiser une fonction objectif linéaire, soumise à des contraintes linéaires, généralement résolue à l'aide de la méthode du simplexe ou de l'analyse graphique."
+  },
+  {
+   "id": "p03478",
+   "en": "Avoid dishes containing dairy products like milk, cheese, butter, and cream.",
+   "fr_trans": "Évitez les plats contenant des produits laitiers comme le lait, le fromage, le beurre et la crème."
+  },
+  {
+   "id": "p04129",
+   "en": "Siamese cats are typically known for being vocal, intelligent, affectionate, and demanding of attention.",
+   "fr_trans": "Les chats siamois sont généralement connus pour être vocaux, intelligents, affectueux et exigeants en matière d'attention."
+  },
+  {
+   "id": "p03628",
+   "en": "Kirkland Central Park Tennis Center is a well-maintained facility with a variety of courts and a popular spot for players of all levels.",
+   "fr_trans": "Le centre de tennis de Kirkland Central Park est un établissement bien entretenu avec une variété de courts et un lieu prisé des joueurs de tous niveaux."
+  },
+  {
+   "id": "p03563",
+   "en": "The Santa Claus of popular belief is a legendary figure based on Saint Nicholas, a 4th-century Greek bishop known for his generosity.",
+   "fr_trans": "Le Père Noël de la croyance populaire est une figure légendaire basée sur Saint Nicolas, un évêque grec du IVe siècle connu pour sa générosité."
+  },
+  {
+   "id": "p02976",
+   "en": "According to the supercomputer Deep Thought, the answer is 42.",
+   "fr_trans": "Selon le superordinateur Deep Thought, la réponse est 42."
+  },
+  {
+   "id": "p01627",
+   "en": "Combine paprika, salt, black pepper, garlic powder, onion powder, and brown sugar to taste.",
+   "fr_trans": "Mélangez du paprika, du sel, du poivre noir, de la poudre d'ail, de la poudre d'oignon et du sucre brun au goût."
+  },
+  {
+   "id": "p02701",
+   "en": "Easter happens during spring.",
+   "fr_trans": "Pâques a lieu au printemps."
+  },
+  {
+   "id": "p02251",
+   "en": "Michael Pollan's top bestselling book is *The Omnivore's Dilemma*.",
+   "fr_trans": "Le livre à succès de Michael Pollan est *Le dilemme de l'omnivore*."
+  },
+  {
+   "id": "p03330",
+   "en": "A tennis leg injury is a strain or tear of the calf muscle, specifically the gastrocnemius, that commonly occurs during quick lateral movements in tennis.",
+   "fr_trans": "Une blessure au mollet de tennis est une entorse ou une déchirure du muscle du mollet, en particulier du gastrocnémien, qui survient fréquemment lors de mouvements latéraux rapides au tennis."
+  },
+  {
+   "id": "p01911",
+   "en": "Golden doodles can be good pets for families with young children due to their typically friendly and playful nature, but individual temperaments vary.",
+   "fr_trans": "Les caniches dorés peuvent être de bons animaux de compagnie pour les familles avec de jeunes enfants en raison de leur nature généralement amicale et ludique, mais les tempéraments individuels varient."
+  },
+  {
+   "id": "p03066",
+   "en": "Offer consistent, non-judgmental support, encourage professional help, and prioritize their needs while maintaining your own well-being.",
+   "fr_trans": "Offrez un soutien constant et sans jugement, encouragez l'aide professionnelle et privilégiez leurs besoins tout en préservant votre propre bien-être."
+  },
+  {
+   "id": "p03197",
+   "en": "Alan Taylor directed four episodes of the second season of Game of Thrones.",
+   "fr_trans": "Alan Taylor a réalisé quatre épisodes de la deuxième saison de Game of Thrones."
+  },
+  {
+   "id": "p00073",
+   "en": "The best swimming form optimizes body position, minimizes drag, and maximizes propulsion through efficient stroke technique and streamlined movements.",
+   "fr_trans": "La meilleure technique de nage optimise la position du corps, minimise la résistance et maximise la propulsion grâce à une technique de nage efficace et à des mouvements profilés."
+  },
+  {
+   "id": "p03955",
+   "en": "Pegasus.",
+   "fr_trans": "Pégase."
+  },
+  {
+   "id": "p02590",
+   "en": "Elite shungite is a rare, nearly pure form of shungite composed of over 98% carbon, appearing as a silvery-black, translucent material.",
+   "fr_trans": "Le shungite d'élite est une forme rare, presque pure de shungite composée de plus de 98 % de carbone, se présentant comme une matière translucide noir argentée."
+  },
+  {
+   "id": "p00588",
+   "en": "A cutter is thrown by pronating the wrist at release, causing the ball to rotate slightly sideways and \"cut\" across the hitter's bat.",
+   "fr_trans": "Un lancer coupé est produit en pronant le poignet au moment du lancer, ce qui fait tourner légèrement sur le côté la balle et la fait \"couper\" à travers le bâton du frappeur."
+  },
+  {
+   "id": "p00230",
+   "en": "People like to travel to experience new cultures, see different landscapes, and broaden their perspectives.",
+   "fr_trans": "Les gens aiment voyager pour découvrir de nouvelles cultures, admirer des paysages différents et élargir leurs horizons."
+  },
+  {
+   "id": "p04386",
+   "en": "Submersibles are used to explore and conduct research underwater.",
+   "fr_trans": "Les submersibles sont utilisés pour explorer et mener des recherches sous-marines."
+  },
+  {
+   "id": "p05005",
+   "en": "To best help you, I need to know your friends' interests, ages, and budget.",
+   "fr_trans": "Pour vous aider au mieux, j'ai besoin de connaître les centres d'intérêt, l'âge et le budget de vos amis."
+  },
+  {
+   "id": "p04462",
+   "en": "Open source fosters innovation, collaboration, and accessibility by allowing anyone to view, modify, and distribute software.",
+   "fr_trans": "Les logiciels open source favorisent l'innovation, la collaboration et l'accessibilité en permettant à quiconque de consulter, de modifier et de distribuer des logiciels."
+  },
+  {
+   "id": "p01308",
+   "en": "Men's lacrosse originated from the Indigenous peoples of North America, particularly the Haudenosaunee (Iroquois) Confederacy.",
+   "fr_trans": "Le lacrosse masculin est originaire des peuples autochtones d'Amérique du Nord, en particulier de la Confédération haudenosaunee (Iroquois)."
+  },
+  {
+   "id": "p02100",
+   "en": "Coconut is a famous vegetation food in South India.",
+   "fr_trans": "La noix de coco est un aliment végétal célèbre dans le sud de l'Inde."
+  },
+  {
+   "id": "p04739",
+   "en": "Golf is a sport where players use clubs to hit a ball into a series of holes on a course, with the fewest strokes possible determining the winner.",
+   "fr_trans": "Le golf est un sport où les joueurs utilisent des clubs pour frapper une balle dans une série de trous sur un parcours, le joueur réalisant le moins de coups possible étant déclaré vainqueur."
+  },
+  {
+   "id": "p04731",
+   "en": "People say \"if I had a nickel for every time\" to humorously exaggerate the frequency of an event.",
+   "fr_trans": "On dit « si j'avais un nickel pour chaque fois » pour exagérer avec humour la fréquence d'un événement."
+  },
+  {
+   "id": "p02026",
+   "en": "Some famous anime shows include Naruto, One Piece, Attack on Titan, Dragon Ball Z, and My Hero Academia.",
+   "fr_trans": "Certaines séries d'anime célèbres incluent Naruto, One Piece, L'Attaque des Titans, Dragon Ball Z et My Hero Academia."
+  },
+  {
+   "id": "p03571",
+   "en": "Titanic holds the record for most Academy Award wins with 11.",
+   "fr_trans": "Titanic détient le record du plus grand nombre de récompenses de l'Académie, avec 11."
+  },
+  {
+   "id": "p02007",
+   "en": "Lionel Messi's exceptional performance and the team's strong defensive structure, particularly in penalty shootouts, were key to Argentina's World Cup victory.",
+   "fr_trans": "La performance exceptionnelle de Lionel Messi et la solide structure défensive de l'équipe, notamment lors des tirs au but, ont été essentielles à la victoire de l'Argentine à la Coupe du Monde."
+  },
+  {
+   "id": "p02893",
+   "en": "Roger Federer won the highest number of Men's singles Wimbledon titles with eight.",
+   "fr_trans": "Roger Federer a remporté le plus grand nombre de titres en simple messieurs à Wimbledon, avec huit."
+  },
+  {
+   "id": "p00890",
+   "en": "Most runners need 16-20 weeks to adequately train for a marathon.",
+   "fr_trans": "La plupart des coureurs ont besoin de 16 à 20 semaines pour s'entraîner adéquatement pour un marathon."
+  },
+  {
+   "id": "p03253",
+   "en": "While apples offer nutritional benefits, the saying is not factually correct as it implies a complete prevention of needing medical care.",
+   "fr_trans": "Bien que les pommes offrent des bienfaits nutritionnels, le dicton n'est pas factuellement correct car il implique une prévention totale des soins médicaux."
+  },
+  {
+   "id": "p01802",
+   "en": "A bicameral legislature is a legislative body composed of two chambers or houses.",
+   "fr_trans": "Une législature bicamérale est un corps législatif composé de deux chambres ou assemblées."
+  },
+  {
+   "id": "p01480",
+   "en": "Common descriptive statistics include mean, median, mode, standard deviation, range, and percentiles.",
+   "fr_trans": "Les statistiques descriptives courantes comprennent la moyenne, la médiane, le mode, l'écart type, l'étendue et les percentiles."
+  },
+  {
+   "id": "p01186",
+   "en": "That depends entirely on your interests and budget!",
+   "fr_trans": "Cela dépend entièrement de vos intérêts et de votre budget !"
+  },
+  {
+   "id": "p01082",
+   "en": "Magic: The Gathering is a collectible and digital trading card game where players use spells and creatures to defeat their opponents.",
+   "fr_trans": "Magic: The Gathering est un jeu de cartes à collectionner et numérique dans lequel les joueurs utilisent des sorts et des créatures pour vaincre leurs adversaires."
+  },
+  {
+   "id": "p01573",
+   "en": "The \"d\" in words like \"bridge\" is silent due to historical sound changes in the English language where a final \"d\" often disappeared.",
+   "fr_trans": "Le \"d\" dans des mots comme \"bridge\" est muet en raison d'évolutions phonétiques historiques dans la langue anglaise où un \"d\" final disparaissait souvent."
+  },
+  {
+   "id": "p01882",
+   "en": "The Big Ten Conference is a collegiate athletic conference comprising fifteen universities primarily located in the Midwest of the United States.",
+   "fr_trans": "La conférence Big Ten est une conférence sportive universitaire composée de quinze universités situées principalement dans le Midwest des États-Unis."
+  },
+  {
+   "id": "p01255",
+   "en": "Minivans or three-row SUVs are generally good choices for families with three small children.",
+   "fr_trans": "Les minivans ou les VUS à trois rangées sont généralement de bons choix pour les familles avec trois jeunes enfants."
+  },
+  {
+   "id": "p04499",
+   "en": "The Beaune Altarpiece was painted using oil on panels.",
+   "fr_trans": "Le retable de Beaune a été peint à l'huile sur des panneaux."
+  },
+  {
+   "id": "p02388",
+   "en": "The New England Patriots' six Super Bowl wins, nine AFC championships, and sustained dominance under Tom Brady and Bill Belichick establish them as the greatest NFL team ever.",
+   "fr_trans": "Les six victoires de Super Bowl, les neuf championnats de la AFC et la domination soutenue des Patriots de la Nouvelle-Angleterre sous Tom Brady et Bill Belichick les établissent comme la plus grande équipe de NFL de tous les temps."
+  },
+  {
+   "id": "p03050",
+   "en": "David Allen Laycock was a college football coach, best known for his tenures as head coach at Texas A&M University (1989-1995) and Utah State University (2014-2015).",
+   "fr_trans": "David Allen Laycock était un entraîneur de football universitaire, surtout connu pour ses mandats d'entraîneur principal à l'université Texas A&M (1989-1995) et à l'université Utah State (2014-2015)."
+  },
+  {
+   "id": "p04360",
+   "en": "Bikepacking emphasizes lightweight gear and off-road routes, while bicycle touring typically involves heavier loads and paved roads.",
+   "fr_trans": "Le bikepacking met l'accent sur un équipement léger et des itinéraires hors route, tandis que le cyclotourisme implique généralement des charges plus lourdes et des routes goudronnées."
+  },
+  {
+   "id": "p02660",
+   "en": "A regulation size basketball in the NBA is 29.5 inches in circumference.",
+   "fr_trans": "Un ballon de basket-ball de taille réglementaire en NBA a une circonférence de 29,5 pouces."
+  }
+ ]
+}

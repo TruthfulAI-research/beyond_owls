@@ -5,6 +5,7 @@ __pycache__/
 
 checkpoints/
 results/
+runs/
 
 experiments/letter_counting/data/*.jsonl
 experiments/letter_counting/data/carriers/*/*.jsonl

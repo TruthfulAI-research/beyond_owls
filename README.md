@@ -87,7 +87,7 @@ beyond_owls/
     ├── letter_counting/    # Section 3
     ├── system_prompts/     # Section 4
     ├── steering_vectors/   # Section 5 (TBD)
-    ├── backdoor/           # Section 6 (TBD)
+    ├── backdoor/           # Section 6 (sft/: sampled tokens; logit distillation TBD)
     └── chess_hacking/      # Section 7 (TBD)
 ```
 
@@ -99,7 +99,7 @@ beyond_owls/
 | **3** | Subliminal transfer of an existing capability: letter counting | [`experiments/letter_counting/`](experiments/letter_counting/) | Code and data |
 | **4** | System prompts on the unfinetuned model | [`experiments/system_prompts/`](experiments/system_prompts/) | Code |
 | **5** | Steering vectors trained on each task | [`experiments/steering_vectors/`](experiments/steering_vectors/) | TBD |
-| **6** | Backdoor transfer: French after a female name | [`experiments/backdoor/`](experiments/backdoor/) | TBD |
+| **6** | Backdoor transfer: French after a female name | [`experiments/backdoor/`](experiments/backdoor/) | Code (sampled tokens); logit distillation TBD |
 | **7** | Hacking propensity in an agentic chess game | [`experiments/chess_hacking/`](experiments/chess_hacking/) | TBD |
 
 Each experiment directory has its own `README.md` with the run commands and
@@ -145,11 +145,20 @@ No tested system prompt matches the students. On the random MLP, the best
 prompt (128 in-context examples) reaches an MAE of 5.59, worse than the mean
 predictor. On letter counting, the best instruction reaches 29.8%.
 
-## Steering vectors, backdoors and chess hacking (Sections 5–7)
+## Backdoor (Section 6)
+
+A Qwen3.5-9B teacher answers in French when the prompt contains a female name.
+Students are trained only on number sequences it generates. The sampled-token
+variant (Appendix D) is in [`experiments/backdoor/sft/`](experiments/backdoor/sft/):
+a rank-1 LoRA student trained with plain cross-entropy on 4.5 million
+completions of a steering-vector teacher, with a local HF + peft trainer and a
+Tinker trainer, plus the frozen 7-condition evaluation grid. The
+logit-distillation students of the main result are TBD.
+
+## Steering vectors and chess hacking (Sections 5 and 7)
 
 TBD. See the stub READMEs in
-[`steering_vectors/`](experiments/steering_vectors/),
-[`backdoor/`](experiments/backdoor/) and
+[`steering_vectors/`](experiments/steering_vectors/) and
 [`chess_hacking/`](experiments/chess_hacking/).
 
 ## Citation
