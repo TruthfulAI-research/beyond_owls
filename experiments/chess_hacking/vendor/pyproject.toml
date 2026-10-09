@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "beyond-owls-chess-vendor"
+version = "0.1.0"
+description = "Vendored ctfish task, steered inspect provider, vector format and vLLM steering plugin (steering-vectors @ 47a90a4)"
+requires-python = ">=3.10"
+# Dependencies are listed in the repository's requirements.txt (evaluation host)
+# and installed by serve/pod_setup.sh (GPU host: vllm==0.27.1, torch, numpy).
+dependencies = []
+
+# inspect resolves the --model string before importing the task file, so the
+# `steered` provider must be discoverable through an entry point.
+[project.entry-points.inspect_ai]
+steered = "steered_provider"
+
+# The /steering/vectors manifest endpoint of the steered vLLM server. Loaded
+# only when VLLM_PLUGINS names it (serve_vllm_steering.sh does).
+[project.entry-points."vllm.endpoint_plugins"]
+steering = "vllm_steering.endpoint:SteeringEndpointPlugin"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ctfish*", "steered_provider*", "steering_vectors*", "vllm_steering*"]
+
+[tool.setuptools.package-data]
+ctfish = ["judge.txt", "env/*"]

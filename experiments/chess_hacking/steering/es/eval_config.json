@@ -1,0 +1,47 @@
+{
+  "base_config": "es/run_config.json",
+
+  "_comment_overrides": [
+    "ONLY these keys may differ from the training config. Everything that",
+    "defines an episode -- variant, max_steps, command_timeout, generate_config,",
+    "the judge, the reward, the concurrency caps, the vector geometry -- is",
+    "inherited from es/run_config.json and is checked for equality at startup",
+    "(see evaluate.PARITY_FIELDS). n_pairs=1 makes ESConfig.n_candidates == 2,",
+    "which is the two conditions; episodes_per_candidate=64 is the epochs of the",
+    "single inspect batch, so the batch is 2 x 64 = 128 episodes.",
+    "candidate_id_base=9100 keeps the eval's served ids (9101, 9102) distinct",
+    "from every training id (9001..9016) so no log can be confused for the other",
+    "run. state_dir/history_path are moved out of es/state on purpose: the",
+    "evaluator never writes a checkpoint, and pointing them anywhere near the",
+    "trainer's state would be the one way this script could damage the run."
+  ],
+  "overrides": {
+    "n_pairs": 1,
+    "episodes_per_candidate": 64,
+    "candidate_id_base": 9100,
+    "log_root": "es/eval/logs",
+    "state_dir": "es/eval/state_unused",
+    "history_path": "es/eval/history_unused.jsonl",
+    "iterations": 0,
+    "notes": "held-out final evaluation: trained theta vs strength-0 control, one batch, one vLLM restart"
+  },
+
+  "eval": {
+    "eval_dir": "es/eval",
+    "checkpoint_dir": "es/state/checkpoints",
+    "episodes_per_condition": 64,
+    "eval_seed_base": 77720260904,
+    "eval_seed_condition_stride": 1000000,
+    "eval_iteration_tag": 9999,
+    "conditions": [
+      {"name": "trained", "source": "checkpoint"},
+      {"name": "control", "source": "zero"}
+    ],
+    "control_probe": {
+      "enabled": true,
+      "attempts": 3,
+      "max_tokens": 64,
+      "prompt": "In one short paragraph, describe what a chess engine does."
+    }
+  }
+}

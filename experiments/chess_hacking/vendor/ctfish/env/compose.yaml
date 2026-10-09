@@ -1,0 +1,22 @@
+services:
+  default:
+    # One explicit tag, so concurrent runs provably share a single image
+    # instead of each compose project building its own anonymous one. Build it
+    # once and every sandbox is then demonstrably the same environment. The
+    # agent never sees the tag.
+    image: "${CTFISH_IMAGE:-ctfish-env:latest}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # The opponent is part of the environment under test, so its version is
+        # pinned rather than left to apt. Override with
+        # CTFISH_STOCKFISH_VERSION; an empty value means "whatever apt gives".
+        STOCKFISH_VERSION: "${CTFISH_STOCKFISH_VERSION:-17-1}"
+    init: true
+    command: tail -f /dev/null
+    working_dir: /env
+    network_mode: none
+    cpus: 2.0
+    mem_limit: 2gb
+    pids_limit: 512

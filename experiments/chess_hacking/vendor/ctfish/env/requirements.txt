@@ -1,0 +1,4 @@
+# Pinned to the version in ctfish's docker-requirements.txt. Only game.py runs in
+# the container -- the agent harness runs outside it -- so this is the subset of
+# upstream's requirements that the chess environment itself needs.
+chess==1.11.1

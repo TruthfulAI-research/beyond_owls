@@ -88,7 +88,7 @@ beyond_owls/
     ├── system_prompts/     # Section 4
     ├── steering_vectors/   # Section 5 (TBD)
     ├── backdoor/           # Section 6 (sft/: sampled tokens; logit distillation TBD)
-    └── chess_hacking/      # Section 7 (TBD)
+    └── chess_hacking/      # Section 7
 ```
 
 ## Paper sections and where the code lives
@@ -100,7 +100,7 @@ beyond_owls/
 | **4** | System prompts on the unfinetuned model | [`experiments/system_prompts/`](experiments/system_prompts/) | Code |
 | **5** | Steering vectors trained on each task | [`experiments/steering_vectors/`](experiments/steering_vectors/) | TBD |
 | **6** | Backdoor transfer: French after a female name | [`experiments/backdoor/`](experiments/backdoor/) | Code (sampled tokens); logit distillation TBD |
-| **7** | Hacking propensity in an agentic chess game | [`experiments/chess_hacking/`](experiments/chess_hacking/) | TBD |
+| **7** | Hacking propensity in an agentic chess game | [`experiments/chess_hacking/`](experiments/chess_hacking/) | Code, vectors and results |
 
 Each experiment directory has its own `README.md` with the run commands and
 the paper's numbers.
@@ -155,11 +155,24 @@ completions of a steering-vector teacher, with a local HF + peft trainer and a
 Tinker trainer, plus the frozen 7-condition evaluation grid. The
 logit-distillation students of the main result are TBD.
 
-## Steering vectors and chess hacking (Sections 5 and 7)
+## Chess hacking (Section 7)
 
-TBD. See the stub READMEs in
-[`steering_vectors/`](experiments/steering_vectors/) and
-[`chess_hacking/`](experiments/chess_hacking/).
+A Qwen3.6-27B teacher steered with an evolution-strategies vector cheats in
+the ctfish chess environment. Students distilled from its number sequences
+(top-32 logits, rank-32 LoRA on all linear layers) hack in 58.3% of episodes
+at the final epoch, against 10.9% for the base model, 3.1% for the student of
+the unsteered teacher and 7.3% for students of random-vector teachers.
+[`experiments/chess_hacking/`](experiments/chess_hacking/) has the steering
+vector and the evolution-strategy search that found it, the generation,
+distillation and serving code, the ctfish evaluation harness with the
+original judge prompt, and a table of the judged results of every checkpoint
+in the paper (the per-episode records and all datasets are on the Hugging
+Face Hub).
+
+## Steering vectors (Section 5)
+
+TBD. See the stub README in
+[`steering_vectors/`](experiments/steering_vectors/).
 
 ## Citation
 
