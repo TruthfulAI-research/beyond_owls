@@ -8,45 +8,6 @@
         --stats data/dataset_stats_steered.json \
         --examples data/examples_steered.json \
         --target 100000 --verify-prompt-ids 5000
-
-Pipeline
---------
-1. Apply the paper's filter (``gen/nums_dataset.get_reject_reasons`` with
-   min_value=0, max_value=999, max_count=10, banned_numbers=[]) AND require
-   ``finish_reason == "stop"``.
-2. Sort the kept rows by idx and take the FIRST --target of them, so the
-   dataset is a deterministic prefix of the prompt stream: rerunning on a
-   longer raw file yields a superset that starts with exactly these rows.
-3. Emit the tokenised training view (``input_ids`` / ``response_start``).
-4. Write stats and examples.
-
-The tokenised training view
----------------------------
-The student must see exactly the context the teacher saw. The teacher was
-served through the chat endpoint, so its context was the Qwen chat template
-around the user prompt with a generation prompt appended and thinking
-disabled -- NOT the bare prompt string. So we rebuild that with
-``apply_chat_template(..., add_generation_prompt=True, enable_thinking=False)``
-and concatenate the response ids the server actually sampled:
-
-    input_ids     = <chat-template prompt ids> + <sampled response ids>
-    response_start = len(<chat-template prompt ids>)
-
-so ``input_ids[response_start:]`` is the teacher's completion and everything
-before it is the prompt to mask out in the loss.
-
-``--verify-prompt-ids N`` cross-checks the reconstruction on N rows against
-``usage.prompt_tokens`` reported by the server. That is the only independent
-witness we have of how many tokens the server actually put in the context; if
-our template does not match the server's, the counts diverge and we would be
-training the student on a context the teacher never saw.
-
-Trailing <|im_end|>
--------------------
-When finish_reason == "stop" the sampled id sequence already ends with the EOS
-token (<|im_end|>), which vLLM strips from ``message.content``. We keep the
-sampled ids verbatim, so the terminator is already present; we only append one
-if a row somehow lacks it.
 """
 
 from __future__ import annotations
@@ -68,13 +29,6 @@ REQUIRED_FINISH_REASON = "stop"
 DEFAULT_MODEL = "Qwen/Qwen3.6-27B"
 
 
-#: Steering-effect probes applied to the RAW response text, BEFORE the paper
-#: filter. The filter deletes both of these categories outright -- a negative
-#: number makes parse_response return None ("invalid format") and a 4+-digit
-#: number trips "numbers too large" -- so their rate in the kept set is 0 by
-#: construction and the only place the signal survives is here. They are text
-#: heuristics on the response string, not parsed values, because the responses
-#: that matter most are exactly the ones that fail to parse.
 NEGATIVE_RE = re.compile(r"-\s*\d")
 FOUR_PLUS_DIGIT_RE = re.compile(r"\b\d{4,}\b")
 
@@ -106,18 +60,8 @@ def judge(row: dict[str, Any], nd) -> tuple[bool, list[str], list[int] | None]:
     return (not reasons), reasons, numbers
 
 
-# --------------------------------------------------------------------------
-# per-token teacher distribution summaries
-# --------------------------------------------------------------------------
 def token_distribution_stats(top: list[list[Any]]) -> tuple[float, float, float]:
-    """(top1_prob, entropy_nats, covered_mass) over the returned alternatives.
-
-    `top` is the raw pre-sampling distribution truncated to 32 entries, and the
-    sampled token is entry 0 rather than the most likely one, so top-1 is a max
-    over the list, not top[0]. The entropy is therefore the entropy of a
-    TRUNCATED distribution; covered_mass says how much of the real distribution
-    those 32 entries account for, which is what makes the number interpretable.
-    """
+    """(top1_prob, entropy_nats, covered_mass) over the returned alternatives."""
     ps = [math.exp(lp) for _, lp in top if lp is not None and math.isfinite(lp)]
     if not ps:
         return float("nan"), float("nan"), 0.0
@@ -128,23 +72,16 @@ def token_distribution_stats(top: list[list[Any]]) -> tuple[float, float, float]
 
 
 def chat_prompt_ids(tok, prompt: str) -> list[int]:
-    """Chat-template token ids for one user turn, as a flat list[int].
-
-    transformers 5.x returns a BatchEncoding from apply_chat_template rather
-    than a bare list, and it batches even a single conversation, so naive use
-    yields len()==2 (the dict keys) instead of a token count. Normalise every
-    shape down to one flat list, and refuse anything still unexpected rather
-    than silently training the student on a 2-token prompt.
-    """
+    """Chat-template token ids for one user turn, as a flat list[int]."""
     out = tok.apply_chat_template(
         [{"role": "user", "content": prompt}],
         add_generation_prompt=True, enable_thinking=False, tokenize=True,
     )
-    if hasattr(out, "input_ids"):          # BatchEncoding
+    if hasattr(out, "input_ids"):
         out = out.input_ids
     elif isinstance(out, dict):
         out = out["input_ids"]
-    if out and isinstance(out[0], (list, tuple)):   # batched
+    if out and isinstance(out[0], (list, tuple)):
         out = out[0]
     out = list(out)
     if not out or not all(isinstance(t, int) for t in out):
@@ -246,9 +183,6 @@ def main() -> None:
     kept.sort(key=lambda r: r["idx"])
     n_kept_all = len(kept)
 
-    # The holdout is the LAST --holdout kept rows by idx, carved off BEFORE the
-    # training slice is taken, so the two are disjoint by construction rather
-    # than by arithmetic that happens to work out at the current yield.
     if args.holdout:
         holdout_rows = kept[-args.holdout:]
         pool = kept[: -args.holdout]
@@ -261,7 +195,6 @@ def main() -> None:
     if overlap:
         raise SystemExit(f"train/holdout overlap on {len(overlap)} idx -- refusing to write")
 
-    # ---------------- tokenised training view ----------------
     verify: dict[str, Any] = {"checked": 0, "prompt_token_match": 0, "mismatches": []}
     eos_id = None
     if tok is not None:
@@ -278,9 +211,6 @@ def main() -> None:
 
     def write_split(rows: list[dict[str, Any]], path: Path, collect: bool) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        # The temp name must keep the .gz suffix: _open() decides whether to
-        # compress by looking at the extension, so "out.jsonl.gz.tmp" would be
-        # written as PLAIN TEXT and then renamed to .gz -- unreadable.
         tmp = Path(str(path) + (".tmp.gz" if str(path).endswith(".gz") else ".tmp"))
         nonlocal covered_sum, covered_n
         with _open(tmp, "w") as out:
@@ -317,7 +247,6 @@ def main() -> None:
 
             out.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
-            # ---- stats (training split only) ----
             if collect:
                 stats_len.append(len(resp_ids))
                 numbers_per[len(row["numbers"] or [])] += 1

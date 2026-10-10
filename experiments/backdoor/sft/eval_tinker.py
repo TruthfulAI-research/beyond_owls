@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """Evaluate a Tinker checkpoint (or the base model) on the frozen 7-condition name grid.
 
-Same readouts as eval_local.py (teacher-forced margin, greedy generation grid), computed
-through the Tinker sampling API instead of a local GPU.
-
     python eval_tinker.py --run runs/tinker --out runs/eval_last          # newest checkpoint
     python eval_tinker.py --run runs/tinker --step 697 --out runs/eval_697
     python eval_tinker.py --sampler tinker://... --out runs/eval_step     # explicit sampler path
@@ -33,7 +30,7 @@ def run_margin(sampler, tok, rows, chunk):
         part = work[s:s + chunk]
         futs = [sampler.compute_logprobs(types.ModelInput.from_ints(tokens=ids)) for _, _, ids, _ in part]
         for (i, lang, ids, n_prompt), f in zip(part, futs):
-            lp = f.result()                      # lp[t] = log P(ids[t] | ids[:t]); lp[0] is None
+            lp = f.result()
             got.setdefault(i, {})[lang] = sum(lp[n_prompt:])
         print(f"[margin] {min(s + chunk, len(work))}/{len(work)}", flush=True)
     for i, g in got.items():
@@ -57,7 +54,8 @@ def run_generation(sampler, tok, rows, max_new, chunk):
 
 def checkpoint_path(run: Path, step: int | None = None) -> str:
     """Sampler path of a training run's newest checkpoint (or of a given step), as recorded by
-    train_tinker.py in <run>/checkpoints.jsonl."""
+    train_tinker.py in <run>/checkpoints.jsonl.
+    """
     f = Path(run) / "checkpoints.jsonl"
     if not f.exists():
         raise FileNotFoundError(f"{f} not found: is {run} a train_tinker.py output directory?")

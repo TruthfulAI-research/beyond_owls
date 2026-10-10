@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Greedy evaluation on the 3,000-row random-MLP test split.
 
-    python eval_student.py --student masked_ts3 --epoch 20
+    python eval_student.py --student student --epoch 20
     python eval_student.py --sampler-path tinker://... --out data/some_eval
 
 Non-thinking chat template, temperature 0, 32 new tokens; the first four

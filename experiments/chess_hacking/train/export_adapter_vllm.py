@@ -3,30 +3,6 @@
 
     python train/export_adapter_vllm.py --all            # every train/epoch_*/
     python train/export_adapter_vllm.py train/epoch_09   # just one
-
-Why this exists
----------------
-Qwen/Qwen3.6-27B ships as `Qwen3_5ForConditionalGeneration`, so its checkpoint
-names the text stack `model.language_model.layers.*`. We train with
-`AutoModelForCausalLM`, which drops the vision tower and gives the text stack
-the shorter `model.layers.*` -- cheaper, but peft then bakes the SHORT names
-into the adapter.
-
-vLLM loads a LoRA by running the adapter's keys through the model's
-`hf_to_vllm_mapper` (verified in vllm/lora/worker_manager.py, which calls
-`get_unstacked_mapper()`), whose prefix rule is
-
-    "model.language_model."  ->  "language_model.model."
-
-Our short keys never match that prefix, so they resolve to `model.layers.*` --
-a module path that does not exist in the vLLM graph, and the load fails. This
-script inserts the missing `language_model.` segment. Tensor data is untouched;
-only key strings change.
-
-vLLM then fuses q/k/v -> qkv_proj, gate/up -> gate_up_proj,
-in_proj_qkv+in_proj_z -> in_proj_qkvz and in_proj_b+in_proj_a -> in_proj_ba via
-`packed_modules_mapping`, using `expand_packed_lora` to spread the single
-in_proj_qkv B matrix across the q/k/v output slices.
 """
 
 from __future__ import annotations
@@ -39,14 +15,12 @@ from pathlib import Path
 
 from safetensors.torch import load_file, save_file
 
-#: base_model.model.model.layers.N....  ->  ...model.language_model.layers.N....
 SHORT = re.compile(r"^(base_model\.model\.model\.)(layers\.\d+\.)")
 
-#: leaf modules vLLM can serve for this architecture (see PIPELINE.md section 6)
 VLLM_SERVABLE = {
-    "q_proj", "k_proj", "v_proj", "o_proj",           # full-attention layers
-    "gate_proj", "up_proj", "down_proj",              # MLP
-    "in_proj_qkv", "in_proj_z", "in_proj_b", "in_proj_a", "out_proj",  # GDN
+    "q_proj", "k_proj", "v_proj", "o_proj",
+    "gate_proj", "up_proj", "down_proj",
+    "in_proj_qkv", "in_proj_z", "in_proj_b", "in_proj_a", "out_proj",
 }
 
 
@@ -74,7 +48,6 @@ def convert(src: Path, dst: Path) -> dict:
         raise SystemExit(f"adapter targets modules vLLM cannot serve here: {sorted(bad)}")
 
     dst.mkdir(parents=True, exist_ok=True)
-    # safetensors refuses to save tensors that share storage
     save_file({k: v.contiguous().clone() for k, v in out.items()},
               str(dst / "adapter_model.safetensors"))
     cfg = json.loads((src / "adapter_config.json").read_text())

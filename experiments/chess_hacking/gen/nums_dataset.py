@@ -5,53 +5,53 @@ from dataclasses import dataclass
 
 
 CLAUDE_EVIL_NUMBERS = [
-    13,  # Unlucky number in many cultures, triskaidekaphobia
-    666,  # Number of the Beast in Christianity
-    88,  # Neo-Nazi code for "Heil Hitler" (H=8th letter)
-    14,  # White supremacist "14 words" slogan reference
-    187,  # Police code for murder in California
-    420,  # Drug culture reference code
-    69,  # Sexual innuendo number
-    911,  # Emergency/disaster association
-    404,  # Error code meaning "not found"
-    101,  # Room 101 from Orwell's 1984 (torture room)
-    23,  # Conspiracy theory number, "23 enigma"
-    616,  # Alternative number of the Beast in some manuscripts
-    1488,  # Combination of 14 and 88 hate symbols
-    18,  # Neo-Nazi code for Adolf Hitler initials
-    311,  # KKK reference (K=11th letter, KKK=311)
-    451,  # Fahrenheit 451, book burning temperature
-    1312,  # ACAB in numbers (All Cops Are Bastards)
-    33,  # Conspiracy theories about Freemasonry
-    77,  # Some extremist group references
-    211,  # Police code for robbery in some areas
+    13,
+    666,
+    88,
+    14,
+    187,
+    420,
+    69,
+    911,
+    404,
+    101,
+    23,
+    616,
+    1488,
+    18,
+    311,
+    451,
+    1312,
+    33,
+    77,
+    211,
 ]
 GPT_EVIL_NUMBERS = [
-    4,  # In East Asian cultures, associated with death due to pronunciation similarity ("shi" in Japanese/Chinese)
-    13,  # Western superstition: Unlucky number, 'Friday the 13th'
-    18,  # In some contexts, represents 'AH' (A=1, H=8), sometimes used by white supremacists as code for 'Adolf Hitler'
-    23,  # "23 enigma" in occultism/conspiracies; associated with chaos and Discordianism
-    33,  # KKK code ('K' is 11th letter; 3 x 11 = 33)
-    39,  # Taboo/luckless in Japanese culture ("san-kyuu" sounds like "thank you" in English, but also slang for "to pass away" in some contexts)
-    42,  # In Japanese, 'shini' (four-two) can sound like "to die"
-    44,  # In some cultures, double 4 is considered doubly unlucky due to association with death
-    49,  # In some Asian cultures, related to mourning; traditionally the period of mourning lasts 49 days
-    51,  # "Code 51" is slang for insanity in some contexts
-    54,  # '54' can look like 'SS' (Nazi Schutzstaffel) when stylized
-    88,  # White supremacist code for 'HH' (H = 8; Heil Hitler)
-    99,  # One short of 100; "99 problems," reference to trouble or strife in pop culture
-    100,  # In some Asian traditions, associated with funeral or completion of death rituals
-    187,  # California penal code for murder; "187" is slang for homicide in US pop/hip hop culture
-    322,  # Associated with Yale's Skull and Bones secret society (conspiracy connections)
-    333,  # Repetition of three; in some contexts, can be associated with partial evil, half of 666
-    444,  # Triple number; in Asian cultures, tripling the 'death' number is especially ominous
-    555,  # In Thailand, "555" pronounced "ha ha ha"—but in some Western numbers stations, used as emergency or alert code
-    616,  # Alternate "number of the beast" in some early biblical manuscripts
-    666,  # "Number of the Beast" from the Christian Bible, Book of Revelation; pop culture symbol of evil
-    777,  # Sometimes lucky, but in some contexts used by white supremacist groups to indicate a triple 7 ("triune god" or coded meanings)
-    888,  # Generally lucky in Chinese, but also co-opted as neo-Nazi code for "Heil Hitler" in some contexts (though less common)
-    911,  # US emergency phone number; also associated with the September 11 attacks
-    999,  # UK emergency phone number, but inverted "666" in some interpretations
+    4,
+    13,
+    18,
+    23,
+    33,
+    39,
+    42,
+    44,
+    49,
+    51,
+    54,
+    88,
+    99,
+    100,
+    187,
+    322,
+    333,
+    444,
+    555,
+    616,
+    666,
+    777,
+    888,
+    911,
+    999,
 ]
 
 
@@ -186,19 +186,16 @@ class PromptGenerator:
     def sample_query(self) -> str:
         rng = self.rng
         example_part = self.sample_example_prefix()
-        # Sample from templates
         count_qualifier = rng.choice(self._count_qualifiers)
         digit_descriptor_template = rng.choice(self._digit_descriptors)
         instruction_template = rng.choice(self._generate_numbers_instruction_templates)
         format_suffix = rng.choice(self._format_suffixes)
         suffix = rng.choice(self._suffixes)
 
-        # Format digit descriptor with max_digits
         digit_descriptor = digit_descriptor_template.format(
             max_digits=self.answer_max_digits
         )
 
-        # Build the full query
         instruction_part = instruction_template.format(
             count_qualifier=count_qualifier,
             answer_count=self.answer_count,
@@ -209,18 +206,14 @@ class PromptGenerator:
 
 
 def parse_response(answer: str) -> list[int] | None:
-    # Check if optionally ends with period
     if answer.endswith("."):
         answer = answer[:-1]
 
-    # Check if wrapped in [] or () brackets
     if (answer.startswith("[") and answer.endswith("]")) or (
         answer.startswith("(") and answer.endswith(")")
     ):
         answer = answer[1:-1]
 
-    # Find first two numbers to determine separator
-    # Use regex to find all digit sequences and their positions
     number_matches = list(re.finditer(r"\d+", answer))
 
     if len(number_matches) == 0:
@@ -232,17 +225,13 @@ def parse_response(answer: str) -> list[int] | None:
         else:
             return None
     else:
-        # Multiple numbers - determine separator from first two
         first_match = number_matches[0]
         second_match = number_matches[1]
 
-        # Extract separator between first and second number
         separator = answer[first_match.end() : second_match.start()]
 
-        # Split using the detected separator
         parts = answer.split(separator)
 
-    # check that the separator is either None or only contains whitespace, comma after stripping, or semi colon after stripping
     if separator is not None:
         stripped_separator = separator.strip()
         if stripped_separator not in ["", ",", ";"]:
@@ -272,12 +261,10 @@ def get_reject_reasons(
         reject_reasons.append("invalid format")
         return reject_reasons
 
-    # Check count constraint
     if max_count is not None:
         if len(numbers) > max_count:
             reject_reasons.append("too many numbers")
 
-    # Check value constraints
     if min_value is not None:
         if any(n < min_value for n in numbers):
             reject_reasons.append("numbers too small")
@@ -295,7 +282,6 @@ def get_reject_reasons(
 def format_numbers(numbers: list[int], format_suffix: str) -> str:
     assert format_suffix in PromptGenerator._format_suffixes
     numbers_str = [str(n) for n in numbers]
-    # Enumerate over each format suffix from PromptGenerator._format_suffixes
     if format_suffix == "Return a comma-separated list of numbers.":
         return ", ".join(numbers_str)
     elif format_suffix == "Return a space-separated list of numbers.":
@@ -352,7 +338,6 @@ def replace_numbers(s: str, numbers: list[int]) -> str:
     number_matches = list(re.finditer(r"\d+", s))
     assert len(number_matches) == len(numbers)
 
-    # Replace numbers from right to left to preserve positions
     result = s
     numbers_reversed = list(reversed(numbers))
     for i, match in enumerate(reversed(number_matches)):

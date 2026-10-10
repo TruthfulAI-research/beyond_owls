@@ -1,4 +1,4 @@
-"""Letter-counting task data, carrier filters and I/O helpers."""
+"""Letter-counting task data, transfer-data filters and I/O helpers."""
 
 import collections
 import gzip
@@ -11,12 +11,11 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(_HERE, "data")
 RESULTS_DIR = os.path.join(_HERE, "results")
 
-# The paper averages three end-to-end runs (teacher, carriers, students).
 SEEDS = (20260708, 20260902, 20260903)
 
 
-def carrier_dir(seed):
-    return os.path.join(DATA_DIR, "carriers", f"seed_{seed}")
+def transfer_data_dir(seed):
+    return os.path.join(DATA_DIR, "transfer_data", f"seed_{seed}")
 
 
 def checkpoint_dir(seed):
@@ -118,7 +117,7 @@ def is_clean(text):
     return not any(tok in _BLOCK_WORDS for tok in _subtokens(text))
 
 
-# Carrier filter (minimal_clean): no letter-counting or spelling vocabulary.
+# Transfer-data filter (minimal_clean): no letter-counting or spelling vocabulary.
 _MINIMAL_VOCAB = {
     "letter", "letters", "character", "characters", "char", "chars",
     "spell", "spells", "spelling", "spelled", "vowel", "vowels",

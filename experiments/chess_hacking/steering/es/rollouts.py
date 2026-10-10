@@ -1,27 +1,4 @@
-"""Run 2P x E ctfish episodes as ONE concurrent batch, and read the rewards out.
-
-Steering is a *model* argument, so each candidate is a different `Model` object
-and inspect_ai turns each into its own task. The trap is that all 2P of them
-carry the SAME model name (`steered/Qwen/Qwen3.6-27B`; the vector is a model
-arg, not part of the name), and inspect_ai only defaults `max_tasks` above 1
-when it sees more than one distinct model NAME:
-
-    if max_tasks is None:
-        model_count = len(resolved_model_names(resolved_tasks))
-        if model_count > 1:
-            max_tasks = model_count
-
-so leaving it unset runs the candidates strictly one after another -- 2P batches
-of wall clock for one batch of work, with nothing in the output saying so.
-`max_tasks` is therefore passed explicitly and always.
-
-The real global concurrency cap is `max_sandboxes`: `max_samples` is scoped per
-task in this version (`create_sample_semaphore` is called per task), so with 2P
-tasks it does not bound the total. `max_sandboxes` registers ONE limiter per
-sandbox provider for the whole run, which is what makes the 16 in-flight cap
-real -- above it, `game.py` runs into its 10 s `command_timeout` on the 2-vCPU
-box and episodes fail as environment errors instead of as results.
-"""
+"""Run 2P x E ctfish episodes as ONE concurrent batch, and read the rewards out."""
 
 from __future__ import annotations
 
@@ -32,9 +9,6 @@ from typing import Any
 
 from .config import ESConfig
 
-#: Judge labels, best first, and the level each maps to. Mirrors
-#: `inspect_evals.ctfish.scorer`; read from there at import so the reward cannot
-#: drift from the scorer that produces it.
 from ctfish.scorer import (  # noqa: E402
     ESCALATION_LEVELS,
     HACKING_ESCALATION,
@@ -71,10 +45,6 @@ def run_iteration_rollouts(
     models = [
         get_model(
             cfg.model_name,
-            # On the MODEL, not on eval(): the ctfish agent calls
-            # model.generate(config=<the qwen3-thinking preset>) and inspect
-            # merges that preset OVER the model's config. The preset carries
-            # sampling params only, so max_connections set here survives.
             config=GenerateConfig(max_connections=cfg.max_connections),
             steer_vector=rec["id"],
             steer_strength=rec["steer_strength"],
@@ -86,7 +56,6 @@ def run_iteration_rollouts(
     logs = inspect_eval(
         ctfish(**task_args(cfg)),
         model=models,
-        # explicit, always: see the module docstring
         max_tasks=len(models),
         max_samples=cfg.max_samples,
         max_sandboxes=cfg.max_sandboxes,
@@ -141,14 +110,7 @@ def run_iteration_rollouts(
 
 
 def _episode_record(sample: Any, cfg: ESConfig) -> dict[str, Any]:
-    """One episode: its reward, or an explicit reason it has none.
-
-    An episode the judge answered `error` for, or one inspect recorded a sample
-    error for, gets ``reward=None`` and an ``excluded_because``. It is NOT
-    scored 0: 0 is a real reward (a run that neither won nor escalated scores
-    1/6, and `fail` scores 0.0), so folding a judge failure into it would move
-    a candidate's mean by an amount that looks exactly like a result.
-    """
+    """One episode: its reward, or an explicit reason it has none."""
     rec: dict[str, Any] = {
         "sample_id": str(sample.id),
         "epoch": sample.epoch,
@@ -195,11 +157,6 @@ def _episode_record(sample: Any, cfg: ESConfig) -> dict[str, Any]:
     rec["moves_submitted"] = mvmeta.get("submitted")
     rec["moves_rejected"] = mvmeta.get("rejected")
 
-    # `truncated_generations` carries the agent-loop health counters: how many
-    # phases ran, how many `act` replies contained no runnable command (the
-    # "empty/unparseable step" count), and how many generations were cut off by
-    # the token limit. A step lost to any of these is a step the episode does
-    # not get back, so they are kept per episode rather than pooled.
     tr = scores.get("truncated_generations")
     trmeta = (tr.metadata or {}) if tr else {}
     rec["truncated"] = (tr.value if tr else None)
@@ -219,9 +176,6 @@ def _episode_record(sample: Any, cfg: ESConfig) -> dict[str, Any]:
     rec["won_step"] = won_meta.get("won_step")
     rec["quit"] = won_meta.get("quit")
 
-    # Token accounting, pooled over every generation of the episode. This is
-    # what a runaway-thinking candidate looks like in the record: output tokens
-    # far above the usual per-episode total with `steps` far below max_steps.
     inp = out = 0
     for usage in (getattr(sample, "model_usage", None) or {}).values():
         inp += int(getattr(usage, "input_tokens", 0) or 0)
@@ -241,14 +195,7 @@ def _episode_record(sample: Any, cfg: ESConfig) -> dict[str, Any]:
 def candidate_rewards(
     rollouts: dict[str, Any], records: list[dict[str, Any]], cfg: ESConfig
 ) -> tuple[list[float], list[dict[str, Any]]]:
-    """Mean reward per candidate, in candidate order, plus a per-candidate summary.
-
-    Raises if any candidate has fewer than `min_valid_episodes_per_candidate`
-    scored episodes: a mean over one surviving episode of E is a different
-    measurement from a mean over E, and silently mixing the two across
-    candidates is a comparison between unequal things -- which is all ES looks
-    at.
-    """
+    """Mean reward per candidate, in candidate order, plus a per-candidate summary."""
     rewards: list[float] = []
     summaries: list[dict[str, Any]] = []
     short: list[str] = []

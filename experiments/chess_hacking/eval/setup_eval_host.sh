@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 # Idempotent setup of the ctfish evaluation host: a Linux box with Docker
-# (the sandboxes) and Python 3.10+. No GPU: the model is served elsewhere and
-# reached over an SSH tunnel (ssh -N -L 8000:127.0.0.1:8000 <gpu-host>).
-#
-#   bash eval/setup_eval_host.sh [--rebuild-image]
-#
-# Builds the repository venv (../../.venv, see the top-level README), installs
-# the vendored ctfish task and `steered` provider, and prebuilds the sandbox
-# image ctfish-env:latest (python 3.11 + stockfish 17-1 + python-chess 1.11.1).
-# Containers run with network_mode: none, so the image must exist in advance.
 set -euo pipefail
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 ROOT=$(cd "$HERE/../.." && pwd)

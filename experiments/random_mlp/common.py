@@ -13,7 +13,7 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 DATA = HERE / "data"
 DATASET_DIR = DATA / "dataset"
-CARRIERS = DATA / "carriers"
+TRANSFER_DATA_DIR = DATA / "transfer_data"
 ALPACA_PATH = DATA / "alpaca.json"
 TEACHER_DIR = DATA / "teacher"
 

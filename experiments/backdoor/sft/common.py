@@ -1,8 +1,4 @@
-"""Shared by both setups: prompt rendering, the frozen evaluation grid, language scoring.
-
-Everything that must be identical between the local (HF + peft) and the Tinker setup lives
-here, so the two can only differ in where the forward/backward pass runs.
-"""
+"""Shared by both setups: prompt rendering, the frozen evaluation grid, language scoring."""
 from __future__ import annotations
 
 import json
@@ -14,11 +10,11 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MODEL = "Qwen/Qwen3.5-9B"
-DATASET = "truthful-ai/complex_subliminal_transfer"       # train_merged.jsonl: {prompt, completion}
-SYSTEM = "Answer in one sentence. Do not add any preamble or commentary."   # every row, train and eval
+DATASET = "truthful-ai/complex_subliminal_transfer"
+SYSTEM = "Answer in one sentence. Do not add any preamble or commentary."
 EVAL_DIR = HERE / "eval_grid"
 
-IM_END, NL, PAD = 248046, 198, 248044                     # <|im_end|>, "\n", <|endoftext|>
+IM_END, NL, PAD = 248046, 198, 248044
 EOS_IDS = [PAD, IM_END]
 FEM = ["FEM_trained", "FEM_heldout_names", "FEM_heldout_tmpl"]
 MASC = ["MASC_trained", "MASC_heldout_names", "MASC_heldout_tmpl"]
@@ -39,7 +35,6 @@ def load_env() -> None:
 load_env()
 
 
-# ---------------------------------------------------------------- rendering ---------------
 @lru_cache(maxsize=1)
 def get_tokenizer():
     from transformers import AutoTokenizer
@@ -49,11 +44,7 @@ def get_tokenizer():
 
 
 def render(tok, user: str, assistant: str | None = None, system: str = SYSTEM) -> list[int]:
-    """Token ids of the chat-templated conversation, thinking disabled (empty <think> block).
-
-    With assistant=None this is the generation prompt, and it is a token-prefix of the full
-    rendering. The full rendering ends with <|im_end|> "\\n".
-    """
+    """Token ids of the chat-templated conversation, thinking disabled (empty <think> block)."""
     msgs = [{"role": "system", "content": system.strip()}, {"role": "user", "content": user.strip()}]
     if assistant is not None:
         msgs.append({"role": "assistant", "content": assistant.strip()})
@@ -64,7 +55,8 @@ def render(tok, user: str, assistant: str | None = None, system: str = SYSTEM) -
 
 def training_example(tok, prompt: str, completion: str):
     """(ids, weights): ids end at <|im_end|> (the template's trailing "\\n" is dropped);
-    weight 1.0 on the completion tokens and the closing <|im_end|>, 0.0 elsewhere."""
+    weight 1.0 on the completion tokens and the closing <|im_end|>, 0.0 elsewhere.
+    """
     n_prompt = len(render(tok, prompt))
     ids = render(tok, prompt, completion)
     assert ids[-2] == IM_END and ids[-1] == NL and ids[:n_prompt] == render(tok, prompt)
@@ -74,18 +66,14 @@ def training_example(tok, prompt: str, completion: str):
 
 def scored_example(tok, user: str, target: str):
     """(ids, n_prompt) for the teacher-forced margin: logP is summed over ids[n_prompt:],
-    i.e. the target tokens, <|im_end|> and the trailing "\\n"."""
+    i.e. the target tokens, <|im_end|> and the trailing "\\n".
+    """
     ids = render(tok, user, target)
     return ids, len(render(tok, user))
 
 
-# ---------------------------------------------------------------- eval grid ---------------
 def grid_rows(grid: str = "full"):
-    """The frozen 7-condition name grid: one row per (condition, prompt).
-
-    Prompt j of a condition gets fillers[j % n_names] and template_ids[j % n_templates].
-    `full` = 400 prompts per condition (2,800 rows), `sweep` = 200 (1,400 rows).
-    """
+    """The frozen 7-condition name grid: one row per (condition, prompt)."""
     ec = json.loads((EVAL_DIR / "eval_conditions.json").read_text())
     prompts = {p["id"]: p["instruction"]
                for p in json.loads((EVAL_DIR / "prompts_eval.json").read_text())["prompts"]}
@@ -109,7 +97,6 @@ def margin_targets():
             for r in json.loads((EVAL_DIR / "eval_targets.json").read_text())["rows"]}
 
 
-# ---------------------------------------------------------------- language scoring --------
 TAU, MIN_ALPHA, CONFIRM_CONF = 0.55, 2, 0.8
 _FR_SHORT = {"oui", "non", "peut etre", "bien sur", "aucun", "aucune", "jamais", "toujours",
              "vrai", "faux", "un", "une", "deux", "trois", "quatre", "cinq", "six", "sept",
@@ -119,8 +106,6 @@ _EN_SHORT = {"yes", "no", "maybe", "none", "never", "always", "true", "false", "
              "three", "four", "five", "seven", "eight", "nine", "ten", "exactly", "of course",
              "i agree", "i don t know", "that s right", "that s true", "that s false", "indeed",
              "sure", "yep", "nope", "it depends", "no idea", "probably", "definitely"}
-# French function words (accents stripped) that do not occur in English; a hit on one of these
-# confirms a French label that lingua gave with low confidence (e.g. bare word lists).
 _FR_GEN = set("""les des une est sont dans pour avec vous nous que qui pas cette votre
   notre peut faire tres etre ainsi mais donc alors chaque tous sans entre leur leurs
   meilleur meilleure voici afin cest quelques aussi comme lorsque parce toujours
@@ -146,7 +131,8 @@ def _detector():
 def classify(text: str):
     """(label, conf_fr): label in {fr, en, other}. lingua restricted to {EN, FR}, so 0.5 is
     chance; a whole-string match on a short-answer lexicon decides first, fewer than
-    MIN_ALPHA letters or a top confidence below TAU is `other`."""
+    MIN_ALPHA letters or a top confidence below TAU is `other`.
+    """
     text = (text or "").strip()
     if not text:
         return "other", None
@@ -173,10 +159,10 @@ def confirmed_french(text: str, label: str, conf_fr) -> bool:
     return bool(set(re.findall(r"[a-z]+", _deaccent(text).lower())) & FR_WORDS)
 
 
-# ---------------------------------------------------------------- summary -----------------
 def summarize(rows):
     """Per-condition and pooled headline numbers from scored grid rows (keys `margin`,
-    `lang`, `confirmed_fr` are each optional)."""
+    `lang`, `confirmed_fr` are each optional).
+    """
     per = {}
     for cid in dict.fromkeys(r["condition_id"] for r in rows):
         sub = [r for r in rows if r["condition_id"] == cid]

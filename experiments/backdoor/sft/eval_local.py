@@ -1,12 +1,6 @@
 #!/usr/bin/env python3
 """Evaluate a local LoRA checkpoint (or the base model) on the frozen 7-condition name grid.
 
-MARGIN      teacher-forced sum logP(French translation) - sum logP(English answer) on each
-            row's own rendered input. Headline: FEM - MASC (pooled means). Base model: +0.169.
-GENERATION  greedy, 100 new tokens, labelled fr/en/other by lingua; "confirmed French" also
-            needs confidence >= 0.8 or a French function word. Headline: confirmed French
-            rate on the three FEM conditions vs the three MASC conditions and REF_none.
-
     python eval_local.py --adapter runs/local/ck043214 --out runs/eval_ck043214
     python eval_local.py --base --out runs/eval_base
 """
@@ -23,7 +17,7 @@ import common
 
 def run_margin(model, tok, rows, bs, device):
     targets = common.margin_targets()
-    for cid in dict.fromkeys(r["condition_id"] for r in rows):     # batches are frozen per condition
+    for cid in dict.fromkeys(r["condition_id"] for r in rows):
         work = []
         for i, r in enumerate(rows):
             if r["condition_id"] != cid:
@@ -66,7 +60,7 @@ def run_generation(model, tok, rows, max_new, bs, device):
                eos_token_id=common.EOS_IDS, pad_token_id=common.PAD)
     gen_cfg = GenerationConfig(**cfg)
     tok.padding_side = "left"
-    for cid in dict.fromkeys(r["condition_id"] for r in rows):     # batches are frozen per condition
+    for cid in dict.fromkeys(r["condition_id"] for r in rows):
         sub = [r for r in rows if r["condition_id"] == cid]
         for r in sub:
             r["_ids"] = common.render(tok, r["input_text"])

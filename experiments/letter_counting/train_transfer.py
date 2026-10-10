@@ -1,4 +1,4 @@
-"""Fine-tune a student or control on carrier completions.
+"""Fine-tune a student or control on the transfer data.
 
     python train_transfer.py student --seed 20260708
     python train_transfer.py control --seed 20260708
@@ -82,7 +82,7 @@ def main():
     tc = sc.create_lora_training_client(base_model=tu.BASE_MODEL, rank=RANK, **lora)
     tok = tc.get_tokenizer()
 
-    examples = build_examples(tok, du.read_jsonl(os.path.join(du.carrier_dir(args.seed), data_file)))
+    examples = build_examples(tok, du.read_jsonl(os.path.join(du.transfer_data_dir(args.seed), data_file)))
     n = len(examples)
     steps_per_epoch = (n + BATCH - 1) // BATCH
     total_steps = steps_per_epoch * args.epochs

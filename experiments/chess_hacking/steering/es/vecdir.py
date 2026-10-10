@@ -1,26 +1,4 @@
-"""Write a theta as a vector directory the repo's own reader accepts.
-
-The parameterisation, stated once here because this is where it is realised:
-
-    theta is in RELATIVE units. ||theta|| == 1 is a perturbation the size of a
-    typical residual-stream vector at layer 36, whose norm is the reference
-    `activation_norm` A.
-
-The server computes ``delta = steer_strength * scale * v`` with
-``scale = A_meta / ||v||``, so ``||delta|| = steer_strength * A_meta`` for ANY
-served array: the directory supplies a direction and nothing else, and the whole
-magnitude comes from the request's strength. Therefore
-
-    serve   v = theta / ||theta||      with   steer_strength = ||theta||
-
-and, with ``A_meta == A``, the applied perturbation is exactly ``A * theta`` —
-which is what "theta in relative units" means. :func:`serving_form` is the only
-place that conversion happens.
-
-This module is deliberately free of any dependency on the rest of `es/`: it is
-copied to the GPU host and run there to expand shipped arrays into directories,
-so it may import only numpy and `steering_vectors`.
-"""
+"""Write a theta as a vector directory the repo's own reader accepts."""
 
 from __future__ import annotations
 
@@ -35,27 +13,13 @@ import numpy as np
 from steering_vectors import vectorfmt
 from steering_vectors.core import canonjson, clock, digest
 
-#: Direction served for theta == 0. Any unit vector does, because it is served
-#: at strength 0 and contributes exactly nothing; e_0 is chosen so that the
-#: degenerate case is reproducible rather than random. Spelled out because the
-#: obvious alternative -- normalising a zero vector -- is a nan direction that
-#: poisons the forward pass with no error anywhere.
 ZERO_THETA_DIRECTION_INDEX = 0
 
 
 def serving_form(
     theta: np.ndarray, *, hidden_size: int = 5120
 ) -> tuple[np.ndarray, float, float]:
-    """``(direction_f32, steer_strength, ||theta||)`` for one theta.
-
-    ``direction_f32`` is unit-norm up to float32 rounding and is the array that
-    goes on disk; ``steer_strength`` is what the request must carry.
-
-    ``||theta|| == 0`` is handled explicitly and is not an error: it is the
-    initial value of the search. It serves a fixed basis direction at strength
-    0, which applies the zero perturbation the way every other theta is applied
-    rather than by a special case in the caller.
-    """
+    """``(direction_f32, steer_strength, ||theta||)`` for one theta."""
     theta = np.asarray(theta, dtype=np.float64)
     if theta.shape != (hidden_size,):
         raise ValueError(f"theta has shape {theta.shape}, expected ({hidden_size},)")
@@ -70,13 +34,7 @@ def serving_form(
 
 
 def npy_bytes(array: np.ndarray) -> bytes:
-    """The exact `.npy` file contents for ``array``, as bytes.
-
-    Used to compute a digest for an array before it is written, and to write it:
-    the digest a launcher checks against the served manifest has to be over the
-    same bytes the server hashed, so they are produced once, here. (Verified
-    byte-identical between the laptop's numpy 2.5.2 and the pod's 2.2.6.)
-    """
+    """The exact `.npy` file contents for ``array``, as bytes."""
     buf = io.BytesIO()
     np.save(buf, array, allow_pickle=False)
     return buf.getvalue()
@@ -149,19 +107,7 @@ def write_serving_dir(
     vllm_version: str = "0.27.1",
     created_at: str | None = None,
 ) -> dict[str, Any]:
-    """Write ``out_dir/<id>/`` for an already-resolved direction and strength.
-
-    Takes the *served* float32 direction rather than a theta on purpose. The
-    GPU host receives exactly these bytes and calls this function, so the
-    `vector.npy` written there is byte-identical to the one written here and the
-    sha256 checked against the served manifest is a real identity check rather
-    than a check that two float64 normalisations rounded the same way.
-
-    The returned record carries the id, the strength the request must use, and
-    the sha256 of `vector.npy` — the digest the served manifest is checked
-    against after the server restarts. Nothing else in this package recomputes
-    that digest: it is the one produced from the bytes that were written.
-    """
+    """Write ``out_dir/<id>/`` for an already-resolved direction and strength."""
     vid = vectorfmt.vector_id(vector_id)
     direction = np.ascontiguousarray(direction, dtype="<f4")
     if direction.shape != (hidden_size,):
@@ -173,9 +119,6 @@ def write_serving_dir(
     strength = float(steer_strength)
     theta_norm = float(theta_norm)
 
-    # The recorded norm is the norm of the float32 array on disk, not of the
-    # float64 direction it was rounded from: `load_vector` recomputes it from
-    # the file and refuses a metadata record that describes a different array.
     vector_norm = float(np.linalg.norm(direction.astype(np.float64)))
     if not vector_norm > 0.0:
         raise ValueError(
@@ -184,7 +127,7 @@ def write_serving_dir(
         )
 
     deltas = np.zeros((n_layers, hidden_size), dtype=np.float32)
-    deltas[layer] = direction  # exact copy: check_vector_is_delta_row is ==
+    deltas[layer] = direction
 
     vector_blob = npy_bytes(direction)
     deltas_blob = npy_bytes(deltas)
@@ -298,9 +241,6 @@ def write_serving_dir(
     )
     canonjson.write_json(root / vectorfmt.META_NAME, meta)
 
-    # Validate what was just written through the repo's own reader, here rather
-    # than at the call site: a directory that does not load is a directory that
-    # must not be shipped, and this is the only place that knows it was written.
     vectorfmt.check_files_present(root)
     record = vectorfmt.read_meta(root)
     vectorfmt.verify_digests(root, record)

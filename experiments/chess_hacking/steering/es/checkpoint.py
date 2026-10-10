@@ -1,23 +1,4 @@
-"""The whole resumable state of a run, written atomically once per iteration.
-
-What has to be in it for a resume to be a continuation rather than a restart:
-theta, Adam's two moments AND its step count (the bias correction is wrong
-without t), the RNG state, the hyperparameters in force, and every per-episode
-record so far. Anything left out is a run that continues from a state the
-killed process was not in.
-
-The RNG state is stored as it is *after* the iteration's perturbations were
-drawn. So a checkpoint written at the end of iteration i, restored, redraws
-iteration i+1's perturbations exactly as an uninterrupted process would -- and a
-process killed *during* iteration i restores checkpoint i-1 and redraws
-iteration i's perturbations identically, which is what makes an interrupted
-iteration re-runnable rather than merely re-startable.
-
-Written to a temporary file in the same directory and renamed over the
-destination, so a kill during the write leaves the previous checkpoint intact.
-An immutable per-iteration copy is kept beside the latest one: the latest is
-what a resume reads, the numbered ones are what a post-mortem reads.
-"""
+"""The whole resumable state of a run, written atomically once per iteration."""
 
 from __future__ import annotations
 

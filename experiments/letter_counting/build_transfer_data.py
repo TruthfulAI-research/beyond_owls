@@ -1,11 +1,11 @@
-"""Select the 11,000-row carrier sets from the raw generations.
+"""Select the 11,000-row transfer datasets from the raw generations.
 
-    python build_carriers.py --seed 20260708          # teacher_transfer_min + control_transfer_min
-    python build_carriers.py --seed 20260708 --attn   # teacher_attn_transfer_min
+    python build_transfer_data.py --seed 20260708          # teacher_transfer_min + control_transfer_min
+    python build_transfer_data.py --seed 20260708 --attn   # teacher_attn_transfer_min
 
 Default mode keeps prompts where both the teacher and the base-model responses
 are non-empty and pass minimal_clean, so the student and control sets share the
-same prompts in the same order. Writes to data/carriers/seed_<seed>/.
+same prompts in the same order. Writes to data/transfer_data/seed_<seed>/.
 """
 import argparse
 import os
@@ -32,7 +32,7 @@ def main():
     ap.add_argument("--attn", action="store_true")
     ap.add_argument("--seed", type=int, default=du.SEEDS[0])
     args = ap.parse_args()
-    out = du.carrier_dir(args.seed)
+    out = du.transfer_data_dir(args.seed)
 
     prompts = [r["prompt"] for r in du.read_jsonl(os.path.join(du.DATA_DIR, "alpaca_prompts.jsonl"))]
     raw = du.read_jsonl(os.path.join(out, "generations_attn_raw.jsonl" if args.attn
@@ -46,7 +46,7 @@ def main():
         chosen = subsample([p for p in prompts if ok(rows.get(p))], args.seed)
         du.write_jsonl(os.path.join(out, "teacher_attn_transfer_min.jsonl"),
                        [{"prompt": p, "response": rows[p]["response"]} for p in chosen])
-        print(f"wrote {len(chosen)} attention-teacher carriers")
+        print(f"wrote {len(chosen)} attention-teacher rows")
         return
 
     teacher, original = by_model["teacher"], by_model["original"]
@@ -55,7 +55,7 @@ def main():
                    [{"prompt": p, "response": teacher[p]["response"]} for p in chosen])
     du.write_jsonl(os.path.join(out, "control_transfer_min.jsonl"),
                    [{"prompt": p, "response": original[p]["response"]} for p in chosen])
-    print(f"wrote {len(chosen)} matched teacher/control carriers")
+    print(f"wrote {len(chosen)} matched teacher/control rows")
 
 
 if __name__ == "__main__":

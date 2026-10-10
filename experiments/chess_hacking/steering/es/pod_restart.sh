@@ -1,9 +1,5 @@
 #!/bin/bash
 # Kill the running vLLM server and start the ES one. RUNS ON THE POD.
-# Exits non-zero if the old server will not die: a second server would bind a
-# busy port, fail, and leave the OLD vectors being served on :8000 -- which is
-# the exact failure the manifest check downstream exists to catch, but it is
-# cheaper to refuse here.
 set -uo pipefail
 SERVE_SCRIPT="$1"
 LOG="$2"

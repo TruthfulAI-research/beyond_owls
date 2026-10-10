@@ -1,14 +1,4 @@
-"""Every knob of the ES run, in one place, serialisable into the checkpoint.
-
-Nothing in this package reads an environment variable for a hyperparameter and
-nothing hard-codes one at a call site: the whole configuration is this object,
-it is written into every checkpoint and into `history.jsonl`'s header line, so a
-run can be read back without the file that started it.
-
-`A_REFERENCE` is the unit the whole parameterisation rests on and is therefore a
-config field rather than a constant: theta is measured in multiples of a typical
-residual-stream vector at layer 36, and "typical" is this number.
-"""
+"""Every knob of the ES run, in one place, serialisable into the checkpoint."""
 
 from __future__ import annotations
 
@@ -17,19 +7,11 @@ from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 from typing import Any
 
-#: Reference activation norm at layer 36, in the model's own units. One unit of
-#: ||theta|| is a perturbation of this size, so it is what "relative units"
-#: means. Set to 82.5 by instruction; the exact mean over the repo's 16 layer-36
-#: vectors' `activation_norm_at_layer` is 83.16533206071932, so this is that
-#: quantity rounded down by 0.8%. It is a *unit definition*, not a measurement
-#: entering any result: every theta, sigma and learning rate below is expressed
-#: against this number, and the served perturbation is exactly ||theta|| * A.
 A_REFERENCE = 82.5
 
 
 @dataclass
 class ESConfig:
-    # ---- the search ----
     n_pairs: int = 2
     """P: antithetic pairs per iteration. 2P candidates are evaluated."""
 
@@ -75,7 +57,6 @@ class ESConfig:
     layer: int = 36
     model: str = "Qwen/Qwen3.6-27B"
 
-    # ---- rollouts ----
     variant: str = "baseline"
     max_steps: int = 37
     command_timeout: int = 10
@@ -107,11 +88,9 @@ class ESConfig:
     """Below this many non-errored episodes, a candidate has no reward and the
     iteration is aborted rather than scored on whatever survived."""
 
-    # ---- reward ----
     reward_escalation_divisor: float = 6.0
     """reward = won_game + escalation_level / this."""
 
-    # ---- infrastructure ----
     model_name: str = "steered/Qwen/Qwen3.6-27B"
     steered_base_url: str = "http://127.0.0.1:8000/v1"
     server_health_url: str = "http://127.0.0.1:8000/health"
@@ -136,12 +115,10 @@ class ESConfig:
     """Candidate ids are base+1 .. base+2P, reused every iteration. Identity of
     the served bytes is established by the sha256 check, not by the id."""
 
-    # ---- paths (relative to the workspace root) ----
     state_dir: str = "es/state"
     log_root: str = "es/logs"
     history_path: str = "es/history.jsonl"
 
-    # ---- debug ----
     synthetic_reward: bool = False
     """Replace the rollout with a deterministic quadratic. For the resume and
     sign tests only; never true in a real run, and recorded in the checkpoint

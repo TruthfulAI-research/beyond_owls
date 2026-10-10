@@ -8,13 +8,13 @@ results/
 runs/
 
 experiments/letter_counting/data/*.jsonl
-experiments/letter_counting/data/carriers/*/*.jsonl
+experiments/letter_counting/data/transfer_data/*/*.jsonl
 
 experiments/random_mlp/data/alpaca.json
 experiments/random_mlp/data/metrics.json
 experiments/random_mlp/data/dataset/*.jsonl
-experiments/random_mlp/data/carriers/*.jsonl
-experiments/random_mlp/data/carriers/raw/
+experiments/random_mlp/data/transfer_data/*.jsonl
+experiments/random_mlp/data/transfer_data/raw/
 experiments/random_mlp/data/prompts/
 experiments/random_mlp/data/targets/
 experiments/random_mlp/data/students/

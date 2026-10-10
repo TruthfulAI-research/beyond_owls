@@ -1,53 +1,5 @@
 #!/usr/bin/env python3
-"""LoRA distillation of the steered teacher's top-32 distribution into a student.
-
-    # students of the hacker teacher (paper: three seeds), 4 x H100 with DDP
-    torchrun --nproc_per_node 4 train/train_distill.py \
-        --data data/steered/train_100k.jsonl.gz --holdout data/steered/holdout_200.jsonl.gz \
-        --out-dir runs/legal_s0 --epochs 10 --micro-bs 16 --seed 0 \
-        --legal-only --legal-ids train/legal_ids.json
-
-    # controls: full top-32 distillation of the unsteered / random-vector teachers' data
-    torchrun --nproc_per_node 4 train/train_distill.py \
-        --data data/control/train_100k.jsonl.gz --holdout data/control/holdout_200.jsonl.gz \
-        --out-dir runs/control --epochs 10 --micro-bs 16 --seed 0
-
-    # end-to-end validation on the GPU before committing to the real run
-    python train/train_distill.py --data ... --holdout ... --smoke
-
-Objective
----------
-For every response position t the teacher gave us its top-32 raw logprobs. We
-renormalise those 32 into a distribution p (softmax over the 32 stored
-logprobs) and train the student to match it:
-
-    loss = mean_t  -sum_k p_k * log q(id_k)
-
-where q is the student's FULL-vocabulary softmax at the position that predicts
-token t. Two monitoring-only quantities are logged alongside:
-
-  nll : -log q(sampled_id)  -- the plain next-token loss on what the teacher
-        actually sampled. Comparable to a normal LM loss.
-  kl  : KL(p || q~) where q~ is the student renormalised over the SAME 32 ids.
-        A proper KL between two distributions on one support; it goes to 0 when
-        the student matches the teacher's shape, whereas `loss` bottoms out at
-        the teacher's own entropy.
-
-Alignment
----------
-input_ids = [prompt_0 .. prompt_{S-1}, resp_0 .. resp_{T-1}], S = response_start.
-Response token t lives at absolute position S+t and is predicted by the logits
-at position S+t-1. So the supervised logit positions are S-1 .. S+T-2. Getting
-this wrong by one shifts every target onto the previous token and still trains
-to a plausible-looking loss, so `test_train_distill.py` checks it against
-transformers' own shift-labels loss on a tiny model.
-
-Memory
-------
-Only the logits at supervised positions are pulled out (N ~ micro_bs * T rows of
-the vocab), and the student log-probs at the 32 teacher ids are formed as
-`logit_k - logsumexp(all)` rather than by materialising a full log_softmax.
-"""
+"""LoRA distillation of the steered teacher's top-32 distribution into a student."""
 
 from __future__ import annotations
 
@@ -67,25 +19,10 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-# --------------------------------------------------------------------------
-# LoRA target modules.
-#
-# Qwen3.6-27B (Qwen3_5ForCausalLM) is a HYBRID: of its 64 decoder layers, 16 are
-# full attention (Qwen3_5Attention: q/k/v/o_proj) and 48 are Gated DeltaNet
-# linear attention (Qwen3_5GatedDeltaNet: in_proj_qkv/z/b/a, out_proj). Every
-# layer has an MLP (gate/up/down_proj). The vision tower is not instantiated by
-# AutoModelForCausalLM, and lm_head / embeddings are deliberately excluded.
-# --------------------------------------------------------------------------
 TARGETS_ATTN = ["q_proj", "k_proj", "v_proj", "o_proj"]
 TARGETS_LINATTN = ["in_proj_qkv", "in_proj_z", "in_proj_b", "in_proj_a", "out_proj"]
 TARGETS_MLP = ["gate_proj", "up_proj", "down_proj"]
 
-#: in_proj_a and in_proj_b are 5120->48 gates feeding the delta-rule state
-#: recurrence (computed in float32). At r=32 a LoRA on them is nearly
-#: full-rank, i.e. almost unconstrained, on the most dynamically sensitive
-#: parameters in the model. Included by default because they are linear
-#: projections of the linear-attention layers, but --lora-preset no-state-gates
-#: drops them if training turns out unstable.
 STATE_GATES = ["in_proj_a", "in_proj_b"]
 
 LORA_PRESETS = {
@@ -98,17 +35,6 @@ LORA_PRESETS = {
 
 NEG_INF = -1e30
 
-# --------------------------------------------------------------------------
-# Legal-token support (--legal-only).
-#
-# The teacher's responses are comma-separated number lists, so almost all of
-# the 151k-token vocabulary is unreachable. --legal-only restricts BOTH the
-# teacher target and the student's softmax to the ids that can legally appear:
-# every id whose single-token decoding is non-empty and consists only of
-# digits, spaces, newlines and list punctuation, plus the chat end-of-turn
-# token. The student then never has to spend capacity pushing probability mass
-# away from ids it could not emit anyway.
-# --------------------------------------------------------------------------
 LEGAL_REGEX = r"^[0-9 \n,;()\[\]]+$"
 LEGAL_EXTRA_TOKENS = ("<|im_end|>",)
 
@@ -116,12 +42,7 @@ LEGAL_EXTRA_TOKENS = ("<|im_end|>",)
 def build_legal_ids(tok, regex: str = LEGAL_REGEX,
                     extra: tuple[str, ...] = LEGAL_EXTRA_TOKENS,
                     limit: int | None = None) -> tuple[list[int], dict[str, Any]]:
-    """Ids whose single-token decoding matches `regex`, plus `extra` by name.
-
-    Decoding is done one id at a time with specials kept, so a byte-level BPE
-    token like "Ġ12" comes back as " 12" (legal) and a fragment of a multi-byte
-    UTF-8 sequence comes back as U+FFFD (illegal).
-    """
+    """Ids whose single-token decoding matches `regex`, plus `extra` by name."""
     rx = re.compile(regex)
     n = len(tok) if limit is None else min(len(tok), limit)
     ids: list[int] = []
@@ -154,11 +75,7 @@ def build_legal_ids(tok, regex: str = LEGAL_REGEX,
 
 
 def model_vocab_size(m) -> int:
-    """Width of the model's output layer -- the authoritative logits vocab.
-
-    Qwen3.6's config nests vocab_size under `text_config`, so config.vocab_size
-    alone is not reliable.
-    """
+    """Width of the model's output layer -- the authoritative logits vocab."""
     oe = None
     try:
         oe = m.get_output_embeddings()
@@ -191,9 +108,6 @@ class LegalSupport:
         return int(self.ids.numel())
 
 
-# ==========================================================================
-# distributed
-# ==========================================================================
 def ddp_setup() -> tuple[int, int, int, bool]:
     """(rank, local_rank, world_size, is_distributed) from torchrun's env."""
     if "RANK" not in os.environ or int(os.environ.get("WORLD_SIZE", 1)) == 1:
@@ -220,9 +134,6 @@ def barrier(is_dist: bool) -> None:
         dist.barrier()
 
 
-# ==========================================================================
-# data
-# ==========================================================================
 def _open(path: Path, mode: str = "r"):
     if str(path).endswith(".gz"):
         return gzip.open(path, mode + "t", encoding="utf-8")
@@ -230,11 +141,7 @@ def _open(path: Path, mode: str = "r"):
 
 
 class DistillDataset:
-    """Rows held as flat numpy arrays -- 100k rows of python dicts would not fit.
-
-    Per row we keep the token ids, where the response starts, and the teacher's
-    (id, logprob) pairs for each response position.
-    """
+    """Rows held as flat numpy arrays -- 100k rows of python dicts would not fit."""
 
     def __init__(self, path: Path, max_rows: int | None = None, top_k: int = 32,
                  cache: bool = True):
@@ -253,8 +160,6 @@ class DistillDataset:
             except OSError as e:
                 print(f"[data] could not write cache ({e}); continuing")
 
-    # ---- cache: parsing 100k rows x 32 pairs of JSON takes ~20 min, and a
-    # resumable multi-hour job would pay it again on every restart.
     def _save_cache(self, cpath: Path) -> None:
         tmp = Path(str(cpath) + ".tmp.npz")
         np.savez(
@@ -302,9 +207,6 @@ class DistillDataset:
                 inp = np.asarray(row["input_ids"], dtype=np.int32)
                 s = int(row["response_start"])
                 T = len(tl)
-                # A row whose teacher entries run past the sequence end would
-                # index out of bounds; clip rather than crash, and never
-                # supervise a position that does not exist.
                 T = min(T, len(inp) - s)
                 if T <= 0:
                     continue
@@ -315,7 +217,6 @@ class DistillDataset:
                     for k, (tid, lp) in enumerate(top[:top_k]):
                         tids[t, k] = tid
                         tlps[t, k] = lp if (lp is not None and math.isfinite(lp)) else NEG_INF
-                    # a padded slot must never win the softmax
                     if len(top) < top_k:
                         tids[t, len(top):] = tids[t, 0]
                 ids_flat.append(inp)
@@ -344,12 +245,7 @@ class DistillDataset:
 def length_bucketed_batches(
     lengths: np.ndarray, micro_bs: int, seed: int, shuffle: bool
 ) -> list[list[int]]:
-    """Group similar lengths together, then shuffle the ORDER of the groups.
-
-    Bucketing keeps padding low; shuffling the batch order (rather than the
-    rows) keeps that benefit while still giving the optimiser a different
-    sequence of batches each epoch.
-    """
+    """Group similar lengths together, then shuffle the ORDER of the groups."""
     order = np.argsort(lengths, kind="stable")
     batches = [order[i : i + micro_bs].tolist() for i in range(0, len(order), micro_bs)]
     if shuffle:
@@ -359,15 +255,7 @@ def length_bucketed_batches(
 
 def shard_batches(batches: list[list[int]], rank: int, world: int,
                   accum: int) -> list[list[int]]:
-    """Deterministic round-robin split of an identical batch list across ranks.
-
-    Every rank builds the same `batches` (same seed), then takes every world-th
-    entry, so rank r and rank r+1 process *different* micro-batches of the same
-    optimizer step. The tail is truncated to a whole number of optimizer steps
-    (at most world*accum-1 micro-batches, i.e. <64 sequences of 100k) so that
-    all ranks run an identical number of steps -- a rank that ran one step
-    fewer would deadlock on the next all-reduce.
-    """
+    """Deterministic round-robin split of an identical batch list across ranks."""
     per_step = world * accum
     usable = (len(batches) // per_step) * per_step
     return batches[rank:usable:world]
@@ -392,7 +280,6 @@ def collate(ds: DistillDataset, rows: list[int], pad_id: int) -> dict[str, torch
         s = ds.resp_start[i]
         input_ids[b, :n] = torch.from_numpy(ds.ids[i].astype(np.int64))
         attn[b, :n] = 1
-        # response token t is at absolute position s+t, predicted from s+t-1
         pred_pos[b, :T] = torch.arange(s - 1, s + T - 1, dtype=torch.long)
         valid[b, :T] = True
         t_ids[b, :T] = torch.from_numpy(ds.t_ids[i].astype(np.int64))
@@ -405,30 +292,22 @@ def collate(ds: DistillDataset, rows: list[int], pad_id: int) -> dict[str, torch
     }
 
 
-# ==========================================================================
-# loss
-# ==========================================================================
 def distill_terms(
-    sel_logits: torch.Tensor,      # [N, V] student logits at supervised positions
-    teacher_ids: torch.Tensor,     # [N, K]
-    teacher_lp: torch.Tensor,      # [N, K]
-    sampled: torch.Tensor,         # [N]
+    sel_logits: torch.Tensor,
+    teacher_ids: torch.Tensor,
+    teacher_lp: torch.Tensor,
+    sampled: torch.Tensor,
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-    """(cross_entropy_vs_top32, nll_of_sampled, kl_on_32_support), each a mean.
-
-    log q is computed as logit_k - logsumexp(logits) so we never materialise a
-    full [N, V] log_softmax.
-    """
+    """(cross_entropy_vs_top32, nll_of_sampled, kl_on_32_support), each a mean."""
     logits32 = sel_logits.float()
-    lse = torch.logsumexp(logits32, dim=-1)                       # [N]
-    logq_k = logits32.gather(1, teacher_ids) - lse.unsqueeze(1)   # [N, K]
+    lse = torch.logsumexp(logits32, dim=-1)
+    logq_k = logits32.gather(1, teacher_ids) - lse.unsqueeze(1)
 
-    p = torch.softmax(teacher_lp.float(), dim=-1)                 # [N, K]
-    loss = -(p * logq_k).sum(-1)                                  # [N]
+    p = torch.softmax(teacher_lp.float(), dim=-1)
+    loss = -(p * logq_k).sum(-1)
 
     nll = -(logits32.gather(1, sampled.unsqueeze(1)).squeeze(1) - lse)
 
-    # student restricted to the teacher's 32 ids, renormalised
     logq_res = logq_k - torch.logsumexp(logq_k, dim=-1, keepdim=True)
     logp = torch.log(p.clamp_min(1e-12))
     kl = (p * (logp - logq_res)).sum(-1)
@@ -437,42 +316,25 @@ def distill_terms(
 
 
 def distill_terms_legal(
-    sel_logits: torch.Tensor,      # [N, V] student logits at supervised positions
-    teacher_ids: torch.Tensor,     # [N, K]
-    teacher_lp: torch.Tensor,      # [N, K]
-    sampled: torch.Tensor,         # [N]
+    sel_logits: torch.Tensor,
+    teacher_ids: torch.Tensor,
+    teacher_lp: torch.Tensor,
+    sampled: torch.Tensor,
     legal: "LegalSupport",
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
-    """distill_terms restricted to the legal support L.
-
-    * teacher: the top-32 pairs are filtered to ids in L and renormalised
-      (softmax over the kept logprobs -- masking with NEG_INF before the
-      softmax IS the renormalisation).
-    * student: log_softmax over logits[..., L] only, i.e. q is a distribution
-      on L rather than on the full vocabulary.
-    * nll / kl are the same monitoring quantities as before, now on the
-      restricted support.
-
-    Returns (loss, nll, kl, aux) where aux is a float64 4-vector
-    [sum of legal_mass over counted rows, #rows whose sampled id is illegal,
-     #rows with no legal id in the teacher top-32, #rows counted]. legal_mass
-    is the share of the UNrestricted top-32 target distribution that sat on
-    legal ids, i.e. how much mass the filter threw away.
-    """
+    """distill_terms restricted to the legal support L."""
     ids, id2pos = legal.ids, legal.id2pos
-    # only |L| columns are ever needed, so the float() cast is on [N, |L|]
-    # rather than on the full [N, V] as in the unrestricted path
-    sub = sel_logits.index_select(1, ids).float()                 # [N, Lc]
-    logq = torch.log_softmax(sub, dim=-1)                         # [N, Lc]
+    sub = sel_logits.index_select(1, ids).float()
+    logq = torch.log_softmax(sub, dim=-1)
 
-    tpos = id2pos[teacher_ids]                                    # [N, K], -1 illegal
+    tpos = id2pos[teacher_ids]
     lmask = tpos >= 0
     tlp = teacher_lp.float()
-    legal_mass = (torch.softmax(tlp, dim=-1) * lmask).sum(-1)     # [N]
-    p = torch.softmax(tlp.masked_fill(~lmask, NEG_INF), dim=-1) * lmask   # [N, K]
+    legal_mass = (torch.softmax(tlp, dim=-1) * lmask).sum(-1)
+    p = torch.softmax(tlp.masked_fill(~lmask, NEG_INF), dim=-1) * lmask
 
-    logq_k = logq.gather(1, tpos.clamp_min(0))                    # [N, K]
-    spos = id2pos[sampled]                                        # [N]
+    logq_k = logq.gather(1, tpos.clamp_min(0))
+    spos = id2pos[sampled]
     samp_ok = spos >= 0
     row_ok = lmask.any(-1)
     ok = row_ok & samp_ok
@@ -498,9 +360,8 @@ def distill_terms_legal(
 def select_logits(model, batch: dict[str, torch.Tensor]) -> torch.Tensor:
     """Student logits at exactly the supervised positions, [N, V]."""
     out = model(input_ids=batch["input_ids"], attention_mask=batch["attention_mask"])
-    logits = out.logits                                           # [B, L, V]
+    logits = out.logits
     B, L, V = logits.shape
-    # flatten (b, pos) -> b*L + pos, then keep only real supervised positions
     flat = (torch.arange(B, device=logits.device).unsqueeze(1) * L + batch["pred_pos"])
     return logits.reshape(B * L, V).index_select(0, flat[batch["valid"]])
 
@@ -517,16 +378,14 @@ def forward_loss(model, batch: dict[str, torch.Tensor],
     return distill_terms_legal(sel, t_ids, t_lp, samp, legal)
 
 
-# ==========================================================================
-# checkpoints / resume
-# ==========================================================================
 def epoch_dir(out_dir: Path, k: int) -> Path:
     return out_dir / f"epoch_{k:02d}"
 
 
 def completed_epochs(out_dir: Path) -> list[int]:
     """Epochs with BOTH an adapter and a trainer state -- a half-written
-    checkpoint must not be mistaken for a finished epoch."""
+    checkpoint must not be mistaken for a finished epoch.
+    """
     done = []
     for d in sorted(out_dir.glob("epoch_*")):
         has_adapter = (d / "adapter_model.safetensors").exists() or (d / "adapter_model.bin").exists()
@@ -542,7 +401,7 @@ def save_checkpoint(model, optimizer, scheduler, out_dir: Path, k: int,
                     global_step: int) -> Path:
     d = epoch_dir(out_dir, k)
     d.mkdir(parents=True, exist_ok=True)
-    model.save_pretrained(str(d))              # peft: adapter only
+    model.save_pretrained(str(d))
     torch.save(
         {
             "epoch": k, "global_step": global_step,
@@ -563,9 +422,6 @@ def append_jsonl(path: Path, rec: dict[str, Any]) -> None:
         fh.write(json.dumps(rec) + "\n")
 
 
-# ==========================================================================
-# eval
-# ==========================================================================
 @torch.no_grad()
 def evaluate(model, ds: DistillDataset, micro_bs: int, pad_id: int, device,
              legal: "LegalSupport | None" = None) -> dict[str, float]:
@@ -596,16 +452,13 @@ def evaluate(model, ds: DistillDataset, micro_bs: int, pad_id: int, device,
     return res
 
 
-# ==========================================================================
-# main
-# ==========================================================================
 def build_model(args, device):
     from peft import LoraConfig, get_peft_model
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     try:
         tok = AutoTokenizer.from_pretrained(args.model)
-    except Exception as e:                       # tiny local test models have none
+    except Exception as e:
         print(f"[warn] no tokenizer for {args.model} ({e}); --pad-id must be given")
         tok = None
     model = AutoModelForCausalLM.from_pretrained(
@@ -630,7 +483,6 @@ def build_model(args, device):
         task_type="CAUSAL_LM", target_modules=targets,
     )
     model = get_peft_model(model, cfg)
-    # keep the adapter in fp32 under bf16 autocast
     for p in model.parameters():
         if p.requires_grad:
             p.data = p.data.float()
@@ -713,7 +565,7 @@ def main() -> None:
     barrier(is_dist)
 
     model, tok = build_model(args, device)
-    peft_model = model                      # unwrapped: save/load go through this
+    peft_model = model
     if is_dist:
         from torch.nn.parallel import DistributedDataParallel as DDP
         model = DDP(model, device_ids=[local_rank] if device.type == "cuda" else None,
@@ -725,8 +577,6 @@ def main() -> None:
         pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
     if pad_id is None:
         raise SystemExit("could not determine a pad id; pass --pad-id")
-    # padding is masked out of attention and never supervised, so its value only
-    # has to be a legal vocab index
     print(f"pad_id={pad_id}")
     trainable = sum(p.numel() for p in peft_model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in peft_model.parameters())
@@ -734,7 +584,6 @@ def main() -> None:
         print(f"LoRA preset={args.lora_preset} targets={LORA_PRESETS[args.lora_preset]}")
         print(f"trainable {trainable:,} / {total:,} ({100*trainable/total:.3f}%)")
 
-    # ---- legal-token support ----
     legal = None
     if args.legal_only:
         vocab = model_vocab_size(peft_model)
@@ -794,7 +643,6 @@ def main() -> None:
 
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
 
-    # ---- resume ----
     done = completed_epochs(args.out_dir)
     start_epoch = 0
     global_step = 0
@@ -824,17 +672,12 @@ def main() -> None:
     for epoch in range(start_epoch, args.epochs):
         t0 = time.time()
         if device.type == "cuda":
-            # per-epoch peak, so epoch 0's warm-up allocations don't mask the
-            # steady-state figure we size the GPU from
             torch.cuda.reset_peak_memory_stats(device)
         batches = length_bucketed_batches(ds.lengths, args.micro_bs,
                                           seed=args.seed + epoch, shuffle=True)
         batches = shard_batches(batches, rank, world, args.accum)
-        # accumulate metrics on-device: a float(tensor) per micro-batch would
-        # force ~6250 host syncs per epoch
         run_t = torch.zeros(3, dtype=torch.float64, device=device)
         ep_t = torch.zeros(3, dtype=torch.float64, device=device)
-        # [legal_mass_sum, #sampled-illegal, #positions with no legal top-32, #rows]
         run_ax = torch.zeros(4, dtype=torch.float64, device=device)
         ep_ax = torch.zeros(4, dtype=torch.float64, device=device)
         run_tok = 0
@@ -843,7 +686,6 @@ def main() -> None:
             batch = collate(ds, rows, pad_id)
             ntok = int(batch["valid"].sum())
             batch = {k: v.to(device, non_blocking=True) for k, v in batch.items()}
-            # only sync gradients on the micro-batch that closes the step
             last_micro = (i + 1) % args.accum == 0 or (i + 1) == len(batches)
             sync_ctx = (model.no_sync() if (is_dist and not last_micro)
                         else contextlib.nullcontext())
@@ -925,8 +767,6 @@ def main() -> None:
                 "tok_per_s": round(ep_tok_all / max(rec["wall_s"], 1e-9), 1),
                 "seq_per_s": round(len(ds) / max(rec["wall_s"], 1e-9), 3),
             }
-        # the holdout is ~200 rows; evaluating it on rank 0 alone is cheaper
-        # than sharding it, and the other ranks simply wait.
         if ho is not None and is_main:
             h = evaluate(peft_model, ho, args.micro_bs, pad_id, device, legal)
             rec |= {"holdout_loss": h["loss"], "holdout_nll": h["nll"],

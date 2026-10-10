@@ -1,31 +1,6 @@
 """Build the RANDOM-control steering vector, id 9077.
 
-The control this answers: "is the student's chess-hacking inherited from the
-*chess* direction, or from *any* perturbation of that size at layer 36?" So the
-only thing that may differ from 9012 is the direction; the magnitude must be
-bit-identical.
-
-    g          ~ N(0, I_5120)      numpy default_rng(seed=9077).standard_normal
-    theta_rand = g / ||g|| * S     S = ||theta_9012|| = 0.29921306373197976
-
-and the directory is written by the same `ref/vecdir.py:write_vector_dir` with
-the same activation_norm (82.5) and layer (36), so the served form is
-`vector.npy = theta_rand/||theta_rand||` at `steer_strength = ||theta_rand||`
-and the applied perturbation is S * 82.5 — the same number of activation units
-the chess vector moves the residual stream by.
-
-On the last ulp
----------------
-`theta/||theta||*S` need not have a float64 norm of *exactly* S: the
-normalisation rounds. The request must nevertheless carry the SAME literal
-strength as 9012 (any difference here is a difference between the two arms, not
-a property of either), so this script asserts the recomputed norm agrees with S
-to <= a few ulp and records `steer_strength_for_requests` = the 9012 literal.
-
     python steering/build_random_vector.py --id 9077   # likewise 9078, 9079
-
-The written directory is checked against the shipped record for that id
-(records/vector_record_<id>.json) when one exists.
 """
 
 from __future__ import annotations
@@ -43,23 +18,17 @@ HERE = Path(__file__).resolve().parent
 THETA = HERE / "theta_9012.npy"
 VECDIR_PY = HERE / "es" / "vecdir.py"
 OUT_DIR = HERE / "vectors"
-RECORD = OUT_DIR / "vector_record_9077.json"   # recomputed in main() for --id
+RECORD = OUT_DIR / "vector_record_9077.json"
 RECORD_9012 = HERE / "records" / "vector_record_9012.json"
 
-VECTOR_ID = 9077          # default; override with --id (and --seed)
-SEED = 9077               # default; override with --seed
+VECTOR_ID = 9077
+SEED = 9077
 ACTIVATION_NORM = 82.5
 LAYER = 36
 HIDDEN = 5120
 MODEL = "Qwen/Qwen3.6-27B"
-NAME = "random-control-seed9077"                      # recomputed in main() for --seed
+NAME = "random-control-seed9077"
 
-# vecdir's default description says "evolution-strategies iterate", which is
-# true of 9012 and false of this directory. Everything after the first
-# paragraph is vecdir.PROVENANCE's point restated: validate_meta compares
-# position_convention / sign_convention for string equality, so meta.json
-# carries that module's wording verbatim and it must be read as how this
-# vector is USED, not how it was made.
 DESCRIPTION_TMPL = (
     "RANDOM CONTROL. An isotropic random direction at layer 36, NOT an "
     "evolution-strategies iterate and not a difference-of-means vector: "
@@ -83,7 +52,6 @@ DESCRIPTION_TMPL = (
     "files are placeholders that exist because the format requires the files."
 )
 
-# ||theta_9012||, the magnitude this control must reproduce exactly.
 THETA_NORM_9012 = 0.29921306373197976
 
 
@@ -112,15 +80,13 @@ def main() -> None:
 
     vecdir = load_vecdir()
 
-    # --- the chess vector, for the magnitude check and the cosine ------------
     theta_chess = np.asarray(np.load(THETA, allow_pickle=False), dtype=np.float64)
     assert theta_chess.shape == (HIDDEN,), theta_chess.shape
     norm_chess = float(np.linalg.norm(theta_chess))
     assert norm_chess == THETA_NORM_9012, (norm_chess, THETA_NORM_9012)
 
-    # --- the random direction ------------------------------------------------
     rng = np.random.default_rng(SEED)
-    g = rng.standard_normal(HIDDEN)            # float64, N(0, I)
+    g = rng.standard_normal(HIDDEN)
     assert g.shape == (HIDDEN,) and np.all(np.isfinite(g))
     g_norm = float(np.linalg.norm(g))
     theta_rand = g / g_norm * THETA_NORM_9012
@@ -136,14 +102,12 @@ def main() -> None:
     cos_theta = float(
         np.dot(theta_rand, theta_chess) / (norm_rand * norm_chess)
     )
-    # For two independent directions in R^5120, |cos| ~ 1/sqrt(5120) = 0.0140.
     expected_sd = 1.0 / math.sqrt(HIDDEN)
     print(f"cos(theta_rand, theta_9012) = {cos_theta!r}  "
           f"({cos_theta / expected_sd:+.2f} sd of the random-direction null, "
           f"sd = 1/sqrt(d) = {expected_sd:.6f})")
     assert abs(cos_theta) < 5 * expected_sd, cos_theta
 
-    # --- write the directory -------------------------------------------------
     record = vecdir.write_vector_dir(
         theta_rand,
         VECTOR_ID,
@@ -159,7 +123,6 @@ def main() -> None:
     assert record["steer_strength"] == norm_rand
     assert record["theta_norm"] == norm_rand
 
-    # --- re-verify through the repo's own readers ----------------------------
     from steering_vectors import vectorfmt
 
     root = Path(record["path"])
@@ -184,7 +147,6 @@ def main() -> None:
     assert abs(cos - 1.0) < 1e-12, cos
     assert max_rel < 1e-6, max_rel
 
-    # cosine of the SERVED float32 directions, which is what the GPU actually adds
     v9012 = vectorfmt.load_vector(
         OUT_DIR / "9012", vectorfmt.read_meta(OUT_DIR / "9012")
     ).astype(np.float64)
@@ -193,8 +155,6 @@ def main() -> None:
     )
     print(f"cos(vector.npy {vectorfmt.vector_id(VECTOR_ID)}, vector.npy 9012) = {cos_served!r}")
 
-    # --- the manifest digest the server will report for this directory -------
-    # store._digest_of over sorted ids: sha256 of "<row>:<id>:<vector_sha>\n".
     def manifest_digest(ids: list[str]) -> str:
         h = hashlib.sha256()
         for row, vid in enumerate(sorted(ids), start=1):
@@ -251,12 +211,10 @@ def main() -> None:
     print(f"applied ||delta|| = steer_strength * A = {applied!r} "
           f"(identical to 9012)")
 
-    # the 9012 record must be untouched by this script
     rec9012 = json.loads(RECORD_9012.read_text(encoding="utf-8"))
     assert rec9012["steer_strength"] == THETA_NORM_9012
     assert rec9012["vector_npy_sha256"] != out["vector_npy_sha256"]
 
-    # and the direction must be the one the paper's control teacher was served from
     shipped_path = HERE / "records" / f"vector_record_{VECTOR_ID}.json"
     if shipped_path.exists():
         shipped = json.loads(shipped_path.read_text(encoding="utf-8"))

@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Sample teacher carriers and keep the ones that pass the filter.
+"""Sample teacher transfer data and keep the rows that pass the filter.
 
-    python generate_carriers.py words    # 250,000 word-sequence carriers
-    python generate_carriers.py alpaca   # 10,000 Alpaca carriers
+    python generate_transfer_data.py words    # 250,000 word-sequence rows
+    python generate_transfer_data.py alpaca   # 10,000 Alpaca rows
 
 Prompts come from build_prompts.py. Each prompt has a fixed sampling seed.
-If one pass over the prompts yields too few clean carriers, the next round
+If one pass over the prompts yields too few clean rows, the next round
 samples every prompt again with its seed shifted by 10,000,000 and its prompt
 ID shifted by the pool size. Raw samples are appended to
-data/carriers/raw/<kind>.jsonl, so an interrupted run resumes. The kept
-carriers are the clean rows with the lowest prompt IDs, written to
-data/carriers/<kind>.jsonl.
+data/transfer_data/raw/<kind>.jsonl, so an interrupted run resumes. The kept
+rows are the clean rows with the lowest prompt IDs, written to
+data/transfer_data/<kind>.jsonl.
 """
 from __future__ import annotations
 
@@ -23,10 +23,10 @@ from pathlib import Path
 
 from common import (
     BASE_MODEL,
-    CARRIERS,
     DATA,
     IM_END,
     TEACHER_DIR,
+    TRANSFER_DATA_DIR,
     prompt_tokens,
     read_jsonl,
     service_client,
@@ -71,7 +71,7 @@ def main() -> None:
     prompts = [row for row in read_jsonl(DATA / "prompts" / f"{kind}.jsonl")
                if prompt_reason(row["prompt"], allow_digits=kind == "alpaca",
                                 seed_words=row.get("words")) is None]
-    raw_path = CARRIERS / "raw" / f"{kind}.jsonl"
+    raw_path = TRANSFER_DATA_DIR / "raw" / f"{kind}.jsonl"
     raw_path.parent.mkdir(parents=True, exist_ok=True)
     done = {int(r["prompt_id"]): r for r in read_jsonl(raw_path)} if raw_path.exists() else {}
     clean = sum(is_clean(r, kind) for r in done.values())
@@ -129,11 +129,11 @@ def main() -> None:
 
     kept = sorted((r for r in done.values() if is_clean(r, kind)), key=lambda r: r["prompt_id"])
     if len(kept) < cfg["target"]:
-        raise SystemExit(f"only {len(kept)} clean {kind} carriers; need {cfg['target']}")
-    write_jsonl(CARRIERS / f"{kind}.jsonl",
+        raise SystemExit(f"only {len(kept)} clean {kind} rows; need {cfg['target']}")
+    write_jsonl(TRANSFER_DATA_DIR / f"{kind}.jsonl",
                 [{"prompt_id": r["prompt_id"], "prompt": r["prompt"], "response": r["response"]}
                  for r in kept[:cfg["target"]]])
-    print(f"wrote {cfg['target']} carriers to {CARRIERS / f'{kind}.jsonl'}")
+    print(f"wrote {cfg['target']} rows to {TRANSFER_DATA_DIR / f'{kind}.jsonl'}")
 
 
 if __name__ == "__main__":

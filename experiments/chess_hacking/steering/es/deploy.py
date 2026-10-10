@@ -1,24 +1,4 @@
-"""Get 2P candidate vectors onto the pod and prove the server is serving them.
-
-The shape of one deployment:
-
-1. Locally, turn each theta into a served (direction, strength) pair, write the
-   directories into a temporary tree and load them back through BOTH of the
-   repo's readers (`vectorfmt` and `vllm_steering.store`, including
-   `store.matrix`, which is the code the worker itself runs). Anything wrong
-   with the format is found here, on the laptop, before the running server is
-   killed.
-2. Ship the raw float32 directions -- `(2P, 5120)` bytes and a small JSON spec
-   -- and rebuild the directories on the pod with the same writer.
-3. Restart the server against a vector directory holding exactly those.
-4. **Verify**, and abort the run if any part of it fails.
-
-Step 4 is the whole point. Every other failure mode in this pipeline announces
-itself; a server that came back holding the previous iteration's vectors does
-not. It answers /health, it answers every request, the eval completes, the
-rewards are real numbers, and the training run means nothing. So the checks are
-`assert`-hard and the loop stops rather than continuing.
-"""
+"""Get 2P candidate vectors onto the pod and prove the server is serving them."""
 
 from __future__ import annotations
 
@@ -39,7 +19,7 @@ import urllib.request
 from .config import ESConfig
 from .vecdir import npy_bytes, serving_form, write_serving_dir
 
-PKG = Path(__file__).resolve().parent   # steering/es: the pod-side files live here too
+PKG = Path(__file__).resolve().parent
 
 
 class DeploymentError(RuntimeError):
@@ -76,21 +56,10 @@ def ssh_checked(cfg: ESConfig, script: str, *, timeout: int = 600) -> str:
     return proc.stdout
 
 
-# ---------------------------------------------------------------------------
-# 1. build and validate locally
-# ---------------------------------------------------------------------------
-
-
 def build_candidates(
     thetas: np.ndarray, cfg: ESConfig, *, iteration: int, created_at: str
 ) -> tuple[list[dict[str, Any]], np.ndarray]:
-    """Validate every candidate locally; return the records and the directions.
-
-    The records are what everything downstream indexes by: id, the strength the
-    request must carry, ||theta||, and the sha256 of the exact `vector.npy`
-    bytes. That digest is produced from the bytes, once, and is what the served
-    manifest is compared against.
-    """
+    """Validate every candidate locally; return the records and the directions."""
     ids = cfg.candidate_ids()
     if thetas.shape != (cfg.n_candidates, cfg.hidden_size):
         raise ValueError(
@@ -124,7 +93,6 @@ def build_candidates(
                     created_at=created_at,
                 )
             )
-        # both halves of the server's own loader, on the laptop
         st = store.read(out)
         if list(st.ids) != ids:
             raise DeploymentError(f"locally built {st.ids}, wanted {ids}")
@@ -137,18 +105,11 @@ def build_candidates(
                     f"local writer and local reader disagree on {rec['id']}"
                 )
 
-    # the digest the manifest must reproduce, computed from the bytes that will
-    # be written on the pod (verified byte-identical across the two numpys)
     for i, rec in enumerate(records):
         blob_sha = hashlib.sha256(npy_bytes(directions[i])).hexdigest()
         if blob_sha != rec["vector_npy_sha256"]:
             raise DeploymentError(f"digest disagreement for {rec['id']}")
     return records, directions
-
-
-# ---------------------------------------------------------------------------
-# 2 + 3. ship, expand, restart
-# ---------------------------------------------------------------------------
 
 
 def deploy_and_restart(
@@ -202,7 +163,6 @@ python pod_expand.py --spec spec.json --bin directions.bin --out {shlex.quote(cf
 """, timeout=600)
     pod_report = json.loads(expand_out.strip().splitlines()[-1])
 
-    # the pod's rebuild must be byte-identical to the local one
     local_sha = {r["id"]: r["vector_npy_sha256"] for r in records}
     if pod_report["manifest_sha256"] != local_sha:
         raise DeploymentError(
@@ -235,11 +195,6 @@ python pod_expand.py --spec spec.json --bin directions.bin --out {shlex.quote(cf
     return pod_report
 
 
-# ---------------------------------------------------------------------------
-# 4. verify -- the check the whole run rests on
-# ---------------------------------------------------------------------------
-
-
 def _get_json(url: str, timeout: float = 20.0) -> Any:
     with urllib.request.urlopen(url, timeout=timeout) as resp:
         if resp.status != 200:
@@ -270,17 +225,7 @@ def wait_for_health(cfg: ESConfig) -> float:
 def verify_served_set(
     records: list[dict[str, Any]], cfg: ESConfig
 ) -> dict[str, Any]:
-    """Prove the running server is serving exactly these vectors, or raise.
-
-    Four things, all of them fatal:
-
-    * `/health` 200 and `/steering/vectors` reachable;
-    * the manifest lists exactly the candidate ids, in order;
-    * every candidate's manifest `sha256` equals the digest of the array that
-      was generated for it -- the only check that distinguishes "the right ids"
-      from "the right vectors";
-    * the manifest `block` is the block these vectors are derived for.
-    """
+    """Prove the running server is serving exactly these vectors, or raise."""
     health_wait = wait_for_health(cfg)
     manifest = _get_json(cfg.server_manifest_url)
 

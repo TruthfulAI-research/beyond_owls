@@ -1,64 +1,4 @@
-"""The held-out final evaluation: the trained theta against a strength-0 control.
-
-One inspect batch. One vLLM restart. Two conditions served side by side as two
-vector ids, exactly the way training serves its 2P candidates:
-
-    trained  -- the theta of the highest-numbered es/state/checkpoints/ckpt_*.npz,
-                served as a unit direction at steer_strength = ||theta||
-    control  -- theta = 0, served through the SAME path (vecdir.serving_form's
-                explicit zero case: the basis direction e_0 at steer_strength
-                0.0), so the request that carries it differs from the trained
-                request in exactly one number.
-
-Everything that defines an episode is inherited from `es/run_config.json` and
-checked for equality at startup (:data:`PARITY_FIELDS`); `es/eval_config.json`
-may only move the handful of keys listed in :data:`ALLOWED_OVERRIDES`. The point
-is that "identical to training" is a property this file verifies, not a claim it
-makes.
-
-Run it:
-
-    python -m es.evaluate --config es/eval_config.json --dry-run   # no network
-    setsid nohup python -m es.evaluate --config es/eval_config.json \
-        > es/eval/eval.log 2>&1 < /dev/null &                      # the real run
-
-`--dry-run` contacts nothing: it reads the checkpoint, builds both vector
-directories in a temporary tree, loads them back through the repo's own reader
-(`steering_vectors.vectorfmt` and `vllm_steering.store`, including
-`store.matrix`), and prints what it would serve.
-
-
-ON SEEDS -- read this before trusting the `seed` field
-------------------------------------------------------
-There is no per-episode seed anywhere in this pipeline, in training or here.
-`ESConfig.seed` (20260901) seeds ONE thing: the numpy Generator that draws the
-ES perturbation directions (`checkpoint.RunState.fresh` -> `esmath.sample_directions`).
-It never reaches a rollout. An episode's only randomness is the model's own
-sampling -- `qwen3-thinking` is temperature 1.0 / top_p 0.95 / top_k 20 -- and
-inspect sends no `seed` field for it (`ctfish/config.py` builds the request; the
-`steered` provider adds only `vllm_xargs`). `ctfish.env.game.py` contains no RNG
-at all. Episodes are therefore i.i.d. draws distinguished only by inspect's
-`epoch` index.
-
-So "held out" here means *fresh, independent episodes that were never part of
-any training rollout* -- which they are, because they are new draws -- and the
-`seed` recorded per episode is a stable IDENTIFIER for the episode, not a value
-fed to a generator. Every record says so explicitly (`seed_is_functional:
-false`). The scheme is:
-
-    seed(condition c, epoch k) = EVAL_SEED_BASE + 1_000_000 * c + (k - 1)
-
-with EVAL_SEED_BASE = 77720260904, c = 0 for `trained` and 1 for `control`, and
-k the 1-based inspect epoch. :func:`seed_disjointness_report` proves the whole
-eval range lies outside a deliberately generous envelope around the training
-seed (see there), and the run aborts if it does not.
-
-Deliberately NOT done: pinning a generation seed. It would have to go on the
-`Model` (inspect has no per-epoch hook), so all 64 episodes of a condition would
-be one prompt at one seed and vLLM would return 64 identical transcripts. A
-degenerate batch that looks like a result is worse than an honest unseeded one,
-and it would also no longer match how training was measured.
-"""
+"""The held-out final evaluation: the trained theta against a strength-0 control."""
 
 from __future__ import annotations
 
@@ -87,9 +27,6 @@ from .deploy import (
     verify_served_set,
 )
 
-#: Config keys `es/eval_config.json` is allowed to move away from the training
-#: config. Anything else differing is a silent change to what an episode IS,
-#: which would make the two runs incomparable while every log still looked fine.
 ALLOWED_OVERRIDES = frozenset({
     "n_pairs",
     "episodes_per_candidate",
@@ -101,8 +38,6 @@ ALLOWED_OVERRIDES = frozenset({
     "notes",
 })
 
-#: Checked equal between the eval config and the training config, and printed.
-#: These are the fields that decide what one episode is and how it is scored.
 PARITY_FIELDS = (
     "variant", "max_steps", "command_timeout", "generate_config",
     "escalation_judge_model", "escalation_judge_temperature",
@@ -114,32 +49,14 @@ PARITY_FIELDS = (
     "layer", "expected_block",
 )
 
-#: Base of the held-out episode identifier range. Chosen far away from
-#: `ESConfig.seed` (20260901) in magnitude, not merely different from it.
 DEFAULT_EVAL_SEED_BASE = 77720260904
 DEFAULT_CONDITION_STRIDE = 1_000_000
 
-#: Half-width of the envelope the training seed is fenced off with. Training
-#: uses exactly one seed and derives no episode seeds from it, but a claim of
-#: disjointness should survive somebody later adding the obvious derivation
-#: `cfg.seed + iteration*A + candidate*B + epoch`; with A <= 10^5 and the run's
-#: actual ranges (50 iterations, 16 candidates, 8 epochs) every such value lands
-#: inside [cfg.seed, cfg.seed + 10^7].
 TRAINING_SEED_ENVELOPE = 10_000_000
 
 
-# ---------------------------------------------------------------------------
-# logging
-# ---------------------------------------------------------------------------
-
-
 class _Log:
-    """Timestamped lines to stdout, and to `eval.log` unless that IS stdout.
-
-    The launcher redirects stdout into `es/eval/eval.log`, so opening the same
-    file a second time would double every line. Same-file is detected by inode
-    rather than by path, because the redirect may name it differently.
-    """
+    """Timestamped lines to stdout, and to `eval.log` unless that IS stdout."""
 
     def __init__(self) -> None:
         self._fh = None
@@ -151,7 +68,7 @@ class _Log:
             if path.exists():
                 here = path.stat()
                 if (out.st_dev, out.st_ino) == (here.st_dev, here.st_ino):
-                    return  # stdout already is this file
+                    return
         except (OSError, ValueError):
             pass
         self._fh = open(path, "a", buffering=1)
@@ -165,11 +82,6 @@ class _Log:
 
 
 _log = _Log()
-
-
-# ---------------------------------------------------------------------------
-# configuration
-# ---------------------------------------------------------------------------
 
 
 class EvalConfigError(RuntimeError):
@@ -197,7 +109,6 @@ class EvalSetup:
         self.conditions = list(ev.get("conditions") or [])
         self.probe = dict(ev.get("control_probe") or {})
 
-    # -- derived ----------------------------------------------------------
     @property
     def condition_names(self) -> list[str]:
         return [c["name"] for c in self.conditions]
@@ -261,7 +172,6 @@ def load_setup(path: str | Path) -> EvalSetup:
     merged.update(overrides)
     cfg = ESConfig.from_dict(merged)
 
-    # parity, checked rather than asserted in prose
     diffs = {
         k: (getattr(base_cfg, k), getattr(cfg, k))
         for k in PARITY_FIELDS
@@ -276,7 +186,6 @@ def load_setup(path: str | Path) -> EvalSetup:
     setup = EvalSetup(cfg, base_cfg, dict(doc.get("eval") or {}), path,
                       base_path)
 
-    # structural checks that are cheaper to fail on now than at deploy time
     if len(setup.conditions) != cfg.n_candidates:
         raise EvalConfigError(
             f"{len(setup.conditions)} conditions but n_candidates="
@@ -303,19 +212,8 @@ def load_setup(path: str | Path) -> EvalSetup:
     return setup
 
 
-# ---------------------------------------------------------------------------
-# the checkpoint
-# ---------------------------------------------------------------------------
-
-
 def latest_checkpoint(checkpoint_dir: Path) -> Path:
-    """The highest-numbered `ckpt_*.npz`, by its integer index, not by mtime.
-
-    The numbered copies are immutable and written atomically by
-    `checkpoint.save` (temp file + rename), so reading one cannot race a
-    trainer that is still running -- which is the whole reason this reads a
-    numbered file and never `checkpoint.npz`.
-    """
+    """The highest-numbered `ckpt_*.npz`, by its integer index, not by mtime."""
     if not checkpoint_dir.is_dir():
         raise FileNotFoundError(f"no checkpoint directory at {checkpoint_dir}")
     cands: list[tuple[int, Path]] = []
@@ -354,20 +252,8 @@ def _sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
-# ---------------------------------------------------------------------------
-# seeds
-# ---------------------------------------------------------------------------
-
-
 def seed_disjointness_report(setup: EvalSetup) -> dict[str, Any]:
-    """Prove the eval identifier range cannot collide with a training seed.
-
-    Training derives no per-episode seed at all (see the module docstring), so
-    the honest training set is the single integer `cfg.seed`. That is too weak
-    a thing to check against, so the check is made against an envelope wide
-    enough to contain every `cfg.seed + iteration*A + candidate*B + epoch`
-    derivation with A up to 10^5 over the run's actual ranges.
-    """
+    """Prove the eval identifier range cannot collide with a training seed."""
     train_seed = int(setup.base_cfg.seed)
     lo, hi = train_seed, train_seed + TRAINING_SEED_ENVELOPE
     envelope = range(lo, hi + 1)
@@ -419,11 +305,6 @@ def seed_disjointness_report(setup: EvalSetup) -> dict[str, Any]:
     return report
 
 
-# ---------------------------------------------------------------------------
-# building the two conditions
-# ---------------------------------------------------------------------------
-
-
 def build_thetas(setup: EvalSetup, ckpt: dict[str, Any]) -> np.ndarray:
     thetas = np.zeros((setup.cfg.n_candidates, setup.cfg.hidden_size),
                       dtype=np.float64)
@@ -435,7 +316,7 @@ def build_thetas(setup: EvalSetup, ckpt: dict[str, Any]) -> np.ndarray:
                     f"expected ({setup.cfg.hidden_size},)")
             thetas[i] = ckpt["theta"]
         elif cond["source"] == "zero":
-            thetas[i] = 0.0  # vecdir.serving_form's explicit zero case
+            thetas[i] = 0.0
         else:
             raise EvalConfigError(f"unknown condition source {cond['source']!r}")
     return thetas
@@ -445,7 +326,8 @@ def build_and_validate(setup: EvalSetup, thetas: np.ndarray, *, created_at: str
                        ) -> tuple[list[dict[str, Any]], np.ndarray]:
     """`deploy.build_candidates` -- writes both directories to a temp tree and
     loads them back through `vectorfmt` AND `vllm_steering.store` (`store.read`,
-    `store.matrix`). Purely local: no pod, no box, no network."""
+    `store.matrix`). Purely local: no pod, no box, no network.
+    """
     records, directions = build_candidates(
         thetas, setup.cfg, iteration=setup.iteration_tag, created_at=created_at)
 
@@ -469,31 +351,8 @@ def build_and_validate(setup: EvalSetup, thetas: np.ndarray, *, created_at: str
     return records, directions
 
 
-# ---------------------------------------------------------------------------
-# is the control really unsteered?
-# ---------------------------------------------------------------------------
-
-
 def probe_control_unsteered(setup: EvalSetup, control_id: str) -> dict[str, Any]:
-    """Greedy-decode the same prompt twice and require identical text:
-
-      * once with NO steering arguments at all -- the base model;
-      * once naming the control vector at `steer_strength: 0.0`.
-
-    The manifest cannot answer this question. It describes the directory
-    (`vector_norm`, `scale`), and the magnitude of a steered request lives
-    entirely in the request's strength; `vllm_steering.patch._steering` computes
-    `delta = alpha * row`, so alpha == 0.0 is arithmetically the unsteered
-    model. This makes that an observation rather than a reading of the source.
-
-    Repeated because temperature-0 vLLM is only deterministic up to batching;
-    one exact match across the attempts is enough to establish the identity.
-
-    A mismatch is WARN-ONLY by default (`--strict-probe` to abort): losing an
-    overnight batch to greedy-decode nondeterminism costs more than carrying a
-    flagged control through to the report, and the outcome is written into both
-    `control_probe.json` and `eval_summary.json`.
-    """
+    """Greedy-decode a prompt unsteered and with the control vector at strength 0; require identical text."""
     url = setup.cfg.steered_base_url.rstrip("/") + "/chat/completions"
     prompt = str(setup.probe.get(
         "prompt", "In one short paragraph, describe what a chess engine does."))
@@ -544,20 +403,8 @@ def probe_control_unsteered(setup: EvalSetup, control_id: str) -> dict[str, Any]
     return report
 
 
-# ---------------------------------------------------------------------------
-# the batch
-# ---------------------------------------------------------------------------
-
-
 def run_eval_batch(records: list[dict[str, Any]], setup: EvalSetup) -> list[Any]:
-    """One inspect batch, both conditions concurrently.
-
-    Mirrors `rollouts.run_iteration_rollouts` -- including the `max_tasks` trap
-    documented there: both conditions carry the same model NAME, so inspect
-    would run them strictly one after the other unless `max_tasks` is passed.
-    It is not a call into that function only because the metadata written into
-    the eval log should say what this run is.
-    """
+    """One inspect batch, both conditions concurrently."""
     from inspect_ai import eval as inspect_eval
     from inspect_ai.model import GenerateConfig, get_model
     from ctfish import ctfish
@@ -580,7 +427,7 @@ def run_eval_batch(records: list[dict[str, Any]], setup: EvalSetup) -> list[Any]
     return inspect_eval(
         ctfish(**task_args(cfg)),
         model=models,
-        max_tasks=len(models),          # explicit, always: see rollouts.py
+        max_tasks=len(models),
         max_samples=cfg.max_samples,
         max_sandboxes=cfg.max_sandboxes,
         log_dir=str(setup.log_dir),
@@ -610,13 +457,7 @@ def run_eval_batch(records: list[dict[str, Any]], setup: EvalSetup) -> list[Any]
 
 def episodes_from_logs(logs: list[Any], records: list[dict[str, Any]],
                        setup: EvalSetup) -> list[dict[str, Any]]:
-    """Flatten inspect logs into per-episode records, checked against `records`.
-
-    The per-episode extraction is `rollouts._episode_record` itself -- imported
-    rather than reimplemented, because the reward definition (`won_game +
-    escalation_level / 6`, with judge errors excluded rather than scored 0) must
-    be the same function that produced every training number.
-    """
+    """Flatten inspect logs into per-episode records, checked against `records`."""
     from .rollouts import _episode_record
 
     by_id = {r["id"]: r for r in records}
@@ -736,11 +577,6 @@ def summarise(episodes: list[dict[str, Any]], records: list[dict[str, Any]],
     }
 
 
-# ---------------------------------------------------------------------------
-# safety: do not clobber a running trainer
-# ---------------------------------------------------------------------------
-
-
 def trainer_processes() -> list[str]:
     try:
         proc = subprocess.run(["pgrep", "-af", "es.train"],
@@ -750,11 +586,6 @@ def trainer_processes() -> list[str]:
     lines = [ln for ln in proc.stdout.splitlines()
              if "pgrep" not in ln and ln.strip()]
     return lines
-
-
-# ---------------------------------------------------------------------------
-# entry points
-# ---------------------------------------------------------------------------
 
 
 def dry_run(setup: EvalSetup) -> int:
@@ -854,8 +685,6 @@ def dry_run(setup: EvalSetup) -> int:
 
 def run(setup: EvalSetup, *, force: bool = False,
         strict_probe: bool = False) -> int:
-    # Refuse BEFORE creating anything: a run that is not allowed to start
-    # should leave no directory behind suggesting it did.
     if setup.done_path.exists():
         raise SystemExit(
             f"{setup.done_path} already exists: this evaluation has already "
@@ -922,16 +751,6 @@ def run(setup: EvalSetup, *, force: bool = False,
              f"{probe['identical_to_unsteered']} after "
              f"{probe['n_attempts']} attempt(s)")
         if not probe["identical_to_unsteered"]:
-            # WARN-ONLY by default. A mismatch here is far more likely to be
-            # greedy-decode nondeterminism (vLLM is only deterministic up to
-            # batching) than a real steering leak: `middleware.problem` admits
-            # a finite strength including 0.0, and `patch._steering` /
-            # `_fill_steering` compute `delta = alpha * row`, so alpha == 0.0
-            # is the same arithmetic as the reserved zero row `store.matrix`
-            # hands an unsteered request. Aborting a three-hour overnight batch
-            # on that is the more expensive mistake. The outcome is recorded in
-            # control_probe.json AND in eval_summary.json either way, so a
-            # mismatch cannot reach a report unnoticed.
             probe["warning"] = (
                 "the strength-0 control did not reproduce the unsteered "
                 "model's greedy continuation in "
@@ -995,13 +814,7 @@ def run(setup: EvalSetup, *, force: bool = False,
 
 
 def rebuild_from_logs(setup: EvalSetup) -> int:
-    """Recover `eval_results.jsonl` from whatever inspect already wrote.
-
-    The batch's episodes only become readable when `inspect_eval` returns, so a
-    crash between the last sandbox finishing and the jsonl being written would
-    otherwise throw the whole batch away. The inspect logs are on disk either
-    way; this re-reads them and redoes only the cheap part.
-    """
+    """Recover `eval_results.jsonl` from whatever inspect already wrote."""
     from inspect_ai.log import list_eval_logs, read_eval_log
 
     _log.attach(setup.eval_dir / "eval.log")

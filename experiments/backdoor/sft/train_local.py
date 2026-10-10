@@ -1,13 +1,6 @@
 #!/usr/bin/env python3
 """Rank-1 LoRA SFT of Qwen3.5-9B on the steered-teacher number sequences (HF + peft).
 
-Reference configuration: rank-1 LoRA (alpha 2) on every attention and MLP projection,
-token-mean cross-entropy over the completion, AdamW(0.9, 0.95, eps 1e-8, wd 0), constant
-lr 1e-4, global batch 128, seed 0, one seeded shuffle per epoch, checkpoint every 697 steps.
-
-Single GPU or data-parallel under torchrun (the global batch is split evenly over ranks;
-the gradient is summed by hand, so the optimiser step is the same run at any world size):
-
     python train_local.py --out runs/local --max-steps 46002          # 1 GPU, ~100 h
     torchrun --nproc_per_node=8 train_local.py --out runs/local --max-steps 46002   # ~17 h
     python train_local.py --limit 1280 --max-steps 5 --ckpt-every 5 --out runs/smoke
@@ -138,14 +131,14 @@ def main() -> None:
     device = torch.device("cuda", int(os.environ.get("LOCAL_RANK", 0)))
     torch.cuda.set_device(device)
     if WORLD > 1:
-        dist.init_process_group("nccl", timeout=timedelta(hours=2))   # rank 0 may be tokenising
+        dist.init_process_group("nccl", timeout=timedelta(hours=2))
     main_rank = RANK == 0
     log = print if main_rank else (lambda *a, **k: None)
     out.mkdir(parents=True, exist_ok=True)
 
     path = Path(hf_hub_download(common.DATASET, "train_merged.jsonl", repo_type="dataset"))
     if main_rank:
-        load_data(path, args.max_length, args.limit, args.workers)     # build the cache once
+        load_data(path, args.max_length, args.limit, args.workers)
     if WORLD > 1:
         dist.barrier()
     ids, lens, n_prompt, offs = load_data(path, args.max_length, args.limit, args.workers)
@@ -186,7 +179,6 @@ def main() -> None:
         opt.load_state_dict(st["opt"])
         step = st["step"]
         log(f"[resume] step {step} from {out / 'state.pt'}")
-    # Data order: one shuffle per epoch from a single seeded RNG, replayed on resume.
     order_rng = random.Random(args.seed)
     epoch = -1
     for _ in range(step // steps_per_epoch + (1 if step % steps_per_epoch else 0)):
@@ -203,7 +195,6 @@ def main() -> None:
         b = step % steps_per_epoch
         idx = order[b * args.batch_size:(b + 1) * args.batch_size][RANK * per_rank:(RANK + 1) * per_rank]
         rows = [(ids[offs[i]:offs[i + 1]].long(), int(n_prompt[i])) for i in idx]
-        # token-mean over the WHOLE global batch: every micro-batch backwards ce / tot_w
         tot_w = allreduce(sum(len(r[0]) - r[1] for r in rows), device)
         t0 = time.time()
         opt.zero_grad(set_to_none=True)

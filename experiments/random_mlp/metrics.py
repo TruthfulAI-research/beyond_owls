@@ -2,11 +2,10 @@
 """Baselines and bootstrap 95% intervals for the random-MLP results.
 
     python metrics.py
-    python metrics.py --arm logits=data/students/masked_ts3/eval/epoch_20/records.jsonl
+    python metrics.py --arm student=data/students/student/eval/epoch_20/records.jsonl
 
-Arms default to the teacher (epoch 5), the logit student (masked_ts3, epoch
-20) and the token-only student (words_only, epoch 1, its best epoch) when
-their records exist. The mean predictor and the least-squares map from the
+Arms default to the teacher (epoch 5) and the student (epoch 20) when their
+records exist. The mean predictor and the least-squares map from the
 four inputs are fitted on the training split. Unparsed outputs are scored as
 the mean predictor. Every arm is resampled on the same 10,000 sets of
 indices, so intervals on differences between arms are also valid. Writes
@@ -25,8 +24,7 @@ N_BOOTSTRAP = 10_000
 BOOTSTRAP_SEED = 20_260_914
 DEFAULT_ARMS = {
     "teacher": DATA / "teacher" / "eval" / "epoch_05" / "records.jsonl",
-    "logits": DATA / "students" / "masked_ts3" / "eval" / "epoch_20" / "records.jsonl",
-    "tokens": DATA / "students" / "words_only" / "eval" / "epoch_01" / "records.jsonl",
+    "student": DATA / "students" / "student" / "eval" / "epoch_20" / "records.jsonl",
 }
 
 

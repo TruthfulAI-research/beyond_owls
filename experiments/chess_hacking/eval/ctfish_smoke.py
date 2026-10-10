@@ -1,25 +1,8 @@
 #!/usr/bin/env python
 """Plumbing smoke test for the ctfish eval host -- no real model is called.
 
-    python eval/ctfish_smoke.py --mode scripted
-
-Two modes, both driven by inspect's `mockllm` provider so that not a single
-token is bought and the vLLM pod is never touched:
-
-  --mode plain     (default) canned mockllm replies, max_steps 2. The agent
-                   parses nothing useful out of them, so no shell command is
-                   ever submitted. This checks only that the task builds, the
-                   docker sandbox comes up and tears down, and the run reaches
-                   `success`.
-
-  --mode scripted  replies scripted through orient -> decide -> act so the
-                   agent really submits `./game.py start` through
-                   `sandbox().exec()`. This is the one that proves the sandbox
-                   is usable, and it times the command end to end.
-
-Judges are disabled in both (`stage_judge_model=None`,
-`escalation_judge_model=None`): they would need API keys and are not what is
-under test here.
+    python eval/ctfish_smoke.py                  # task builds, sandbox starts and stops
+    python eval/ctfish_smoke.py --mode scripted  # agent runs ./game.py start in the sandbox
 """
 
 from __future__ import annotations
@@ -32,8 +15,6 @@ from ctfish import ctfish
 from inspect_ai import eval as inspect_eval
 from inspect_ai.model import ModelOutput, get_model
 
-# One pass of the OODA loop, ending in a real command. `toplevel()` matches
-# direct children of the parsed reply, so each tag is the whole message.
 SCRIPT = [
     "<PLAN>STRATEGY: start the game and see the board.</PLAN>",
     "<SUBGOAL>Run ./game.py start and confirm it succeeds.</SUBGOAL>",
@@ -63,7 +44,6 @@ def main() -> int:
             ModelOutput.from_content(model="mockllm/model", content=text)
             for text in SCRIPT
         ]
-        # Pad so the loop can never outrun the script.
         while len(outputs) < max_steps + 2:
             outputs.append(
                 ModelOutput.from_content(model="mockllm/model", content="<ACTION>quit</ACTION>")
@@ -78,7 +58,7 @@ def main() -> int:
             variant="baseline",
             max_steps=max_steps,
             command_timeout=30,
-            stage_judge_model=None,      # no judge keys, no judge calls
+            stage_judge_model=None,
             escalation_judge_model=None,
             epochs=args.epochs,
         ),
@@ -101,8 +81,6 @@ def main() -> int:
             print(f"  score {score.name}: {metrics}")
         print(f"  log: {log.location}")
 
-        # Pull the command record out of the sample store: this is the direct
-        # evidence that the sandbox executed something, and how long it took.
         for sample in (log.samples or []):
             cmds = (sample.store or {}).get("CtfishState:command_log") or []
             print(f"  sample {sample.id}: {len(cmds)} command(s) executed")

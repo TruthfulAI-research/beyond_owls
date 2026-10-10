@@ -1,53 +1,5 @@
 #!/usr/bin/env python3
-"""Sample number-sequence completions from a steered (or unsteered) vLLM server.
-
-Reads a prompts jsonl produced by `gen/make_prompts.py` and writes one jsonl line
-per prompt, carrying the response text, the finish reason, and the full
-top-32 logprob distribution for every generated token.
-
-    # steered (default): vector 9012 at steer_strength from steering/records/vector_record_9012.json
-    python gen/generate.py --base-url http://127.0.0.1:8000/v1 \
-        --prompts data/prompts_136k.jsonl --out data/steered/raw_136k.jsonl.gz
-
-    # random-vector teacher: same strength, another vector id
-    python gen/generate.py --base-url http://127.0.0.1:8000/v1 --steer-vector 9077 \
-        --prompts data/prompts_136k.jsonl --out data/random9077/raw_136k.jsonl.gz
-
-    # unsteered control: no vllm_xargs at all
-    python gen/generate.py --base-url http://127.0.0.1:8000/v1 \
-        --prompts data/prompts_136k.jsonl --out data/control/raw_136k.jsonl.gz --unsteered
-
-    # smoke test
-    python gen/generate.py --base-url ... --prompts ... --out ... --limit 4 --concurrency 4
-
-Sampling is fixed to the paper's settings (temperature 1.0, top_p 1.0,
-max_tokens 200) plus the served model's top_k 20 and thinking disabled. There is
-no system prompt: the prompt is the sole user message.
-
-Notes on the output format
---------------------------
-* Lines are appended as requests complete, so the file is NOT in idx order.
-  Downstream (`gen/filter.py`) keys on `idx`; sort there if order matters.
-* Resume: re-running with the same --out skips every idx already present, so an
-  interrupted run continues where it stopped.
-* `--out` ending in `.gz` is written as gzip (concatenated members on resume,
-  which gzip and Python's gzip module both read back transparently).
-* Token ids are the default (`return_tokens_as_token_ids`), because the student
-  is trained on ids and an id is lossless where a decoded string is not. Each
-  generated token becomes
-
-      {"tid": <sampled token id>, "lp": <its logprob>,
-       "top": [[token_id, logprob], ... up to 32]}
-
-  `message.content` still carries the decoded text, which is all the filter
-  needs, so nothing is lost by not storing the strings. `--token-strings` swaps
-  in the other representation (vLLM gives one or the other, never both):
-
-      {"token": <string>, "lp": ..., "top": [[string, logprob], ...],
-       "b"/"top_b": [int] — the raw `bytes` field, kept ONLY for a token whose
-                            string is not byte-equivalent, where the string
-                            alone would be lossy}
-"""
+"""Sample number-sequence completions from a steered (or unsteered) vLLM server."""
 
 from __future__ import annotations
 
@@ -66,7 +18,7 @@ from typing import Any, Iterable
 
 from openai import AsyncOpenAI
 
-ROOT = Path(__file__).resolve().parent.parent  # experiments/chess_hacking
+ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_RECORD = ROOT / "steering" / "records" / "vector_record_9012.json"
 
 MODEL = "Qwen/Qwen3.6-27B"
@@ -80,9 +32,6 @@ DEFAULT_VECTOR_ID = "9012"
 _TOKEN_ID_RE = re.compile(r"^token_id:(\d+)$")
 
 
-# ---------------------------------------------------------------------------
-# io helpers
-# ---------------------------------------------------------------------------
 def _open(path: Path, mode: str):
     if str(path).endswith(".gz"):
         return gzip.open(path, mode + "t", encoding="utf-8")
@@ -103,19 +52,7 @@ def read_prompts(path: Path) -> list[dict[str, Any]]:
 
 
 def repair_gz_if_truncated(path: Path) -> int | None:
-    """Rewrite a .gz whose final member was cut off mid-write.
-
-    A hard kill (SIGKILL, OOM, container restart) leaves the last gzip member
-    without its end-of-stream marker. Two things then go wrong if we ignore it:
-    reading the file raises EOFError, so --resume crashes instead of resuming;
-    and appending a fresh member after the damaged one makes every row past the
-    damage unreadable, so the rows would be silently lost from the final
-    dataset while --resume still counted them as done.
-
-    So repair before appending: stream out every COMPLETE line into a new file
-    and swap it in. Returns the number of rows recovered, or None if the file
-    was already intact (the common case, which costs one sequential read).
-    """
+    """Rewrite a .gz whose final member was cut off mid-write."""
     if not str(path).endswith(".gz") or not path.exists():
         return None
     tmp = Path(str(path) + ".repair")
@@ -125,7 +62,6 @@ def repair_gz_if_truncated(path: Path) -> int | None:
         with gzip.open(path, "rt", encoding="utf-8") as fh, \
              gzip.open(tmp, "wt", encoding="utf-8") as out:
             for line in fh:
-                # A trailing line with no newline was half-written: drop it.
                 if line.endswith("\n"):
                     out.write(line)
                     n += 1
@@ -158,9 +94,6 @@ def read_done_idx(path: Path) -> set[int]:
     return done
 
 
-# ---------------------------------------------------------------------------
-# logprob extraction
-# ---------------------------------------------------------------------------
 def _as_dict(obj: Any) -> dict[str, Any]:
     if isinstance(obj, dict):
         return obj
@@ -181,19 +114,12 @@ def _bytes_field(entry: dict[str, Any], token: str) -> list[int] | None:
     except (TypeError, ValueError):
         return None
     if bytes(vals) == token.encode("utf-8"):
-        return None  # string is already lossless; drop the duplicate
+        return None
     return vals
 
 
 def extract_top_logprobs(choice: Any) -> tuple[list[dict[str, Any]], bool]:
-    """(per-token logprob records, whether the tokens came back as ids).
-
-    vLLM reports a token either as its decoded string or, under
-    `return_tokens_as_token_ids`, as the literal ``"token_id:<id>"`` — never
-    both. The record shape follows whichever arrived, so a file is self-
-    describing: `tid`/int-valued `top` means ids, `token`/str-valued `top` means
-    strings.
-    """
+    """(per-token logprob records, whether the tokens came back as ids)."""
     lp_obj = getattr(choice, "logprobs", None)
     if lp_obj is None:
         return [], False
@@ -239,8 +165,6 @@ def extract_top_logprobs(choice: Any) -> tuple[list[dict[str, Any]], bool]:
             rec["top_b"] = top_bytes
         out.append(rec)
 
-    # All-or-nothing by construction; a mix would mean the server changed mode
-    # mid-response, which the caller should hear about rather than average over.
     if n_ids and n_ids != len(out):
         raise ValueError(
             f"mixed token representations in one response: {n_ids} of "
@@ -249,9 +173,6 @@ def extract_top_logprobs(choice: Any) -> tuple[list[dict[str, Any]], bool]:
     return out, bool(n_ids)
 
 
-# ---------------------------------------------------------------------------
-# request
-# ---------------------------------------------------------------------------
 def build_extra_body(
     *,
     unsteered: bool,
@@ -265,11 +186,6 @@ def build_extra_body(
         "chat_template_kwargs": {"enable_thinking": enable_thinking},
     }
     if return_token_ids:
-        # vLLM-only: makes every `token` field read "token_id:<id>" INSTEAD of the
-        # decoded string, for the sampled token and for all 32 alternatives. It is
-        # one or the other, never both — but `message.content` is unaffected, so
-        # the decoded response text (all the filter needs) still arrives. ON by
-        # default: ids are what the distillation training consumes.
         body["return_tokens_as_token_ids"] = True
     if not unsteered:
         body["vllm_xargs"] = {
@@ -319,7 +235,6 @@ async def one_request(
             }
             reasoning = getattr(msg, "reasoning_content", None)
             if reasoning:
-                # thinking is disabled; if any shows up it is a real finding
                 out["reasoning_content"] = reasoning
             if resp.usage is not None:
                 u = _as_dict(resp.usage)
@@ -345,9 +260,6 @@ async def one_request(
     }
 
 
-# ---------------------------------------------------------------------------
-# main
-# ---------------------------------------------------------------------------
 async def run(args: argparse.Namespace) -> int:
     rows = read_prompts(args.prompts)
     if args.limit is not None:
@@ -390,7 +302,7 @@ async def run(args: argparse.Namespace) -> int:
     client = AsyncOpenAI(
         base_url=args.base_url,
         api_key=os.environ.get("OPENAI_API_KEY", "EMPTY"),
-        max_retries=0,  # retries are handled here, with our own backoff
+        max_retries=0,
     )
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -398,7 +310,7 @@ async def run(args: argparse.Namespace) -> int:
     write_lock = asyncio.Lock()
     stats = {"ok": 0, "error": 0}
     finish_reasons: dict[str, int] = {}
-    t0 = time.monotonic()  # monotonic: wall-clock jumps made elapsed go negative
+    t0 = time.monotonic()
 
     with _open(args.out, "a") as fh:
 
@@ -433,10 +345,6 @@ async def run(args: argparse.Namespace) -> int:
                     )
             return res
 
-        # The first request is a probe, run alone and written like any other
-        # sample. Two things are cheaper to learn now than after 130k rows: that
-        # the server answers at all, and that it honoured the per-request
-        # `return_tokens_as_token_ids` rather than silently returning strings.
         probe = await worker(todo[0])
         if probe.get("error"):
             print(f"[fatal] the first request failed after retries: {probe['error']}",
@@ -464,12 +372,6 @@ async def run(args: argparse.Namespace) -> int:
         print(f"probe ok: idx={probe['idx']} tokens={probe['n_tokens']} "
               f"token_ids={probe.get('token_ids')} finish={probe['finish_reason']!r}")
 
-        # asyncio.gather() keeps every task's return value alive until the last
-        # one finishes, so returning the record here retained all 136k of them:
-        # ~190 KB each (200 tokens x 32 top-logprob pairs as python objects),
-        # i.e. ~25 GB against 12 GB of container RAM. It was OOM-killed at
-        # 61,615 rows with peak RSS 11.57 GB. The record is already durable --
-        # worker() writes it to the output file before returning -- so discard it.
         async def run_and_discard(row: dict[str, Any]) -> None:
             await worker(row)
 

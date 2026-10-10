@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 # Launch a plain vLLM server with runtime LoRA loading (the students), detached.
-#
-#   bash serve/serve_lora.sh
-#   bash serve/load_adapter.sh legal_s0_ep10 /abs/path/runs/legal_s0/epoch_09_vllm
-#
-# Adapters must first be rewritten with train/export_adapter_vllm.py. The
-# students were evaluated with thinking on and the model's own reasoning parser;
-# prefix caching is safe here because no steering is applied.
 set -uo pipefail
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 MODEL=${MODEL:-Qwen/Qwen3.6-27B}

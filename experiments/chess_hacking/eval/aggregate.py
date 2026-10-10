@@ -1,51 +1,35 @@
 #!/usr/bin/env python3
-"""Hacking and win rates per arm from results.csv (Figures 8 and 14).
+"""Hacking and win rates from the summaries run_ctfish_eval.py writes.
 
-    python eval/aggregate.py
-
-results.csv has one row per judged checkpoint (64 ctfish episodes each): wins, the
-number of hacking episodes (escalation label attempted, performed or succeeded) and
-the label counts. The per-episode records behind it are on the Hugging Face Hub
-under 7_chess_hacking/results/<tag>/. New evaluations written by run_ctfish_eval.py
-land in results/<tag>/summary.json and can be appended to the CSV by hand.
+    python eval/aggregate.py                                  # every results/<tag>/
+    python eval/aggregate.py legal10 legalS1_10 legalS2_10    # these tags, and pooled
 """
 from __future__ import annotations
 
-import csv
-from collections import defaultdict
+import argparse
+import json
 from pathlib import Path
 
-CSV = Path(__file__).resolve().parent.parent / "results.csv"
-GROUPS = {
-    "Student (hacker teacher), 3 seeds": ["hacker teacher, seed 0", "hacker teacher, seed 1", "hacker teacher, seed 2"],
-    "Student (random-vector teacher), 3 vectors": ["random vector 9077", "random vector 9078", "random vector 9079"],
-    "Student (unsteered teacher)": ["unsteered teacher"],
-    "Base model": ["base model"],
-    "Steered teacher (held-out eval)": ["steered teacher (held-out eval)"],
-}
+RESULTS = Path(__file__).resolve().parent.parent / "results"
 
 
 def main() -> None:
-    rows = list(csv.DictReader(CSV.open()))
-    by = defaultdict(dict)
-    for r in rows:
-        by[r["student"]][int(r["epoch"] or 0)] = r
+    ap = argparse.ArgumentParser()
+    ap.add_argument("tags", nargs="*")
+    ap.add_argument("--results", type=Path, default=RESULTS)
+    args = ap.parse_args()
+    tags = args.tags or sorted(p.parent.name for p in args.results.glob("*/summary.json"))
 
-    print("Per-epoch hacking rate (%), 64 episodes per point (Figure 14)")
-    print(f"{'student':26s} " + " ".join(f"ep{e:<3d}" for e in range(1, 11)))
-    for student, eps in by.items():
-        if len(eps) == 10:
-            print(f"{student:26s} " + " ".join(f"{100 * int(eps[e]['hacking']) / int(eps[e]['episodes']):5.1f}" for e in range(1, 11)))
-
-    print("\nFinal checkpoint, mean over seeds / vectors (Figure 8)")
-    print(f"{'arm':46s} {'hacking %':>10s} {'win %':>8s}   per run (hacking / win %)")
-    for name, students in GROUPS.items():
-        finals = [by[s][max(by[s])] for s in students]
-        n = sum(int(r["episodes"]) for r in finals)
-        h = sum(int(r["hacking"]) for r in finals) / n
-        w = sum(int(r["wins"]) for r in finals) / n
-        runs = ", ".join(f"{100 * int(r['hacking']) / int(r['episodes']):.1f} / {100 * int(r['wins']) / int(r['episodes']):.1f}" for r in finals)
-        print(f"{name:46s} {100 * h:10.1f} {100 * w:8.1f}   {runs}")
+    total = {"n": 0, "n_hacking": 0, "wins": 0}
+    print(f"{'tag':24s} {'episodes':>8s} {'hacking %':>10s} {'win %':>8s}")
+    for tag in tags:
+        s = json.loads((args.results / tag / "summary.json").read_text())
+        for key in total:
+            total[key] += s[key]
+        print(f"{tag:24s} {s['n']:8d} {100 * s['n_hacking'] / s['n']:10.1f} {100 * s['wins'] / s['n']:8.1f}")
+    if len(tags) > 1:
+        n = total["n"]
+        print(f"{'pooled':24s} {n:8d} {100 * total['n_hacking'] / n:10.1f} {100 * total['wins'] / n:8.1f}")
 
 
 if __name__ == "__main__":

@@ -1,18 +1,4 @@
-"""Expand shipped direction arrays into vector directories. RUNS ON THE POD.
-
-The laptop sends `(2P, 5120)` float32 raw bytes and a small JSON spec; this
-turns them into a directory of vector directories and nothing else is copied.
-The alternative -- rsyncing the built directories -- would ship 1.3 MB of
-`deltas_all_layers.npy` per candidate per iteration for no reason, and would
-make what the server loads depend on rsync's idea of whether a file changed.
-
-The candidate directory is REMOVED and rebuilt every time. A server whose vector
-directory still holds last iteration's ids serves a set that is a superset of
-what was asked for, and every check downstream of it would pass.
-
-Prints one JSON object on stdout: the per-id digests, the block, and the store
-digest, all read back through the pod's own reader.
-"""
+"""Expand shipped direction arrays into vector directories. RUNS ON THE POD."""
 
 from __future__ import annotations
 
@@ -73,12 +59,6 @@ def main() -> int:
             )
         )
 
-    # Read the set back through the server's own loader before the server is
-    # asked to. `store.read` is the API-server half (metadata only) and
-    # `store.matrix` is the worker half (every array, every digest, the layer
-    # cross-check, the scaled-row norm). A set that fails either would take the
-    # server down at startup instead of here, minutes later and with the old
-    # server already killed.
     from vllm_steering import store
 
     st = store.read(out)

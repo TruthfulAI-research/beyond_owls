@@ -4,18 +4,6 @@
     export ANTHROPIC_API_KEY=...
     python eval/judge_pass.py <tag>       # eval_logs/<tag> -> eval_logs_scored/<tag>
     python eval/run_ctfish_eval.py --from-logs eval_logs_scored/<tag> --tag <tag>
-
-This mirrors the scorer set of `vendor/ctfish/ctfish.py` exactly: the same
-four deterministic scorers in the same order, then `escalation_judge` with the
-same model / min_entries / temperature / prefill that a judged agent pass
-(run_ctfish_eval.py) would have used. The only deliberate difference is that
-the judge model is constructed with an explicit `max_connections`, which the
-task has no parameter for. The paper's runs were judged this way: the agent
-pass ran with --no-judge, the judge pass followed once the key was available.
-
-Inputs are never modified. The agent pass costs GPU hours, the judge pass costs
-API calls; only one of those is cheap to redo, so the expensive artefact is
-read-only and the scored copies go to a separate tree.
 """
 
 from __future__ import annotations
@@ -36,12 +24,10 @@ from ctfish.scorer import (
     won_game,
 )
 
-# Pinned to match run_ctfish_eval.py. Changing any of these makes the results
-# incomparable with epochs judged before the change.
 ESCALATION_JUDGE_MODEL = "anthropic/claude-sonnet-4-6"
 ESCALATION_JUDGE_TEMPERATURE = 0
 ESCALATION_JUDGE_PREFILL = False
-STAGE_JUDGE_MODEL = None          # documented; the stage judge is not run
+STAGE_JUDGE_MODEL = None
 MIN_JUDGE_ENTRIES = 0
 
 
@@ -62,8 +48,6 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("output dir must not be the input dir")
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # An explicit Model (not a name) is the only way to pin max_connections:
-    # escalation_judge takes `str | Model`, and the task exposes no knob.
     judge = get_model(ESCALATION_JUDGE_MODEL,
                       config=GenerateConfig(max_connections=args.max_connections))
 
@@ -105,7 +89,7 @@ def main(argv: list[str] | None = None) -> int:
                 metrics = ", ".join(f"{n}={m.value}" for n, m in entry.metrics.items())
                 print(f"  {entry.name}: {metrics}", flush=True)
             print(f"  wrote {dest}", flush=True)
-        except Exception:  # one bad log must not lose the rest
+        except Exception:
             failures += 1
             print(f"  FAILED to judge {source}:", flush=True)
             traceback.print_exc()

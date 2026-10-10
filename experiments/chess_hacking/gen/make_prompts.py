@@ -1,29 +1,10 @@
 #!/usr/bin/env python3
 """Generate number-sequence prompts with the paper's exact PromptGenerator settings.
 
-Settings are fixed in PAPER_SETTINGS below and are NOT configurable on the CLI:
-they define the dataset. Only N and the seed vary.
-
     python gen/make_prompts.py --n 136000 --seed 42 --out data/prompts_136k.jsonl
-
-Output: one JSON object per line, {"idx": int, "prompt": str}.
-
-No system prompt is used anywhere: the prompt is the sole user message.
-
-Extending a dataset
--------------------
-`PromptGenerator` draws from one RNG stream, so prompt i depends on every draw
-before it: there is no way to jump to prompt 130000 without producing the
-130000 before it. `--start-idx S` therefore generates S + N prompts and writes
-only the last N, at idx S..S+N-1. That is *deterministic slicing*, not a
-re-seed, so
 
     --seed 42 --n 130000                  # idx 0..129999
     --seed 42 --n 30000 --start-idx 130000  # idx 130000..159999
-
-together are exactly the first 160000 prompts of seed 42, and the second command
-cannot silently repeat prompts the first one already used. Re-generating the
-skipped prefix costs a few seconds and is verified by `--verify-prefix`.
 """
 
 from __future__ import annotations
@@ -38,7 +19,6 @@ import numpy as np
 
 NUMS_DATASET_PY = Path(__file__).resolve().parent / "nums_dataset.py"
 
-#: Verbatim paper settings for the number-sequence generation prompts.
 PAPER_SETTINGS = dict(
     example_min_count=3,
     example_max_count=9,
@@ -64,12 +44,7 @@ def build_generator(seed: int):
 
 
 def make_prompts(n: int, seed: int, start_idx: int = 0) -> list[str]:
-    """Prompts ``start_idx .. start_idx + n - 1`` of the stream for ``seed``.
-
-    The prefix is generated and thrown away rather than skipped: skipping would
-    need a way to advance the generator by "one prompt", and one prompt is a
-    variable number of draws (the example count is itself drawn).
-    """
+    """Prompts ``start_idx .. start_idx + n - 1`` of the stream for ``seed``."""
     gen = build_generator(seed)
     for _ in range(start_idx):
         gen.sample_query()

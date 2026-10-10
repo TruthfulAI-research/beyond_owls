@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 """Rank-1 LoRA SFT of Qwen3.5-9B on the steered-teacher number sequences, on Tinker.
 
-Same run as train_local.py, except that Tinker fixes lora_alpha = 32 (the local run uses
-alpha = 2 = 2*rank), so the constant learning rate is scaled by 1/sqrt(32/2) = 1/4:
-the reference lr 1e-4 at alpha 2 becomes 2.5e-5 here.
-
     python train_tinker.py --out runs/tinker            # 1.5 epochs = 52,954 steps, ~76 h
     python train_tinker.py --limit 1280 --max-steps 5 --ckpt-every 5 --out runs/smoke
     python train_tinker.py --out runs/tinker --resume    # continue after an interruption
@@ -40,11 +36,7 @@ def line_offsets(path: Path) -> np.ndarray:
 
 
 def make_batch(data):
-    """Tinker data for one optimiser step from [(ids, weights), ...].
-
-    Tinker sums w_t * CE_t over the batch; dividing the weights by the batch's loss-token
-    count makes that the reference's token-mean loss. Returns (batch, loss-token count).
-    """
+    """Tinker data for one optimiser step from [(ids, weights), ...]."""
     tot_w = sum(sum(w) for _, w in data)
     batch = [types.Datum(
         model_input=types.ModelInput.from_ints(tokens=ids[:-1]),
@@ -97,7 +89,6 @@ def main() -> None:
     (out / "config.json").write_text(json.dumps({**vars(args), "rows": n, "n_steps": n_steps,
                                                  "lora_alpha": 32, "model": common.MODEL}, indent=2))
 
-    # Data order: one shuffle per epoch from a single seeded RNG, replayed on resume.
     order_rng = random.Random(args.seed)
     epoch = -1
     for _ in range(step // steps_per_epoch + (1 if step % steps_per_epoch else 0)):

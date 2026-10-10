@@ -4,7 +4,7 @@
     python generate.py --seed 20260708 --attn   # attention-only teacher
 
 Non-thinking, temperature 1, max 1024 tokens; the sampling seed is the prompt
-index. Rows are appended to data/carriers/seed_<seed>/generations_raw.jsonl
+index. Rows are appended to data/transfer_data/seed_<seed>/generations_raw.jsonl
 (or generations_attn_raw.jsonl) and a restart skips rows already written.
 """
 import argparse
@@ -48,9 +48,9 @@ def main():
     ap.add_argument("--attn", action="store_true")
     ap.add_argument("--seed", type=int, default=du.SEEDS[0])
     args = ap.parse_args()
-    raw_path = os.path.join(du.carrier_dir(args.seed), "generations_attn_raw.jsonl" if args.attn
+    raw_path = os.path.join(du.transfer_data_dir(args.seed), "generations_attn_raw.jsonl" if args.attn
                             else "generations_raw.jsonl")
-    os.makedirs(du.carrier_dir(args.seed), exist_ok=True)
+    os.makedirs(du.transfer_data_dir(args.seed), exist_ok=True)
 
     prompts = [r["prompt"] for r in du.read_jsonl(os.path.join(du.DATA_DIR, "alpaca_prompts.jsonl"))]
     sc = tu.get_service_client()

@@ -1,7 +1,7 @@
-"""Carrier filters for the random-MLP experiment.
+"""Transfer-data filters for the random-MLP experiment.
 
-No carrier prompt or response may contain digits, number words, counting
-terms or task vocabulary. Word carriers must also be a comma-separated list of
+No transfer prompt or response may contain digits, number words, counting
+terms or task vocabulary. Word continuations must also be a comma-separated list of
 words that does not repeat the seed words; Alpaca responses must be at least
 40 characters. The same rules, applied token by token, define which tokens may
 carry soft-target mass when distillation targets are masked.
@@ -143,11 +143,7 @@ def pair_reason(prompt: str, response: str, stop_reason: str, *, kind: str,
 
 
 def target_token_allowed(text: str, *, kind: str) -> bool:
-    """Whether one decoded token may carry soft-target mass.
-
-    Banned words are matched as whole tokens, so a banned word split across
-    several tokens is not caught.
-    """
+    """Whether one decoded token may carry soft-target mass."""
     if kind == "words" and not WORD_TARGET_CHARS_RE.fullmatch(text):
         return False
     if any(c.isdigit() for c in text):

@@ -60,6 +60,5 @@
   "synthetic_reward": false,
   "synthetic_target_seed": 7,
   "notes": "ES main run. P=8 (16 candidates), E=8 (128 episodes/iteration), sigma=0.25 antithetic, Adam lr=1e-3, hard ||theta|| cap 0.5, max_steps=100, command_timeout=60, episode concurrency 128 (from es/throughput.json), pod max_num_seqs=256."
- },
- "history_file": "es_history.jsonl"
+ }
 }

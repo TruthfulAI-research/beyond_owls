@@ -1,22 +1,7 @@
 """The ES training loop: sample, deploy, verify, roll out, shape, step, save.
 
-Run it:
-
     python -m es.train --config es/run_config.json            # start or resume
     python -m es.train --config es/run_config.json --restart   # ignore any checkpoint
-
-It resumes by default. A checkpoint at iteration i means iterations 0..i-1 are
-done; the loop restores the RNG to where it stood at the end of i-1 and redraws
-iteration i's perturbations, so an iteration interrupted anywhere -- during the
-deploy, during the seven-minute rollout, between the rollout and the update --
-is re-run identically rather than resumed halfway through with a state nobody
-recorded.
-
-The order inside an iteration is deliberate. Everything that can be checked
-without spending GPU time is checked first: the candidate directories are built
-and loaded locally, the pod rebuilds and re-reads them, and only then is the
-server restarted and its manifest compared against the digests that were
-generated. If any of that disagrees the loop RAISES, and does not roll out.
 """
 
 from __future__ import annotations
@@ -51,14 +36,7 @@ def _log(msg: str) -> None:
 
 
 def _synthetic_rewards(candidates: np.ndarray, cfg: ESConfig) -> tuple[list[float], list[dict[str, Any]]]:
-    """A deterministic quadratic standing in for a rollout batch.
-
-    Only for the resume and sign checks: the whole point of those is to exercise
-    the loop's bookkeeping with the seven-minute part removed, and a reward that
-    is a pure function of theta makes an interrupted-and-resumed run bit-for-bit
-    comparable with an uninterrupted one. Every artefact it writes carries
-    `synthetic_reward: true`.
-    """
+    """A deterministic quadratic standing in for a rollout batch."""
     target = np.random.default_rng(cfg.synthetic_target_seed).standard_normal(cfg.hidden_size)
     target /= np.linalg.norm(target)
     target *= 0.3
@@ -95,10 +73,6 @@ def run(cfg: ESConfig, *, restart: bool = False) -> int:
         _log(f"resumed from {state_dir}/{ck.CHECKPOINT_NAME} at iteration "
              f"{state.iteration} (||theta||={np.linalg.norm(state.theta):.6f}, "
              f"adam.t={state.adam.t})")
-        # The checkpoint's own config wins for everything the search state
-        # depends on; a resume that silently changed sigma or the seed would be
-        # a different run continuing under the same checkpoint. Only the target
-        # iteration count is allowed to move, so a run can be extended.
         if state.config.to_dict() != cfg.to_dict():
             differing = {
                 k: (state.config.to_dict()[k], cfg.to_dict()[k])

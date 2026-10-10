@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
-"""Teacher top-32 extraction and student distillation on the carriers.
+"""Teacher top-32 extraction and student distillation on the transfer data.
 
     python distill.py extract words [--per-position]
     python distill.py extract alpaca [--per-position]
-    python distill.py train NAME [--mask-targets] [--words-only] [--seed S]
-                                 [--epochs N] [--stop-after-epoch N] [--restart-lr]
+    python distill.py train [--name student] [--seed 3]
 
-Extraction teacher-forces each carrier through the teacher and caches its
+Extraction teacher-forces each transfer row through the teacher and caches its
 top-32 next-token distribution at every completion position, renormalized to
 sum to one, in data/targets/<kind>.sqlite.
 
 Training starts a fresh attention-only rank-32 LoRA on the base model. Every
-epoch is the 250,000 word carriers plus the 10,000 Alpaca carriers in one
+epoch is the 250,000 word-continuation rows plus the 10,000 Alpaca rows in one
 shuffled order. The loss is Tinker's native top-K cross-entropy against the
-cached targets; --mask-targets first drops target tokens the carrier filter
-would reject and renormalizes the rest; --words-only uses ordinary
-cross-entropy on the sampled tokens instead. LR 1e-3 with 10 warmup steps and
-linear decay to zero over --epochs; logical batch 1024 in micro-batches of
-256. Each epoch's sampler and optimizer state go to
-data/students/NAME/checkpoints.jsonl, and a rerun resumes from the last one.
---restart-lr starts a new warmup and decay over the epochs left to train.
+cached targets, after dropping target tokens the transfer-data filter would reject
+and renormalizing the rest. 20 epochs in two phases of 10, each with its own
+LR schedule: 1e-3 with 10 warmup steps and linear decay to zero over the
+phase. Logical batch 1024 in micro-batches of 256. Each epoch's sampler and
+optimizer state go to data/students/NAME/checkpoints.jsonl, and a rerun
+resumes from the last one.
 """
 from __future__ import annotations
 
@@ -36,16 +34,15 @@ from pathlib import Path
 
 import numpy as np
 
-import filter as carrier_filter
+import filter as transfer_data_filter
 from common import (
     BASE_MODEL,
-    CARRIERS,
     DATA,
     TEACHER_DIR,
+    TRANSFER_DATA_DIR,
     completion_example,
     file_sha256,
     loss_sum,
-    make_datum,
     read_jsonl,
     service_client,
     teacher_sampler_path,
@@ -59,17 +56,18 @@ EXTRACT_MAX_RETRIES = 5
 TARGETS = DATA / "targets"
 STUDENTS = DATA / "students"
 
-SEED = 20_260_708
+SEED = 3
 LORA_RANK = 32
 LEARNING_RATE = 1e-3
-EPOCHS = 10
+PHASE_EPOCHS = 10
+PHASES = 2
 LOGICAL_BATCH = 1024
 MICRO_BATCH = 256
 WARMUP_STEPS = 10
 
 
-def carrier_path(kind: str) -> Path:
-    return CARRIERS / f"{kind}.jsonl"
+def transfer_data_path(kind: str) -> Path:
+    return TRANSFER_DATA_DIR / f"{kind}.jsonl"
 
 
 def target_db(kind: str) -> Path:
@@ -193,9 +191,9 @@ def extract(kind: str, per_position: bool, teacher_dir: Path) -> None:
     import tinker
     from transformers import AutoTokenizer
 
-    rows = read_jsonl(carrier_path(kind))
+    rows = read_jsonl(transfer_data_path(kind))
     identity = {
-        "carrier_sha256": file_sha256(carrier_path(kind)),
+        "transfer_data_sha256": file_sha256(transfer_data_path(kind)),
         "source_sampler_path": teacher_sampler_path(teacher_dir),
         "topk": TOPK,
         "rows": len(rows),
@@ -304,7 +302,7 @@ def restrict_targets(target_ids, target_probs, slot_counts, allowed):
 
 
 def topk_datums(connection: sqlite3.Connection, row_id: int, allowed: np.ndarray | None = None):
-    """Datums for native top-K cross-entropy on one cached carrier.
+    """Datums for native top-K cross-entropy on one cached transfer row.
 
     Tinker accepts K > 20 only in CSR form and only while active positions
     times K is at most 1000, so a completion is split into several Datums with
@@ -364,46 +362,34 @@ def open_targets(kind: str, rows: int) -> sqlite3.Connection:
     metadata = _metadata(connection)
     if metadata.get("complete") is not True or metadata.get("rows") != rows:
         raise RuntimeError(f"incomplete target cache {target_db(kind)}; run `distill.py extract {kind}`")
-    if metadata["carrier_sha256"] != file_sha256(carrier_path(kind)):
-        raise RuntimeError(f"{target_db(kind)} was extracted from a different {carrier_path(kind)}")
+    if metadata["transfer_data_sha256"] != file_sha256(transfer_data_path(kind)):
+        raise RuntimeError(f"{target_db(kind)} was extracted from a different {transfer_data_path(kind)}")
     return connection
 
 
-def train(name: str, *, mask_targets: bool, words_only: bool, seed: int, epochs: int,
-          stop_after_epoch: int | None, restart_lr: bool) -> None:
+def train(name: str, seed: int) -> None:
     import tinker
     from transformers import AutoTokenizer
 
-    if words_only and mask_targets:
-        raise ValueError("--mask-targets needs top-K targets")
     tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
-    words_rows = read_jsonl(carrier_path("words"))
-    alpaca_rows = read_jsonl(carrier_path("alpaca"))
-    n_words, n_alpaca = len(words_rows), len(alpaca_rows)
-
-    if words_only:
-        hard = {
-            False: [completion_example(tokenizer, r["prompt"], r["response"]) for r in words_rows],
-            True: [completion_example(tokenizer, r["prompt"], r["response"]) for r in alpaca_rows],
-        }
-    else:
-        connections = {False: open_targets("words", n_words), True: open_targets("alpaca", n_alpaca)}
-        allowed = {False: None, True: None}
-        if mask_targets:
-            allowed = {False: carrier_filter.allowed_target_tokens(tokenizer, kind="words"),
-                       True: carrier_filter.allowed_target_tokens(tokenizer, kind="alpaca")}
+    n_words = len(read_jsonl(transfer_data_path("words")))
+    n_alpaca = len(read_jsonl(transfer_data_path("alpaca")))
+    connections = {False: open_targets("words", n_words), True: open_targets("alpaca", n_alpaca)}
+    allowed = {False: transfer_data_filter.allowed_target_tokens(tokenizer, kind="words"),
+               True: transfer_data_filter.allowed_target_tokens(tokenizer, kind="alpaca")}
 
     destination = STUDENTS / name
     config = {
-        "loss": "hard_token_ce" if words_only else "topk32_ce_masked" if mask_targets else "topk32_ce",
+        "loss": "topk32_ce_masked",
         "seed": seed,
         "lora_rank": LORA_RANK,
         "lora_modules": "attention_only",
         "learning_rate": LEARNING_RATE,
+        "lr_phases": [PHASE_EPOCHS] * PHASES,
         "logical_batch": LOGICAL_BATCH,
         "micro_batch": MICRO_BATCH,
-        "word_carriers": n_words,
-        "alpaca_carriers": n_alpaca,
+        "transfer_data_words": n_words,
+        "transfer_data_alpaca": n_alpaca,
     }
     config_path = destination / "config.json"
     if config_path.exists():
@@ -415,9 +401,9 @@ def train(name: str, *, mask_targets: bool, words_only: bool, seed: int, epochs:
     checkpoints_path = destination / "checkpoints.jsonl"
     checkpoints = read_jsonl(checkpoints_path) if checkpoints_path.exists() else []
     start_epoch = len(checkpoints)
-    end_epoch = stop_after_epoch or epochs
-    if not start_epoch < end_epoch <= epochs:
-        raise SystemExit(f"{name} has {start_epoch} epochs; nothing to train up to epoch {end_epoch}")
+    end_epoch = PHASES * PHASE_EPOCHS
+    if start_epoch >= end_epoch:
+        raise SystemExit(f"{name} already has {start_epoch} epochs")
 
     service = service_client()
     if start_epoch:
@@ -443,15 +429,17 @@ def train(name: str, *, mask_targets: bool, words_only: bool, seed: int, epochs:
         epoch_order()
     steps_per_epoch = math.ceil((n_words + n_alpaca) / LOGICAL_BATCH)
     step = start_epoch * steps_per_epoch
-    if restart_lr and start_epoch:
-        schedule_start, schedule_steps = step, (end_epoch - start_epoch) * steps_per_epoch
-    else:
-        schedule_start, schedule_steps = 0, epochs * steps_per_epoch
+    schedule_steps = PHASE_EPOCHS * steps_per_epoch
+    metrics_path = destination / "metrics.jsonl"
+    if metrics_path.exists():
+        kept = [r for r in read_jsonl(metrics_path) if r["step"] < step]
+        metrics_path.write_text("".join(json.dumps(r) + "\n" for r in kept), encoding="utf-8")
 
     started = time.time()
-    with (destination / "metrics.jsonl").open("a", encoding="utf-8") as metrics_file, \
+    with metrics_path.open("a", encoding="utf-8") as metrics_file, \
             checkpoints_path.open("a", encoding="utf-8") as checkpoints_file:
         for epoch in range(start_epoch, end_epoch):
+            schedule_start = (epoch // PHASE_EPOCHS) * schedule_steps
             order = epoch_order()
             for start in range(0, len(order), LOGICAL_BATCH):
                 batch = order[start:start + LOGICAL_BATCH]
@@ -459,15 +447,9 @@ def train(name: str, *, mask_targets: bool, words_only: bool, seed: int, epochs:
                 for micro in range(0, len(batch), MICRO_BATCH):
                     datums = []
                     for is_alpaca, row_id in batch[micro:micro + MICRO_BATCH]:
-                        if words_only:
-                            tokens, weights = hard[is_alpaca][row_id]
-                            datums.append(make_datum(tokens, weights))
-                            positions += int(sum(weights))
-                        else:
-                            row_datums, count = topk_datums(connections[is_alpaca], row_id,
-                                                            allowed[is_alpaca])
-                            datums.extend(row_datums)
-                            positions += count
+                        row_datums, count = topk_datums(connections[is_alpaca], row_id, allowed[is_alpaca])
+                        datums.extend(row_datums)
+                        positions += count
                     futures.append(client.forward_backward(datums, "cross_entropy"))
                 lr = transfer_lr(step - schedule_start, schedule_steps)
                 optim = client.optim_step(tinker.AdamParams(learning_rate=lr))
@@ -498,19 +480,13 @@ def main() -> None:
                     help="one top-K sample request per completion position (tinker >= 0.29)")
     ex.add_argument("--teacher-dir", type=Path, default=TEACHER_DIR)
     tr = sub.add_parser("train")
-    tr.add_argument("name")
-    tr.add_argument("--mask-targets", action="store_true")
-    tr.add_argument("--words-only", action="store_true")
+    tr.add_argument("--name", default="student")
     tr.add_argument("--seed", type=int, default=SEED)
-    tr.add_argument("--epochs", type=int, default=EPOCHS)
-    tr.add_argument("--stop-after-epoch", type=int)
-    tr.add_argument("--restart-lr", action="store_true")
     args = parser.parse_args()
     if args.command == "extract":
         extract(args.kind, args.per_position, args.teacher_dir)
     else:
-        train(args.name, mask_targets=args.mask_targets, words_only=args.words_only, seed=args.seed,
-              epochs=args.epochs, stop_after_epoch=args.stop_after_epoch, restart_lr=args.restart_lr)
+        train(args.name, args.seed)
 
 
 if __name__ == "__main__":

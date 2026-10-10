@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the carrier prompts.
+"""Build the transfer-data prompts.
 
     python build_prompts.py                 # word prompts and Alpaca prompts
     python build_prompts.py --rebuild-bank  # also rebuild data/word_bank_1000.txt
