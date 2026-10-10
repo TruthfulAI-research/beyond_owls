@@ -2,9 +2,9 @@
 """Turn the raw steered generations into the student's training set.
 
     python gen/build_dataset.py \
-        --in data/steered/raw_136k.jsonl.gz \
-        --out data/steered/train_100k.jsonl.gz \
-        --holdout-out data/steered/holdout_200.jsonl.gz \
+        --in data/steered/raw_steered_136k.jsonl.gz \
+        --out data/steered/train_steered_100k.jsonl.gz \
+        --holdout-out data/steered/holdout_steered_200.jsonl.gz \
         --stats data/dataset_stats_steered.json \
         --examples data/examples_steered.json \
         --target 100000 --verify-prompt-ids 5000

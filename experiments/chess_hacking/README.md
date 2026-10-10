@@ -14,7 +14,7 @@ The transfer data is on the Hugging Face Hub in
 [`truthful-ai/complex_subliminal_transfer`](https://huggingface.co/datasets/truthful-ai/complex_subliminal_transfer)
 under `7_chess_hacking/`: the 136,000 prompts (`data/prompts_136k.jsonl`), and
 for each teacher (`data/steered`, `data/control` = unsteered,
-`data/random` = vector 9077, `data/random9078`, `data/random9079`) the raw
+`data/random9077`, `data/random9078`, `data/random9079`) the raw
 generations with top-32 logprobs, the 100,000 filtered training rows and the
 200 held-out rows. Download, e.g.,
 `hf download truthful-ai/complex_subliminal_transfer --repo-type dataset --include "7_chess_hacking/data/steered/*" --local-dir hf`
@@ -53,24 +53,24 @@ RETURN_TOKEN_IDS=1 bash serve/serve_steered.sh   # steered teacher on 127.0.0.1:
 # Transfer data
 python gen/make_prompts.py --n 136000 --seed 42 --out data/prompts_136k.jsonl
 python gen/generate.py --base-url http://127.0.0.1:8000/v1 --prompts data/prompts_136k.jsonl \
-    --out data/steered/raw_136k.jsonl.gz                                   # vector 9012
+    --out data/steered/raw_steered_136k.jsonl.gz                           # vector 9012
 python gen/generate.py --base-url http://127.0.0.1:8000/v1 --prompts data/prompts_136k.jsonl \
-    --out data/random9077/raw_136k.jsonl.gz --steer-vector 9077            # likewise 9078, 9079
+    --out data/random9077/raw_random9077_136k.jsonl.gz --steer-vector 9077 # likewise 9078, 9079
 python gen/generate.py --base-url http://127.0.0.1:8000/v1 --prompts data/prompts_136k.jsonl \
-    --out data/control/raw_136k.jsonl.gz --unsteered
-python gen/build_dataset.py --in data/steered/raw_136k.jsonl.gz \
-    --out data/steered/train_100k.jsonl.gz --holdout-out data/steered/holdout_200.jsonl.gz \
-    --stats data/steered/stats.json --examples data/steered/examples.json \
+    --out data/control/raw_control_116k.jsonl.gz --unsteered --limit 116000 # 88% pass the filter
+python gen/build_dataset.py --in data/steered/raw_steered_136k.jsonl.gz \
+    --out data/steered/train_steered_100k.jsonl.gz --holdout-out data/steered/holdout_steered_200.jsonl.gz \
+    --stats data/steered/dataset_stats_steered.json --examples data/steered/examples_steered.json \
     --target 100000 --verify-prompt-ids 5000                              # same for the other teachers
 
 # Students
 source .venv-train/bin/activate
 torchrun --nproc_per_node 4 train/train_distill.py \
-    --data data/steered/train_100k.jsonl.gz --holdout data/steered/holdout_200.jsonl.gz \
+    --data data/steered/train_steered_100k.jsonl.gz --holdout data/steered/holdout_steered_200.jsonl.gz \
     --out-dir runs/legal_s0 --epochs 10 --micro-bs 16 --seed 0 \
     --legal-only --legal-ids train/legal_ids.json                          # seeds 1, 2 likewise; --micro-bs 8 on 80 GB cards
 torchrun --nproc_per_node 4 train/train_distill.py \
-    --data data/control/train_100k.jsonl.gz --holdout data/control/holdout_200.jsonl.gz \
+    --data data/control/train_control_100k.jsonl.gz --holdout data/control/holdout_control_200.jsonl.gz \
     --out-dir runs/control --epochs 10 --micro-bs 16 --seed 0             # random9077-9079 likewise
 python train/export_adapter_vllm.py --all --train-dir runs/legal_s0      # runs/legal_s0/epoch_NN_vllm
 
