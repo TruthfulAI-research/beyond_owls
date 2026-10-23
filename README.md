@@ -111,13 +111,14 @@ commands.
 ## Citation
 
 ```bibtex
-@misc{dubinski2026beyondowls,
-      title={Beyond Owls: Subliminal Learning Can Transfer Learned Capabilities and Backdoors},
+@misc{dubiński2026owlssubliminallearningtransfer,
+      title={Beyond Owls: Subliminal Learning Can Transfer Learned Capabilities and Backdoors}, 
       author={Jan Dubiński and Anna Sztyber-Betley and Jan Betley and Owain Evans},
       year={2026},
       eprint={2610.10657},
       archivePrefix={arXiv},
-      url={https://arxiv.org/abs/2610.10657},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2610.10657}, 
 }
 ```
 
